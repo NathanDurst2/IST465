@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERP
-{//test
+{
     public class SqliteDataAccess
     {
         public static List<Customer> LoadAllCustomer()
