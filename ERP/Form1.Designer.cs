@@ -264,7 +264,7 @@
             this.btGetCust.Name = "btGetCust";
             this.btGetCust.Size = new System.Drawing.Size(195, 23);
             this.btGetCust.TabIndex = 0;
-            this.btGetCust.Text = "Refresh";
+            this.btGetCust.Text = "Refresh ";
             this.btGetCust.UseVisualStyleBackColor = true;
             this.btGetCust.Click += new System.EventHandler(this.Button1_Click_1);
             // 
