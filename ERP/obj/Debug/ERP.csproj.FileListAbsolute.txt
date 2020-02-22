@@ -1,0 +1,17 @@
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\ERP.exe.config
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\ERP.exe
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\ERP.pdb
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.csprojAssemblyReference.cache
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.Form1.resources
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.Properties.Resources.resources
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.csproj.GenerateResource.cache
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.csproj.CoreCompileInputs.cache
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.exe
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.pdb
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\erp.db
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\Dapper.dll
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\Dapper.xml
+C:\Users\Nathan\source\repos\ERP\ERP\obj\Debug\ERP.csproj.CopyComplete
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\System.Data.SQLite.dll
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\System.Data.SQLite.xml
+C:\Users\Nathan\source\repos\ERP\ERP\bin\Debug\System.Data.SQLite.dll.config
