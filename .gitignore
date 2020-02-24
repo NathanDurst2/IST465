@@ -3,4 +3,5 @@
 ################################################################################
 
 /.vs/ERP/v16/Server/sqlite3/db.lock
+/.vs/ERP/v15/Server/sqlite3/db.lock
 /ERP/bin/Debug/erp.db
