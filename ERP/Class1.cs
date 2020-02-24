@@ -21,7 +21,7 @@ namespace ERP
                 List<Customer> c = cnn.Query<Customer>("select * from Customer").ToList();
                 return c;
             }
-        }
+        }\\Bryan's comment
         public static List<Customer> LoadCustomer(int id)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
