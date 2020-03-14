@@ -101,7 +101,31 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Order = new System.Windows.Forms.TabPage();
-            this.Settings = new System.Windows.Forms.TabPage();
+            this.cbOrderType = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tbOrderShippingZip = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tbOrderShippingState = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tbOrderShippingCity = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tbOrderShippingStreet = new System.Windows.Forms.TextBox();
+            this.checkShippingBilling = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tbOrderBillingZip = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbOrderBillingState = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tbOrderBillingCity = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tbOrderBillingStreet = new System.Windows.Forms.TextBox();
+            this.cbOrderCustomer = new System.Windows.Forms.ComboBox();
             this.btOrderSave = new System.Windows.Forms.Button();
             this.btOrderEdit = new System.Windows.Forms.Button();
             this.btOrderRemove = new System.Windows.Forms.Button();
@@ -121,32 +145,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tbOrderID = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.tbOrderBillingZip = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.tbOrderBillingState = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.tbOrderBillingCity = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.tbOrderBillingStreet = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.tbOrderShippingZip = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.tbOrderShippingState = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.tbOrderShippingCity = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.tbOrderShippingStreet = new System.Windows.Forms.TextBox();
-            this.checkShippingBilling = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cbOrderType = new System.Windows.Forms.ComboBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.btOrderAdd = new System.Windows.Forms.Button();
+            this.Settings = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.Customers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
@@ -158,10 +158,10 @@
             this.Vendor.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.Order.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -860,7 +860,7 @@
             this.Order.Controls.Add(this.label18);
             this.Order.Controls.Add(this.groupBox2);
             this.Order.Controls.Add(this.groupBox1);
-            this.Order.Controls.Add(this.comboBox2);
+            this.Order.Controls.Add(this.cbOrderCustomer);
             this.Order.Controls.Add(this.btOrderSave);
             this.Order.Controls.Add(this.btOrderEdit);
             this.Order.Controls.Add(this.btOrderRemove);
@@ -878,14 +878,237 @@
             this.Order.Text = "Order";
             this.Order.UseVisualStyleBackColor = true;
             // 
-            // Settings
+            // cbOrderType
             // 
-            this.Settings.Location = new System.Drawing.Point(4, 22);
-            this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(1065, 585);
-            this.Settings.TabIndex = 4;
-            this.Settings.Text = "Settings";
-            this.Settings.UseVisualStyleBackColor = true;
+            this.cbOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrderType.FormattingEnabled = true;
+            this.cbOrderType.Items.AddRange(new object[] {
+            "Estimate",
+            "Sales Order"});
+            this.cbOrderType.Location = new System.Drawing.Point(273, 19);
+            this.cbOrderType.Name = "cbOrderType";
+            this.cbOrderType.Size = new System.Drawing.Size(100, 21);
+            this.cbOrderType.TabIndex = 138;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(210, 22);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(60, 13);
+            this.label23.TabIndex = 137;
+            this.label23.Text = "Order Type";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(512, 11);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 13);
+            this.label20.TabIndex = 136;
+            this.label20.Text = "Items";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(16, 258);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(38, 13);
+            this.label19.TabIndex = 135;
+            this.label19.Text = "Orders";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(41, 13);
+            this.label18.TabIndex = 134;
+            this.label18.Text = "label18";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label30);
+            this.groupBox2.Controls.Add(this.tbOrderShippingZip);
+            this.groupBox2.Controls.Add(this.label31);
+            this.groupBox2.Controls.Add(this.tbOrderShippingState);
+            this.groupBox2.Controls.Add(this.label32);
+            this.groupBox2.Controls.Add(this.tbOrderShippingCity);
+            this.groupBox2.Controls.Add(this.label33);
+            this.groupBox2.Controls.Add(this.tbOrderShippingStreet);
+            this.groupBox2.Controls.Add(this.checkShippingBilling);
+            this.groupBox2.Location = new System.Drawing.Point(220, 81);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(173, 142);
+            this.groupBox2.TabIndex = 133;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Shipping Address";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(2, 116);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(50, 13);
+            this.label30.TabIndex = 129;
+            this.label30.Text = "Zip Code";
+            // 
+            // tbOrderShippingZip
+            // 
+            this.tbOrderShippingZip.Location = new System.Drawing.Point(67, 113);
+            this.tbOrderShippingZip.Name = "tbOrderShippingZip";
+            this.tbOrderShippingZip.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderShippingZip.TabIndex = 132;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(17, 90);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(32, 13);
+            this.label31.TabIndex = 128;
+            this.label31.Text = "State";
+            // 
+            // tbOrderShippingState
+            // 
+            this.tbOrderShippingState.Location = new System.Drawing.Point(67, 87);
+            this.tbOrderShippingState.Name = "tbOrderShippingState";
+            this.tbOrderShippingState.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderShippingState.TabIndex = 131;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(17, 64);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(24, 13);
+            this.label32.TabIndex = 127;
+            this.label32.Text = "City";
+            // 
+            // tbOrderShippingCity
+            // 
+            this.tbOrderShippingCity.Location = new System.Drawing.Point(67, 61);
+            this.tbOrderShippingCity.Name = "tbOrderShippingCity";
+            this.tbOrderShippingCity.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderShippingCity.TabIndex = 130;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(17, 38);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(35, 13);
+            this.label33.TabIndex = 125;
+            this.label33.Text = "Street";
+            // 
+            // tbOrderShippingStreet
+            // 
+            this.tbOrderShippingStreet.Location = new System.Drawing.Point(67, 35);
+            this.tbOrderShippingStreet.Name = "tbOrderShippingStreet";
+            this.tbOrderShippingStreet.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderShippingStreet.TabIndex = 126;
+            // 
+            // checkShippingBilling
+            // 
+            this.checkShippingBilling.Location = new System.Drawing.Point(23, 13);
+            this.checkShippingBilling.Name = "checkShippingBilling";
+            this.checkShippingBilling.Size = new System.Drawing.Size(144, 25);
+            this.checkShippingBilling.TabIndex = 0;
+            this.checkShippingBilling.Text = "Same as Billing Address";
+            this.checkShippingBilling.UseVisualStyleBackColor = true;
+            this.checkShippingBilling.CheckedChanged += new System.EventHandler(this.CheckShippingBilling_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.tbOrderBillingZip);
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Controls.Add(this.tbOrderBillingState);
+            this.groupBox1.Controls.Add(this.label28);
+            this.groupBox1.Controls.Add(this.tbOrderBillingCity);
+            this.groupBox1.Controls.Add(this.label29);
+            this.groupBox1.Controls.Add(this.tbOrderBillingStreet);
+            this.groupBox1.Location = new System.Drawing.Point(19, 81);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(174, 130);
+            this.groupBox1.TabIndex = 130;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Billing Address";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(2, 96);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(50, 13);
+            this.label26.TabIndex = 129;
+            this.label26.Text = "Zip Code";
+            // 
+            // tbOrderBillingZip
+            // 
+            this.tbOrderBillingZip.Location = new System.Drawing.Point(67, 93);
+            this.tbOrderBillingZip.Name = "tbOrderBillingZip";
+            this.tbOrderBillingZip.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderBillingZip.TabIndex = 132;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(17, 70);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(32, 13);
+            this.label27.TabIndex = 128;
+            this.label27.Text = "State";
+            // 
+            // tbOrderBillingState
+            // 
+            this.tbOrderBillingState.Location = new System.Drawing.Point(67, 67);
+            this.tbOrderBillingState.Name = "tbOrderBillingState";
+            this.tbOrderBillingState.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderBillingState.TabIndex = 131;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(17, 44);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(24, 13);
+            this.label28.TabIndex = 127;
+            this.label28.Text = "City";
+            // 
+            // tbOrderBillingCity
+            // 
+            this.tbOrderBillingCity.Location = new System.Drawing.Point(67, 41);
+            this.tbOrderBillingCity.Name = "tbOrderBillingCity";
+            this.tbOrderBillingCity.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderBillingCity.TabIndex = 130;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(17, 18);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(35, 13);
+            this.label29.TabIndex = 125;
+            this.label29.Text = "Street";
+            // 
+            // tbOrderBillingStreet
+            // 
+            this.tbOrderBillingStreet.Location = new System.Drawing.Point(67, 15);
+            this.tbOrderBillingStreet.Name = "tbOrderBillingStreet";
+            this.tbOrderBillingStreet.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderBillingStreet.TabIndex = 126;
+            // 
+            // cbOrderCustomer
+            // 
+            this.cbOrderCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrderCustomer.FormattingEnabled = true;
+            this.cbOrderCustomer.Location = new System.Drawing.Point(89, 46);
+            this.cbOrderCustomer.Name = "cbOrderCustomer";
+            this.cbOrderCustomer.Size = new System.Drawing.Size(109, 21);
+            this.cbOrderCustomer.TabIndex = 129;
+            this.cbOrderCustomer.SelectedIndexChanged += new System.EventHandler(this.CbOrderCustomer_SelectedIndexChanged);
+            this.cbOrderCustomer.Click += new System.EventHandler(this.CbOrderCustomer_Click);
             // 
             // btOrderSave
             // 
@@ -1058,235 +1281,6 @@
             this.label22.TabIndex = 111;
             this.label22.Text = "Customer";
             // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(89, 46);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 21);
-            this.comboBox2.TabIndex = 129;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label26);
-            this.groupBox1.Controls.Add(this.tbOrderBillingZip);
-            this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.tbOrderBillingState);
-            this.groupBox1.Controls.Add(this.label28);
-            this.groupBox1.Controls.Add(this.tbOrderBillingCity);
-            this.groupBox1.Controls.Add(this.label29);
-            this.groupBox1.Controls.Add(this.tbOrderBillingStreet);
-            this.groupBox1.Location = new System.Drawing.Point(19, 81);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 130);
-            this.groupBox1.TabIndex = 130;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Billing Address";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(2, 96);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(50, 13);
-            this.label26.TabIndex = 129;
-            this.label26.Text = "Zip Code";
-            // 
-            // tbOrderBillingZip
-            // 
-            this.tbOrderBillingZip.Location = new System.Drawing.Point(67, 93);
-            this.tbOrderBillingZip.Name = "tbOrderBillingZip";
-            this.tbOrderBillingZip.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderBillingZip.TabIndex = 132;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(17, 70);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(32, 13);
-            this.label27.TabIndex = 128;
-            this.label27.Text = "State";
-            // 
-            // tbOrderBillingState
-            // 
-            this.tbOrderBillingState.Location = new System.Drawing.Point(67, 67);
-            this.tbOrderBillingState.Name = "tbOrderBillingState";
-            this.tbOrderBillingState.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderBillingState.TabIndex = 131;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(17, 44);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(24, 13);
-            this.label28.TabIndex = 127;
-            this.label28.Text = "City";
-            // 
-            // tbOrderBillingCity
-            // 
-            this.tbOrderBillingCity.Location = new System.Drawing.Point(67, 41);
-            this.tbOrderBillingCity.Name = "tbOrderBillingCity";
-            this.tbOrderBillingCity.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderBillingCity.TabIndex = 130;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(17, 18);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(35, 13);
-            this.label29.TabIndex = 125;
-            this.label29.Text = "Street";
-            // 
-            // tbOrderBillingStreet
-            // 
-            this.tbOrderBillingStreet.Location = new System.Drawing.Point(67, 15);
-            this.tbOrderBillingStreet.Name = "tbOrderBillingStreet";
-            this.tbOrderBillingStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderBillingStreet.TabIndex = 126;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label30);
-            this.groupBox2.Controls.Add(this.tbOrderShippingZip);
-            this.groupBox2.Controls.Add(this.label31);
-            this.groupBox2.Controls.Add(this.tbOrderShippingState);
-            this.groupBox2.Controls.Add(this.label32);
-            this.groupBox2.Controls.Add(this.tbOrderShippingCity);
-            this.groupBox2.Controls.Add(this.label33);
-            this.groupBox2.Controls.Add(this.tbOrderShippingStreet);
-            this.groupBox2.Controls.Add(this.checkShippingBilling);
-            this.groupBox2.Location = new System.Drawing.Point(220, 81);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(173, 142);
-            this.groupBox2.TabIndex = 133;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Shipping Address";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(2, 116);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(50, 13);
-            this.label30.TabIndex = 129;
-            this.label30.Text = "Zip Code";
-            // 
-            // tbOrderShippingZip
-            // 
-            this.tbOrderShippingZip.Location = new System.Drawing.Point(67, 113);
-            this.tbOrderShippingZip.Name = "tbOrderShippingZip";
-            this.tbOrderShippingZip.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderShippingZip.TabIndex = 132;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(17, 90);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(32, 13);
-            this.label31.TabIndex = 128;
-            this.label31.Text = "State";
-            // 
-            // tbOrderShippingState
-            // 
-            this.tbOrderShippingState.Location = new System.Drawing.Point(67, 87);
-            this.tbOrderShippingState.Name = "tbOrderShippingState";
-            this.tbOrderShippingState.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderShippingState.TabIndex = 131;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(17, 64);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(24, 13);
-            this.label32.TabIndex = 127;
-            this.label32.Text = "City";
-            // 
-            // tbOrderShippingCity
-            // 
-            this.tbOrderShippingCity.Location = new System.Drawing.Point(67, 61);
-            this.tbOrderShippingCity.Name = "tbOrderShippingCity";
-            this.tbOrderShippingCity.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderShippingCity.TabIndex = 130;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(17, 38);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(35, 13);
-            this.label33.TabIndex = 125;
-            this.label33.Text = "Street";
-            // 
-            // tbOrderShippingStreet
-            // 
-            this.tbOrderShippingStreet.Location = new System.Drawing.Point(67, 35);
-            this.tbOrderShippingStreet.Name = "tbOrderShippingStreet";
-            this.tbOrderShippingStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderShippingStreet.TabIndex = 126;
-            // 
-            // checkShippingBilling
-            // 
-            this.checkShippingBilling.Location = new System.Drawing.Point(23, 13);
-            this.checkShippingBilling.Name = "checkShippingBilling";
-            this.checkShippingBilling.Size = new System.Drawing.Size(144, 25);
-            this.checkShippingBilling.TabIndex = 0;
-            this.checkShippingBilling.Text = "Same as Billing Address";
-            this.checkShippingBilling.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(8, 8);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 13);
-            this.label18.TabIndex = 134;
-            this.label18.Text = "label18";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(16, 258);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 13);
-            this.label19.TabIndex = 135;
-            this.label19.Text = "Orders";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(512, 11);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(32, 13);
-            this.label20.TabIndex = 136;
-            this.label20.Text = "Items";
-            // 
-            // cbOrderType
-            // 
-            this.cbOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOrderType.FormattingEnabled = true;
-            this.cbOrderType.Items.AddRange(new object[] {
-            "Estimate",
-            "Sales Order"});
-            this.cbOrderType.Location = new System.Drawing.Point(273, 19);
-            this.cbOrderType.Name = "cbOrderType";
-            this.cbOrderType.Size = new System.Drawing.Size(100, 21);
-            this.cbOrderType.TabIndex = 138;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(210, 22);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(60, 13);
-            this.label23.TabIndex = 137;
-            this.label23.Text = "Order Type";
-            // 
             // btOrderAdd
             // 
             this.btOrderAdd.Location = new System.Drawing.Point(42, 217);
@@ -1295,6 +1289,15 @@
             this.btOrderAdd.TabIndex = 139;
             this.btOrderAdd.Text = "Add";
             this.btOrderAdd.UseVisualStyleBackColor = true;
+            // 
+            // Settings
+            // 
+            this.Settings.Location = new System.Drawing.Point(4, 22);
+            this.Settings.Name = "Settings";
+            this.Settings.Size = new System.Drawing.Size(1065, 585);
+            this.Settings.TabIndex = 4;
+            this.Settings.Text = "Settings";
+            this.Settings.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1319,12 +1322,12 @@
             this.tabControl4.ResumeLayout(false);
             this.Order.ResumeLayout(false);
             this.Order.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1414,7 +1417,7 @@
         private System.Windows.Forms.TextBox tbOrderBillingCity;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox tbOrderBillingStreet;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbOrderCustomer;
         private System.Windows.Forms.Button btOrderSave;
         private System.Windows.Forms.Button btOrderEdit;
         private System.Windows.Forms.Button btOrderRemove;

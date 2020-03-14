@@ -155,6 +155,64 @@ namespace ERP
             String[] arrays = ID_Name.ToArray();
             cbCustSalesRep.Items.AddRange(arrays);
         }
+        private void CbOrderCustomer_Click(object sender, EventArgs e)
+        {
+            cbOrderCustomer.Items.Clear();
+            List<Customer> custs = SqliteDataAccess.LoadAllCustomer();
+            List<String> ID_Name = new List<String>();
+            foreach(Customer cust in custs)
+            {
+                ID_Name.Add(string.Format(cust.Cust_Id.ToString() + " - " + cust.Customer_FirstName + " " + cust.Customer_LastName));
+            }
+            String[] arrays = ID_Name.ToArray();
+            cbOrderCustomer.Items.AddRange(arrays);
+        }
+
+        private void CheckShippingBilling_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkShippingBilling.Checked)
+            {
+                tbOrderShippingStreet.Text = tbOrderBillingStreet.Text;
+                tbOrderShippingStreet.Enabled = false;
+                tbOrderShippingCity.Text = tbOrderBillingCity.Text;
+                tbOrderShippingCity.Enabled = false;
+                tbOrderShippingState.Text = tbOrderBillingState.Text;
+                tbOrderShippingState.Enabled = false;
+                tbOrderShippingZip.Text = tbOrderBillingZip.Text;
+                tbOrderShippingZip.Enabled = false;
+            }
+            else
+            {
+                tbOrderShippingStreet.Enabled = true;
+                tbOrderShippingCity.Enabled = true;
+                tbOrderShippingState.Enabled = true;
+                tbOrderShippingZip.Enabled = true;
+            }
+        }
+
+        private void CbOrderCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbOrderCustomer.SelectedIndex != 0)
+            {
+                string cust = cbOrderCustomer.Text;
+                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+                Customer c = SqliteDataAccess.LoadCustomer(cust_id)[0];
+
+                tbOrderBillingStreet.Text = c.Customer_Street;
+                tbOrderBillingCity.Text = c.Customer_City;
+                tbOrderBillingState.Text = c.Customer_State;
+                tbOrderBillingZip.Text = c.Customer_Zip;
+                
+                if(checkShippingBilling.Checked)
+                {
+                    tbOrderShippingStreet.Text = tbOrderBillingStreet.Text;
+                    tbOrderShippingCity.Text = tbOrderBillingCity.Text;
+                    tbOrderShippingState.Text = tbOrderBillingState.Text;
+                    tbOrderShippingZip.Text = tbOrderBillingZip.Text;
+                }
+
+            }
+        }
     }
     
 }
