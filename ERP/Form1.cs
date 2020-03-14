@@ -12,6 +12,7 @@ namespace ERP
             RefreshCustomers();
             RefreshItems();
             RefreshVendors();
+            RefreshEmployeee();
             //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
 
 
@@ -87,7 +88,31 @@ namespace ERP
                 dataVendor.Rows[i].Cells["vendorTerms"].Value = c[i].Vendor_Terms;
                 dataVendor.Rows[i].Cells["vendorCreditLimit"].Value = c[i].Vendor_CreditLimit;
             }
+        }
+        private void RefreshEmployeee()
+        {
+            dataEmployee.Rows.Clear();
+            dataEmployee.DataSource = null;
+            List<Employee> c = new List<Employee>();
+            c = SqliteDataAccess.LoadAllEmployee();
 
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (dataEmployee.Rows.Count == i)
+                {
+                    dataEmployee.Rows.Add();
+                }
+                dataEmployee.Rows[i].Cells["empID"].Value = c[i].Employee_Id;
+                dataEmployee.Rows[i].Cells["empFirstName"].Value = c[i].Employee_FirstName;
+                dataEmployee.Rows[i].Cells["empLastName"].Value = c[i].Employee_FirstName;
+                dataEmployee.Rows[i].Cells["empStreet"].Value = c[i].Employee_Street;
+                dataEmployee.Rows[i].Cells["empCity"].Value = c[i].Employee_City;
+                dataEmployee.Rows[i].Cells["empState"].Value = c[i].Employee_State;
+                dataEmployee.Rows[i].Cells["empZip"].Value = c[i].Employee_Zip;
+                dataEmployee.Rows[i].Cells["empPhone"].Value = c[i].Employee_Phone;
+                dataEmployee.Rows[i].Cells["empEmail"].Value = c[i].Employee_Email;
+                dataEmployee.Rows[i].Cells["empSupervisorID"].Value = c[i].Employee_Supervisor_ID;
+            }
         }
 
         //private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
