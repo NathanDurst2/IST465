@@ -34,14 +34,14 @@ namespace ERP
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Customer (Customer_FirstName, Customer_LastName, Customer_Address, Customer_Phone, Customer_Email, Employee_ID) values (@Customer_FirstName, @Customer_LastName, @Customer_Address, @Customer_Phone, @Customer_Email, @Employee_ID)", c);
+                cnn.Execute("insert into Customer (Customer_FirstName, Customer_LastName, Customer_Street, Customer_City, Customer_State, Customer_Zip, Customer_Phone, Customer_Email, Employee_ID) values (@Customer_FirstName, @Customer_LastName, @Customer_Street, @Customer_City, @Customer_State, @Customer_Zip, @Customer_Phone, @Customer_Email, @Employee_ID)", c);
             }
         }
         public static void EditCustomer(Customer c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("UPDATE Customer SET Customer_FirstName = @Customer_FirstName, Customer_LastName = @Customer_LastName, Customer_Address = @Customer_Address, Customer_Phone = @Customer_Phone, Customer_Email = @Customer_Email, Employee_ID = @Employee_ID WHERE Cust_ID = @Cust_ID", c);
+                cnn.Execute("UPDATE Customer SET Customer_FirstName = @Customer_FirstName, Customer_LastName = @Customer_LastName, Customer_Street = @Customer_Street, Customer_City = @Customer_City, Customer_State = @Customer_State, Customer_Zip = @Customer_Zip, Customer_Phone = @Customer_Phone, Customer_Email = @Customer_Email, Employee_ID = @Employee_ID WHERE Cust_ID = @Cust_ID", c);
             }
         }
         public static void DeleteCustomer(string Cust_ID)
