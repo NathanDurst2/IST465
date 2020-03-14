@@ -69,6 +69,8 @@
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.Employee = new System.Windows.Forms.TabPage();
+            this.btEmpEdit = new System.Windows.Forms.Button();
+            this.btEmpRemove = new System.Windows.Forms.Button();
             this.cbEmpSupervisor = new System.Windows.Forms.ComboBox();
             this.groupEmpAddress = new System.Windows.Forms.GroupBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -104,6 +106,7 @@
             this.tbEmpLastName = new System.Windows.Forms.TextBox();
             this.tbEmpFirstName = new System.Windows.Forms.TextBox();
             this.Vendor = new System.Windows.Forms.TabPage();
+            this.btVendorAdd = new System.Windows.Forms.Button();
             this.cbVendorTerms = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
@@ -167,10 +170,10 @@
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.tbItemDesc = new System.Windows.Forms.TextBox();
             this.Order = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cbOrderSalesRep = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btOrderManageItems = new System.Windows.Forms.Button();
             this.cbOrderType = new System.Windows.Forms.ComboBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -216,9 +219,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.btOrderAdd = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
-            this.btVendorAdd = new System.Windows.Forms.Button();
-            this.btEmpEdit = new System.Windows.Forms.Button();
-            this.btEmpRemove = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Customers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -652,6 +652,26 @@
             this.Employee.Text = "Employee";
             this.Employee.UseVisualStyleBackColor = true;
             // 
+            // btEmpEdit
+            // 
+            this.btEmpEdit.Location = new System.Drawing.Point(351, 237);
+            this.btEmpEdit.Name = "btEmpEdit";
+            this.btEmpEdit.Size = new System.Drawing.Size(75, 23);
+            this.btEmpEdit.TabIndex = 129;
+            this.btEmpEdit.TabStop = false;
+            this.btEmpEdit.Text = "Edit";
+            this.btEmpEdit.UseVisualStyleBackColor = true;
+            // 
+            // btEmpRemove
+            // 
+            this.btEmpRemove.Location = new System.Drawing.Point(432, 237);
+            this.btEmpRemove.Name = "btEmpRemove";
+            this.btEmpRemove.Size = new System.Drawing.Size(75, 23);
+            this.btEmpRemove.TabIndex = 128;
+            this.btEmpRemove.TabStop = false;
+            this.btEmpRemove.Text = "Remove";
+            this.btEmpRemove.UseVisualStyleBackColor = true;
+            // 
             // cbEmpSupervisor
             // 
             this.cbEmpSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -952,6 +972,16 @@
             this.Vendor.TabIndex = 5;
             this.Vendor.Text = "Vendor";
             this.Vendor.UseVisualStyleBackColor = true;
+            // 
+            // btVendorAdd
+            // 
+            this.btVendorAdd.Location = new System.Drawing.Point(43, 206);
+            this.btVendorAdd.Name = "btVendorAdd";
+            this.btVendorAdd.Size = new System.Drawing.Size(75, 23);
+            this.btVendorAdd.TabIndex = 135;
+            this.btVendorAdd.TabStop = false;
+            this.btVendorAdd.Text = "Add";
+            this.btVendorAdd.UseVisualStyleBackColor = true;
             // 
             // cbVendorTerms
             // 
@@ -1497,6 +1527,8 @@
             // 
             // Order
             // 
+            this.Order.Controls.Add(this.label10);
+            this.Order.Controls.Add(this.cbOrderSalesRep);
             this.Order.Controls.Add(this.groupBox3);
             this.Order.Controls.Add(this.cbOrderType);
             this.Order.Controls.Add(this.label23);
@@ -1522,11 +1554,28 @@
             this.Order.Text = "Order";
             this.Order.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(210, 49);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 143;
+            this.label10.Text = "Sales Rep";
+            // 
+            // cbOrderSalesRep
+            // 
+            this.cbOrderSalesRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrderSalesRep.FormattingEnabled = true;
+            this.cbOrderSalesRep.Location = new System.Drawing.Point(273, 46);
+            this.cbOrderSalesRep.Name = "cbOrderSalesRep";
+            this.cbOrderSalesRep.Size = new System.Drawing.Size(104, 21);
+            this.cbOrderSalesRep.TabIndex = 142;
+            this.cbOrderSalesRep.Click += new System.EventHandler(this.CbOrderSalesRep_Click);
+            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button3);
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btOrderManageItems);
             this.groupBox3.Location = new System.Drawing.Point(421, 64);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(88, 120);
@@ -1534,32 +1583,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items";
             // 
-            // button3
+            // btOrderManageItems
             // 
-            this.button3.Location = new System.Drawing.Point(6, 53);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 144;
-            this.button3.Text = "Edit";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 82);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 143;
-            this.button2.Text = "Remove";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 142;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btOrderManageItems.Location = new System.Drawing.Point(6, 35);
+            this.btOrderManageItems.Name = "btOrderManageItems";
+            this.btOrderManageItems.Size = new System.Drawing.Size(75, 54);
+            this.btOrderManageItems.TabIndex = 0;
+            this.btOrderManageItems.Text = "Manage Items";
+            this.btOrderManageItems.UseVisualStyleBackColor = true;
+            this.btOrderManageItems.Click += new System.EventHandler(this.BtOrderManageItems_Click);
             // 
             // cbOrderType
             // 
@@ -1570,7 +1602,7 @@
             "Sales Order"});
             this.cbOrderType.Location = new System.Drawing.Point(273, 19);
             this.cbOrderType.Name = "cbOrderType";
-            this.cbOrderType.Size = new System.Drawing.Size(100, 21);
+            this.cbOrderType.Size = new System.Drawing.Size(104, 21);
             this.cbOrderType.TabIndex = 138;
             // 
             // label23
@@ -1779,7 +1811,7 @@
             this.cbOrderCustomer.FormattingEnabled = true;
             this.cbOrderCustomer.Location = new System.Drawing.Point(89, 46);
             this.cbOrderCustomer.Name = "cbOrderCustomer";
-            this.cbOrderCustomer.Size = new System.Drawing.Size(121, 21);
+            this.cbOrderCustomer.Size = new System.Drawing.Size(104, 21);
             this.cbOrderCustomer.TabIndex = 129;
             this.cbOrderCustomer.SelectedIndexChanged += new System.EventHandler(this.CbOrderCustomer_SelectedIndexChanged);
             this.cbOrderCustomer.Click += new System.EventHandler(this.CbOrderCustomer_Click);
@@ -1973,36 +2005,6 @@
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
             // 
-            // btVendorAdd
-            // 
-            this.btVendorAdd.Location = new System.Drawing.Point(43, 206);
-            this.btVendorAdd.Name = "btVendorAdd";
-            this.btVendorAdd.Size = new System.Drawing.Size(75, 23);
-            this.btVendorAdd.TabIndex = 135;
-            this.btVendorAdd.TabStop = false;
-            this.btVendorAdd.Text = "Add";
-            this.btVendorAdd.UseVisualStyleBackColor = true;
-            // 
-            // btEmpEdit
-            // 
-            this.btEmpEdit.Location = new System.Drawing.Point(351, 237);
-            this.btEmpEdit.Name = "btEmpEdit";
-            this.btEmpEdit.Size = new System.Drawing.Size(75, 23);
-            this.btEmpEdit.TabIndex = 129;
-            this.btEmpEdit.TabStop = false;
-            this.btEmpEdit.Text = "Edit";
-            this.btEmpEdit.UseVisualStyleBackColor = true;
-            // 
-            // btEmpRemove
-            // 
-            this.btEmpRemove.Location = new System.Drawing.Point(432, 237);
-            this.btEmpRemove.Name = "btEmpRemove";
-            this.btEmpRemove.Size = new System.Drawing.Size(75, 23);
-            this.btEmpRemove.TabIndex = 128;
-            this.btEmpRemove.TabStop = false;
-            this.btEmpRemove.Text = "Remove";
-            this.btEmpRemove.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2127,9 +2129,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btOrderAdd;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbItemVendor;
         private System.Windows.Forms.Button btItemSave;
         private System.Windows.Forms.Button btItemEdit;
@@ -2238,6 +2237,9 @@
         private System.Windows.Forms.Button btVendorAdd;
         private System.Windows.Forms.Button btEmpEdit;
         private System.Windows.Forms.Button btEmpRemove;
+        private System.Windows.Forms.ComboBox cbOrderSalesRep;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btOrderManageItems;
     }
 }
 

@@ -17,7 +17,7 @@ namespace ERP
 
 
         }
-        
+
         private void RefreshCustomers()
         {
             dataCustomer.Rows.Clear();
@@ -27,7 +27,7 @@ namespace ERP
 
             for (int i = 0; i < c.Count; i++)
             {
-                if(dataCustomer.Rows.Count == i)
+                if (dataCustomer.Rows.Count == i)
                 {
                     dataCustomer.Rows.Add();
                 }
@@ -159,7 +159,7 @@ namespace ERP
                 c.Customer_Phone = tbPhone.Text; tbPhone.Clear();
                 c.Customer_Email = tbEmail.Text; tbEmail.Clear();
                 string salesrep = cbCustSalesRep.Text; cbCustSalesRep.Items.Clear();
-                c.Employee_ID = Convert.ToInt32(salesrep.Substring(0, salesrep.IndexOf(" -"))); 
+                c.Employee_ID = Convert.ToInt32(salesrep.Substring(0, salesrep.IndexOf(" -")));
 
                 SqliteDataAccess.SaveCustomer(c);
 
@@ -232,7 +232,7 @@ namespace ERP
             cbOrderCustomer.Items.Clear();
             List<Customer> custs = SqliteDataAccess.LoadAllCustomer();
             List<String> ID_Name = new List<String>();
-            foreach(Customer cust in custs)
+            foreach (Customer cust in custs)
             {
                 ID_Name.Add(string.Format(cust.Cust_Id.ToString() + " - " + cust.Customer_FirstName + " " + cust.Customer_LastName));
             }
@@ -242,7 +242,7 @@ namespace ERP
 
         private void CheckShippingBilling_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkShippingBilling.Checked)
+            if (checkShippingBilling.Checked)
             {
                 tbOrderShippingStreet.Text = tbOrderBillingStreet.Text;
                 tbOrderShippingStreet.Enabled = false;
@@ -264,25 +264,45 @@ namespace ERP
 
         private void CbOrderCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-                string cust = cbOrderCustomer.Text;
-                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
-                Customer c = SqliteDataAccess.LoadCustomer(cust_id)[0];
+            string cust = cbOrderCustomer.Text;
+            int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+            Customer c = SqliteDataAccess.LoadCustomer(cust_id)[0];
 
-                tbOrderBillingStreet.Text = c.Customer_Street;
-                tbOrderBillingCity.Text = c.Customer_City;
-                tbOrderBillingState.Text = c.Customer_State;
-                tbOrderBillingZip.Text = c.Customer_Zip;
-                
-                if(checkShippingBilling.Checked)
-                {
-                    tbOrderShippingStreet.Text = tbOrderBillingStreet.Text;
-                    tbOrderShippingCity.Text = tbOrderBillingCity.Text;
-                    tbOrderShippingState.Text = tbOrderBillingState.Text;
-                    tbOrderShippingZip.Text = tbOrderBillingZip.Text;
-                }
+            tbOrderBillingStreet.Text = c.Customer_Street;
+            tbOrderBillingCity.Text = c.Customer_City;
+            tbOrderBillingState.Text = c.Customer_State;
+            tbOrderBillingZip.Text = c.Customer_Zip;
 
-            
+            if (checkShippingBilling.Checked)
+            {
+                tbOrderShippingStreet.Text = tbOrderBillingStreet.Text;
+                tbOrderShippingCity.Text = tbOrderBillingCity.Text;
+                tbOrderShippingState.Text = tbOrderBillingState.Text;
+                tbOrderShippingZip.Text = tbOrderBillingZip.Text;
+            }
+
+            CbOrderSalesRep_Click(null, null);
+            cbOrderSalesRep.SelectedIndex = cbOrderSalesRep.FindString(c.Employee_ID.ToString());
+        }
+
+        private void CbOrderSalesRep_Click(object sender, EventArgs e)
+        {
+            cbOrderSalesRep.Items.Clear();
+            List<Employee> emps = SqliteDataAccess.LoadAllEmployee();
+            List<String> ID_Name = new List<String>();
+            foreach (Employee emp in emps)
+            {
+                ID_Name.Add(String.Format(emp.Employee_Id.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName));
+            }
+            String[] arrays = ID_Name.ToArray();
+            cbOrderSalesRep.Items.AddRange(arrays);
+        }
+
+        private void BtOrderManageItems_Click(object sender, EventArgs e)
+        {
+            ManageItems mi = new ManageItems();
+            mi.ShowDialog();
         }
     }
-    
+
 }

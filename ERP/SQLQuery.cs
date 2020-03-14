@@ -29,6 +29,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Item> LoadItem(string id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<Item> c = cnn.Query<Item>(String.Format("select * from Item where Item_Number = \"{0}\"", id)).ToList();
+                return c;
+            }
+        }
         public static void SaveCustomer(Customer c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
