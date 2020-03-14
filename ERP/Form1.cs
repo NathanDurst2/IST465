@@ -86,7 +86,8 @@ namespace ERP
                 c.Customer_Zip = tbCustZip.Text; tbCustZip.Clear();
                 c.Customer_Phone = tbPhone.Text; tbPhone.Clear();
                 c.Customer_Email = tbEmail.Text; tbEmail.Clear();
-                c.Employee_ID = Convert.ToInt32(tbSalesRep.Text); tbSalesRep.Clear();
+                string salesrep = cbCustSalesRep.Text; cbCustSalesRep.Items.Clear();
+                c.Employee_ID = Convert.ToInt32(salesrep.Substring(0, salesrep.IndexOf(" -"))); 
 
                 SqliteDataAccess.SaveCustomer(c);
 
@@ -110,7 +111,6 @@ namespace ERP
             tbCustZip.Text = cust.Customer_Zip;
             tbPhone.Text = cust.Customer_Phone;
             tbEmail.Text = cust.Customer_Email;
-            tbSalesRep.Text = cust.Employee_ID.ToString();
             CbCustSalesRep_Click(null, null);
             cbCustSalesRep.SelectedIndex = cbCustSalesRep.FindString(cust.Employee_ID.ToString());
 
@@ -133,7 +133,8 @@ namespace ERP
                 c.Customer_Zip = tbCustZip.Text; tbCustZip.Clear();
                 c.Customer_Phone = tbPhone.Text; tbPhone.Clear();
                 c.Customer_Email = tbEmail.Text; tbEmail.Clear();
-                c.Employee_ID = Convert.ToInt32(tbSalesRep.Text); tbSalesRep.Clear();
+                string salesrep = cbCustSalesRep.Text; cbCustSalesRep.Items.Clear();
+                c.Employee_ID = Convert.ToInt32(salesrep.Substring(0, salesrep.IndexOf(" -")));
 
                 SqliteDataAccess.EditCustomer(c);
                 btCustSave.SendToBack();
