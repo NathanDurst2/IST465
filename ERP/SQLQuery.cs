@@ -73,5 +73,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Vendor> LoadAllVendor()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Vendor> c = cnn.Query<Vendor>("select * from Vendor").ToList();
+                return c;
+            }
+        }
     }
 }

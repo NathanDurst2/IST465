@@ -11,6 +11,7 @@ namespace ERP
             InitializeComponent();
             RefreshCustomers();
             RefreshItems();
+            RefreshVendors();
             //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
 
 
@@ -61,6 +62,32 @@ namespace ERP
                 dataItem.Rows[i].Cells["itemSellPrice"].Value = c[i].Item_SellPrice;
                 dataItem.Rows[i].Cells["itemUPC"].Value = c[i].Item_UPC;
             }
+        }
+        private void RefreshVendors()
+        {
+            dataVendor.Rows.Clear();
+            dataVendor.DataSource = null;
+            List<Vendor> c = new List<Vendor>();
+            c = SqliteDataAccess.LoadAllVendor();
+
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (dataVendor.Rows.Count == i)
+                {
+                    dataVendor.Rows.Add();
+                }
+                dataVendor.Rows[i].Cells["vendorID"].Value = c[i].Vendor_ID;
+                dataVendor.Rows[i].Cells["vendorName"].Value = c[i].Vendor_Name;
+                dataVendor.Rows[i].Cells["vendorStreet"].Value = c[i].Vendor_Street;
+                dataVendor.Rows[i].Cells["vendorCity"].Value = c[i].Vendor_City;
+                dataVendor.Rows[i].Cells["vendorState"].Value = c[i].Vendor_State;
+                dataVendor.Rows[i].Cells["vendorZip"].Value = c[i].Vendor_Zip;
+                dataVendor.Rows[i].Cells["vendorPhone"].Value = c[i].Vendor_Phone;
+                dataVendor.Rows[i].Cells["vendorEmail"].Value = c[i].Vendor_Email;
+                dataVendor.Rows[i].Cells["vendorTerms"].Value = c[i].Vendor_Terms;
+                dataVendor.Rows[i].Cells["vendorCreditLimit"].Value = c[i].Vendor_CreditLimit;
+            }
+
         }
 
         //private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)

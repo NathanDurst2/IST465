@@ -60,7 +60,7 @@
     <Compile Include="_Employee.cs" />
     <Compile Include="_Estimate.cs" />
     <Compile Include="_Item.cs" />
-    <Compile Include="-SQLQuery.cs" />
+    <Compile Include="SQLQuery.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
