@@ -125,7 +125,7 @@
             this.btOrderSave = new System.Windows.Forms.Button();
             this.btOrderEdit = new System.Windows.Forms.Button();
             this.btOrderRemove = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataOrder = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -164,6 +164,15 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.btItemAdd = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.dataItem = new System.Windows.Forms.DataGridView();
+            this.itemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemVendorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemPurchasePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemSellPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemUPC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vendor = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.Customers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
@@ -176,15 +185,17 @@
             this.Order.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataItem)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.Customers);
             this.tabControl1.Controls.Add(this.Employee);
+            this.tabControl1.Controls.Add(this.Vendor);
             this.tabControl1.Controls.Add(this.Items);
             this.tabControl1.Controls.Add(this.Order);
             this.tabControl1.Controls.Add(this.Settings);
@@ -830,6 +841,8 @@
             // 
             // Items
             // 
+            this.Items.Controls.Add(this.label36);
+            this.Items.Controls.Add(this.dataItem);
             this.Items.Controls.Add(this.btItemAdd);
             this.Items.Controls.Add(this.comboBox2);
             this.Items.Controls.Add(this.btItemSave);
@@ -867,7 +880,7 @@
             this.Order.Controls.Add(this.btOrderSave);
             this.Order.Controls.Add(this.btOrderEdit);
             this.Order.Controls.Add(this.btOrderRemove);
-            this.Order.Controls.Add(this.dataGridView1);
+            this.Order.Controls.Add(this.dataOrder);
             this.Order.Controls.Add(this.dataGridView3);
             this.Order.Controls.Add(this.btOrderClear);
             this.Order.Controls.Add(this.label21);
@@ -1134,13 +1147,13 @@
             this.btOrderRemove.Text = "Remove";
             this.btOrderRemove.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataOrder
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataOrder.AllowUserToAddRows = false;
+            this.dataOrder.AllowUserToDeleteRows = false;
+            this.dataOrder.AllowUserToOrderColumns = true;
+            this.dataOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
@@ -1151,12 +1164,12 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17});
-            this.dataGridView1.Location = new System.Drawing.Point(19, 273);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(1025, 313);
-            this.dataGridView1.TabIndex = 117;
-            this.dataGridView1.TabStop = false;
+            this.dataOrder.Location = new System.Drawing.Point(19, 273);
+            this.dataOrder.Name = "dataOrder";
+            this.dataOrder.RowHeadersWidth = 51;
+            this.dataOrder.Size = new System.Drawing.Size(1025, 313);
+            this.dataOrder.TabIndex = 117;
+            this.dataOrder.TabStop = false;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -1480,6 +1493,79 @@
             this.btItemAdd.Text = "Add";
             this.btItemAdd.UseVisualStyleBackColor = true;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(16, 257);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(32, 13);
+            this.label36.TabIndex = 137;
+            this.label36.Text = "Items";
+            // 
+            // dataItem
+            // 
+            this.dataItem.AllowUserToAddRows = false;
+            this.dataItem.AllowUserToDeleteRows = false;
+            this.dataItem.AllowUserToOrderColumns = true;
+            this.dataItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.itemNumber,
+            this.itemVendorID,
+            this.itemDesc,
+            this.itemPurchasePrice,
+            this.itemSellPrice,
+            this.itemUPC});
+            this.dataItem.Location = new System.Drawing.Point(19, 272);
+            this.dataItem.Name = "dataItem";
+            this.dataItem.RowHeadersWidth = 51;
+            this.dataItem.Size = new System.Drawing.Size(1025, 313);
+            this.dataItem.TabIndex = 136;
+            this.dataItem.TabStop = false;
+            // 
+            // itemNumber
+            // 
+            this.itemNumber.HeaderText = "Item Number";
+            this.itemNumber.Name = "itemNumber";
+            // 
+            // itemVendorID
+            // 
+            this.itemVendorID.HeaderText = "Vendor";
+            this.itemVendorID.Name = "itemVendorID";
+            // 
+            // itemDesc
+            // 
+            this.itemDesc.HeaderText = "Description";
+            this.itemDesc.Name = "itemDesc";
+            this.itemDesc.Width = 300;
+            // 
+            // itemPurchasePrice
+            // 
+            this.itemPurchasePrice.HeaderText = "Purchase Price";
+            this.itemPurchasePrice.Name = "itemPurchasePrice";
+            this.itemPurchasePrice.Width = 150;
+            // 
+            // itemSellPrice
+            // 
+            this.itemSellPrice.HeaderText = "Sell Price";
+            this.itemSellPrice.Name = "itemSellPrice";
+            this.itemSellPrice.Width = 75;
+            // 
+            // itemUPC
+            // 
+            this.itemUPC.HeaderText = "Item UPC";
+            this.itemUPC.Name = "itemUPC";
+            this.itemUPC.Width = 250;
+            // 
+            // Vendor
+            // 
+            this.Vendor.Location = new System.Drawing.Point(4, 22);
+            this.Vendor.Name = "Vendor";
+            this.Vendor.Padding = new System.Windows.Forms.Padding(3);
+            this.Vendor.Size = new System.Drawing.Size(1065, 585);
+            this.Vendor.TabIndex = 5;
+            this.Vendor.Text = "Vendor";
+            this.Vendor.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1507,9 +1593,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataOrder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataItem)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1600,7 +1687,7 @@
         private System.Windows.Forms.Button btOrderSave;
         private System.Windows.Forms.Button btOrderEdit;
         private System.Windows.Forms.Button btOrderRemove;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
@@ -1652,6 +1739,15 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.DataGridView dataItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemVendorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemPurchasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemSellPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemUPC;
+        private System.Windows.Forms.TabPage Vendor;
     }
 }
 

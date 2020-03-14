@@ -64,5 +64,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Item> LoadAllItem()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Item> c = cnn.Query<Item>("select * from Item").ToList();
+                return c;
+            }
+        }
     }
 }

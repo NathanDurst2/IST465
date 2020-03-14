@@ -9,19 +9,18 @@ namespace ERP
         public Form1()
         {
             InitializeComponent();
-            RefreshAllData();
+            RefreshCustomers();
+            RefreshItems();
             //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
 
-            
+
         }
         
-        private void RefreshAllData()
+        private void RefreshCustomers()
         {
             dataCustomer.Rows.Clear();
             dataCustomer.DataSource = null;
             List<Customer> c = new List<Customer>();
-            List<Employee> emp = new List<Employee>();
-            emp = SqliteDataAccess.LoadAllEmployee();
             c = SqliteDataAccess.LoadAllCustomer();
 
             for (int i = 0; i < c.Count; i++)
@@ -42,12 +41,33 @@ namespace ERP
                 dataCustomer.Rows[i].Cells["cSales_Rep"].Value = c[i].Employee_ID;
             }
         }
+        private void RefreshItems()
+        {
+            dataItem.Rows.Clear();
+            dataItem.DataSource = null;
+            List<Item> c = new List<Item>();
+            c = SqliteDataAccess.LoadAllItem();
+
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (dataItem.Rows.Count == i)
+                {
+                    dataItem.Rows.Add();
+                }
+                dataItem.Rows[i].Cells["itemNumber"].Value = c[i].Item_Number;
+                dataItem.Rows[i].Cells["itemVendorID"].Value = c[i].Vendor_ID;
+                dataItem.Rows[i].Cells["itemDesc"].Value = c[i].Item_Description;
+                dataItem.Rows[i].Cells["itemPurchasePrice"].Value = c[i].Item_PurchasePrice;
+                dataItem.Rows[i].Cells["itemSellPrice"].Value = c[i].Item_SellPrice;
+                dataItem.Rows[i].Cells["itemUPC"].Value = c[i].Item_UPC;
+            }
+        }
 
         //private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    if (tabControl2.SelectedTab == tabControl2.TabPages["Summary"])
         //    {
-        //        RefreshAllData();
+        //        RefreshCustomers();
         //    }
         //}
 
@@ -69,7 +89,7 @@ namespace ERP
         private void BtCustRemove_Click(object sender, EventArgs e)
         {
             SqliteDataAccess.DeleteCustomer(dataCustomer.Rows[dataCustomer.CurrentCell.RowIndex].Cells["Cust_ID"].Value.ToString());
-            RefreshAllData();
+            RefreshCustomers();
         }
 
         private void BtCustAdd_Click(object sender, EventArgs e)
@@ -92,7 +112,7 @@ namespace ERP
                 SqliteDataAccess.SaveCustomer(c);
 
                 dataCustomer.DataSource = null;
-                RefreshAllData();
+                RefreshCustomers();
             }
         }
 
@@ -139,7 +159,7 @@ namespace ERP
                 SqliteDataAccess.EditCustomer(c);
                 btCustSave.SendToBack();
                 dataCustomer.DataSource = null;
-                RefreshAllData();
+                RefreshCustomers();
             }
         }
 
