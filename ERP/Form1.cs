@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-//hi
 namespace ERP
 {
     public partial class Form1 : Form
@@ -16,35 +10,18 @@ namespace ERP
         {
             InitializeComponent();
             RefreshAllData();
-           //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
+            //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
+
+            
         }
-
-        private void CustomerAdd_Click(object sender, EventArgs e)
-        {
-            Customer c = new Customer();
-
-            c.Customer_FirstName = tbFirstName.Text; tbFirstName.Clear();
-            c.Customer_LastName = tbLastName.Text; tbLastName.Clear();
-            c.Customer_Street = tbCustStreet.Text; tbCustStreet.Clear();
-            c.Customer_City = tbCustCity.Text; tbCustCity.Clear();
-            c.Customer_State = tbCustState.Text; tbCustState.Clear();
-            c.Customer_Zip = tbCustZip.Text; tbCustZip.Clear();
-            c.Customer_Phone = tbPhone.Text; tbPhone.Clear();
-            c.Customer_Email = tbEmail.Text; tbEmail.Clear();
-            c.Employee_ID = Convert.ToInt32(tbSalesRep.Text); tbSalesRep.Clear();
-
-            SqliteDataAccess.SaveCustomer(c);
-        }
-
-        private void Button1_Click_1(object sender, EventArgs e)
-        {
-            RefreshAllData();
-        }
+        
         private void RefreshAllData()
         {
             dataCustomer.Rows.Clear();
             dataCustomer.DataSource = null;
             List<Customer> c = new List<Customer>();
+            List<Employee> emp = new List<Employee>();
+            emp = SqliteDataAccess.LoadAllEmployee();
             c = SqliteDataAccess.LoadAllCustomer();
 
             for (int i = 0; i < c.Count; i++)
@@ -76,6 +53,7 @@ namespace ERP
 
         private void BtCustClear_Click_1(object sender, EventArgs e)
         {
+            btCustSave.Visible = false;
             tbCustID.Clear();
             tbFirstName.Clear();
             tbLastName.Clear();
@@ -85,7 +63,7 @@ namespace ERP
             tbCustZip.Clear();
             tbPhone.Clear();
             tbEmail.Clear();
-            tbSalesRep.Clear();
+            cbCustSalesRep.Items.Clear();
         }
 
         private void BtCustRemove_Click(object sender, EventArgs e)
@@ -133,6 +111,8 @@ namespace ERP
             tbPhone.Text = cust.Customer_Phone;
             tbEmail.Text = cust.Customer_Email;
             tbSalesRep.Text = cust.Employee_ID.ToString();
+            CbCustSalesRep_Click(null, null);
+            cbCustSalesRep.SelectedIndex = cbCustSalesRep.FindString(cust.Employee_ID.ToString());
 
             btCustSave.Visible = true;
             btCustSave.BringToFront();
@@ -160,6 +140,19 @@ namespace ERP
                 dataCustomer.DataSource = null;
                 RefreshAllData();
             }
+        }
+
+        private void CbCustSalesRep_Click(object sender, EventArgs e)
+        {
+            cbCustSalesRep.Items.Clear();
+            List<Employee> emps = SqliteDataAccess.LoadAllEmployee();
+            List<String> ID_Name = new List<String>();
+            foreach (Employee emp in emps)
+            {
+                ID_Name.Add(String.Format(emp.Employee_Id.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName));
+            }
+            String[] arrays = ID_Name.ToArray();
+            cbCustSalesRep.Items.AddRange(arrays);
         }
     }
     

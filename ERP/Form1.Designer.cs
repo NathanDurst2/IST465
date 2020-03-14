@@ -30,6 +30,44 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Customers = new System.Windows.Forms.TabPage();
+            this.cbCustSalesRep = new System.Windows.Forms.ComboBox();
+            this.btCustSave = new System.Windows.Forms.Button();
+            this.btCustEdit = new System.Windows.Forms.Button();
+            this.btCustRemove = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbCustZip = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tbCustState = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbCustCity = new System.Windows.Forms.TextBox();
+            this.dataCustomer = new System.Windows.Forms.DataGridView();
+            this.Cust_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cStreet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cSales_Rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.btCustClear = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbCustID = new System.Windows.Forms.TextBox();
+            this.btCustAdd = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbSalesRep = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.tbPhone = new System.Windows.Forms.TextBox();
+            this.tbCustStreet = new System.Windows.Forms.TextBox();
+            this.tbLastName = new System.Windows.Forms.TextBox();
+            this.tbFirstName = new System.Windows.Forms.TextBox();
             this.Employee = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.EmpSummary = new System.Windows.Forms.TabPage();
@@ -64,49 +102,17 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Order = new System.Windows.Forms.TabPage();
-            this.tabControl5 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.Settings = new System.Windows.Forms.TabPage();
-            this.dataCustomer = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btCustClear = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbCustID = new System.Windows.Forms.TextBox();
-            this.btCustAdd = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbSalesRep = new System.Windows.Forms.TextBox();
-            this.tbEmail = new System.Windows.Forms.TextBox();
-            this.tbPhone = new System.Windows.Forms.TextBox();
-            this.tbCustStreet = new System.Windows.Forms.TextBox();
-            this.tbLastName = new System.Windows.Forms.TextBox();
-            this.tbFirstName = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbCustCity = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tbCustState = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tbCustZip = new System.Windows.Forms.TextBox();
-            this.Cust_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cStreet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cSales_Rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btCustRemove = new System.Windows.Forms.Button();
-            this.btCustEdit = new System.Windows.Forms.Button();
-            this.btCustSave = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Customers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.Employee.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.EmpEntry.SuspendLayout();
@@ -114,9 +120,6 @@
             this.Vendor.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.Order.SuspendLayout();
-            this.tabControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -134,6 +137,7 @@
             // 
             // Customers
             // 
+            this.Customers.Controls.Add(this.cbCustSalesRep);
             this.Customers.Controls.Add(this.btCustSave);
             this.Customers.Controls.Add(this.btCustEdit);
             this.Customers.Controls.Add(this.btCustRemove);
@@ -168,6 +172,336 @@
             this.Customers.TabIndex = 0;
             this.Customers.Text = "Customers";
             this.Customers.UseVisualStyleBackColor = true;
+            // 
+            // cbCustSalesRep
+            // 
+            this.cbCustSalesRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustSalesRep.FormattingEnabled = true;
+            this.cbCustSalesRep.Location = new System.Drawing.Point(261, 78);
+            this.cbCustSalesRep.Name = "cbCustSalesRep";
+            this.cbCustSalesRep.Size = new System.Drawing.Size(100, 21);
+            this.cbCustSalesRep.TabIndex = 103;
+            this.cbCustSalesRep.Click += new System.EventHandler(this.CbCustSalesRep_Click);
+            // 
+            // btCustSave
+            // 
+            this.btCustSave.Location = new System.Drawing.Point(43, 220);
+            this.btCustSave.Name = "btCustSave";
+            this.btCustSave.Size = new System.Drawing.Size(75, 23);
+            this.btCustSave.TabIndex = 102;
+            this.btCustSave.Text = "Save";
+            this.btCustSave.UseVisualStyleBackColor = true;
+            this.btCustSave.Visible = false;
+            this.btCustSave.Click += new System.EventHandler(this.BtCustSave_Click);
+            // 
+            // btCustEdit
+            // 
+            this.btCustEdit.Location = new System.Drawing.Point(354, 247);
+            this.btCustEdit.Name = "btCustEdit";
+            this.btCustEdit.Size = new System.Drawing.Size(75, 23);
+            this.btCustEdit.TabIndex = 101;
+            this.btCustEdit.TabStop = false;
+            this.btCustEdit.Text = "Edit";
+            this.btCustEdit.UseVisualStyleBackColor = true;
+            this.btCustEdit.Click += new System.EventHandler(this.BtCustEdit_Click);
+            // 
+            // btCustRemove
+            // 
+            this.btCustRemove.Location = new System.Drawing.Point(435, 247);
+            this.btCustRemove.Name = "btCustRemove";
+            this.btCustRemove.Size = new System.Drawing.Size(75, 23);
+            this.btCustRemove.TabIndex = 44;
+            this.btCustRemove.TabStop = false;
+            this.btCustRemove.Text = "Remove";
+            this.btCustRemove.UseVisualStyleBackColor = true;
+            this.btCustRemove.Click += new System.EventHandler(this.BtCustRemove_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(25, 195);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(50, 13);
+            this.label17.TabIndex = 43;
+            this.label17.Text = "Zip Code";
+            // 
+            // tbCustZip
+            // 
+            this.tbCustZip.Location = new System.Drawing.Point(90, 192);
+            this.tbCustZip.Name = "tbCustZip";
+            this.tbCustZip.Size = new System.Drawing.Size(100, 20);
+            this.tbCustZip.TabIndex = 66;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(40, 169);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(32, 13);
+            this.label16.TabIndex = 41;
+            this.label16.Text = "State";
+            // 
+            // tbCustState
+            // 
+            this.tbCustState.Location = new System.Drawing.Point(90, 166);
+            this.tbCustState.Name = "tbCustState";
+            this.tbCustState.Size = new System.Drawing.Size(100, 20);
+            this.tbCustState.TabIndex = 55;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(40, 143);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(24, 13);
+            this.label15.TabIndex = 39;
+            this.label15.Text = "City";
+            // 
+            // tbCustCity
+            // 
+            this.tbCustCity.Location = new System.Drawing.Point(90, 140);
+            this.tbCustCity.Name = "tbCustCity";
+            this.tbCustCity.Size = new System.Drawing.Size(100, 20);
+            this.tbCustCity.TabIndex = 44;
+            // 
+            // dataCustomer
+            // 
+            this.dataCustomer.AllowUserToAddRows = false;
+            this.dataCustomer.AllowUserToDeleteRows = false;
+            this.dataCustomer.AllowUserToOrderColumns = true;
+            this.dataCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Cust_ID,
+            this.cFirstName,
+            this.cLastName,
+            this.cStreet,
+            this.cCity,
+            this.cState,
+            this.cZip,
+            this.cPhone,
+            this.cEmail,
+            this.cSales_Rep});
+            this.dataCustomer.Location = new System.Drawing.Point(20, 276);
+            this.dataCustomer.Name = "dataCustomer";
+            this.dataCustomer.RowHeadersWidth = 51;
+            this.dataCustomer.Size = new System.Drawing.Size(1025, 313);
+            this.dataCustomer.TabIndex = 37;
+            this.dataCustomer.TabStop = false;
+            // 
+            // Cust_ID
+            // 
+            this.Cust_ID.HeaderText = "ID";
+            this.Cust_ID.MinimumWidth = 6;
+            this.Cust_ID.Name = "Cust_ID";
+            this.Cust_ID.ReadOnly = true;
+            this.Cust_ID.Width = 125;
+            // 
+            // cFirstName
+            // 
+            this.cFirstName.HeaderText = "First Name";
+            this.cFirstName.MinimumWidth = 6;
+            this.cFirstName.Name = "cFirstName";
+            this.cFirstName.ReadOnly = true;
+            this.cFirstName.Width = 125;
+            // 
+            // cLastName
+            // 
+            this.cLastName.HeaderText = "Last Name";
+            this.cLastName.MinimumWidth = 6;
+            this.cLastName.Name = "cLastName";
+            this.cLastName.ReadOnly = true;
+            this.cLastName.Width = 125;
+            // 
+            // cStreet
+            // 
+            this.cStreet.HeaderText = "Street";
+            this.cStreet.MinimumWidth = 6;
+            this.cStreet.Name = "cStreet";
+            this.cStreet.ReadOnly = true;
+            this.cStreet.Width = 125;
+            // 
+            // cCity
+            // 
+            this.cCity.HeaderText = "City";
+            this.cCity.Name = "cCity";
+            // 
+            // cState
+            // 
+            this.cState.HeaderText = "State";
+            this.cState.Name = "cState";
+            // 
+            // cZip
+            // 
+            this.cZip.HeaderText = "Zip Code";
+            this.cZip.Name = "cZip";
+            // 
+            // cPhone
+            // 
+            this.cPhone.HeaderText = "Phone";
+            this.cPhone.MinimumWidth = 6;
+            this.cPhone.Name = "cPhone";
+            this.cPhone.ReadOnly = true;
+            this.cPhone.Width = 125;
+            // 
+            // cEmail
+            // 
+            this.cEmail.HeaderText = "Email";
+            this.cEmail.MinimumWidth = 6;
+            this.cEmail.Name = "cEmail";
+            this.cEmail.ReadOnly = true;
+            this.cEmail.Width = 125;
+            // 
+            // cSales_Rep
+            // 
+            this.cSales_Rep.HeaderText = "Sales Rep";
+            this.cSales_Rep.MinimumWidth = 6;
+            this.cSales_Rep.Name = "cSales_Rep";
+            this.cSales_Rep.ReadOnly = true;
+            this.cSales_Rep.Width = 125;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(516, 30);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(529, 215);
+            this.dataGridView2.TabIndex = 36;
+            this.dataGridView2.TabStop = false;
+            // 
+            // btCustClear
+            // 
+            this.btCustClear.Location = new System.Drawing.Point(124, 220);
+            this.btCustClear.Name = "btCustClear";
+            this.btCustClear.Size = new System.Drawing.Size(75, 23);
+            this.btCustClear.TabIndex = 35;
+            this.btCustClear.TabStop = false;
+            this.btCustClear.Text = "Clear";
+            this.btCustClear.UseVisualStyleBackColor = true;
+            this.btCustClear.Click += new System.EventHandler(this.BtCustClear_Click_1);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(68, 30);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(16, 13);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Id";
+            // 
+            // tbCustID
+            // 
+            this.tbCustID.Location = new System.Drawing.Point(90, 23);
+            this.tbCustID.Name = "tbCustID";
+            this.tbCustID.ReadOnly = true;
+            this.tbCustID.Size = new System.Drawing.Size(32, 20);
+            this.tbCustID.TabIndex = 33;
+            this.tbCustID.TabStop = false;
+            // 
+            // btCustAdd
+            // 
+            this.btCustAdd.Location = new System.Drawing.Point(43, 220);
+            this.btCustAdd.Name = "btCustAdd";
+            this.btCustAdd.Size = new System.Drawing.Size(75, 23);
+            this.btCustAdd.TabIndex = 100;
+            this.btCustAdd.Text = "Add";
+            this.btCustAdd.UseVisualStyleBackColor = true;
+            this.btCustAdd.Click += new System.EventHandler(this.BtCustAdd_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(200, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Sales Rep";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(224, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "Email";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(218, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Phone";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(40, 117);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Street";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Last Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "First Name";
+            // 
+            // tbSalesRep
+            // 
+            this.tbSalesRep.Location = new System.Drawing.Point(367, 81);
+            this.tbSalesRep.Name = "tbSalesRep";
+            this.tbSalesRep.Size = new System.Drawing.Size(100, 20);
+            this.tbSalesRep.TabIndex = 99;
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(261, 52);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(100, 20);
+            this.tbEmail.TabIndex = 88;
+            // 
+            // tbPhone
+            // 
+            this.tbPhone.Location = new System.Drawing.Point(261, 26);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(100, 20);
+            this.tbPhone.TabIndex = 77;
+            // 
+            // tbCustStreet
+            // 
+            this.tbCustStreet.Location = new System.Drawing.Point(90, 114);
+            this.tbCustStreet.Name = "tbCustStreet";
+            this.tbCustStreet.Size = new System.Drawing.Size(100, 20);
+            this.tbCustStreet.TabIndex = 33;
+            // 
+            // tbLastName
+            // 
+            this.tbLastName.Location = new System.Drawing.Point(90, 75);
+            this.tbLastName.Name = "tbLastName";
+            this.tbLastName.Size = new System.Drawing.Size(100, 20);
+            this.tbLastName.TabIndex = 22;
+            // 
+            // tbFirstName
+            // 
+            this.tbFirstName.Location = new System.Drawing.Point(90, 49);
+            this.tbFirstName.Name = "tbFirstName";
+            this.tbFirstName.Size = new System.Drawing.Size(100, 20);
+            this.tbFirstName.TabIndex = 11;
             // 
             // Employee
             // 
@@ -485,7 +819,12 @@
             // 
             // Order
             // 
-            this.Order.Controls.Add(this.tabControl5);
+            this.Order.Controls.Add(this.label18);
+            this.Order.Controls.Add(this.textBox3);
+            this.Order.Controls.Add(this.label19);
+            this.Order.Controls.Add(this.label20);
+            this.Order.Controls.Add(this.textBox4);
+            this.Order.Controls.Add(this.textBox5);
             this.Order.Location = new System.Drawing.Point(4, 22);
             this.Order.Name = "Order";
             this.Order.Size = new System.Drawing.Size(1065, 585);
@@ -493,35 +832,55 @@
             this.Order.Text = "Order";
             this.Order.UseVisualStyleBackColor = true;
             // 
-            // tabControl5
+            // label18
             // 
-            this.tabControl5.Controls.Add(this.tabPage5);
-            this.tabControl5.Controls.Add(this.tabPage6);
-            this.tabControl5.Location = new System.Drawing.Point(-2, 0);
-            this.tabControl5.Name = "tabControl5";
-            this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(1069, 584);
-            this.tabControl5.TabIndex = 1;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(138, 121);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(16, 13);
+            this.label18.TabIndex = 40;
+            this.label18.Text = "Id";
             // 
-            // tabPage5
+            // textBox3
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1061, 558);
-            this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "Estimate";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.textBox3.Location = new System.Drawing.Point(160, 114);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(32, 20);
+            this.textBox3.TabIndex = 39;
+            this.textBox3.TabStop = false;
             // 
-            // tabPage6
+            // label19
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1061, 558);
-            this.tabPage6.TabIndex = 0;
-            this.tabPage6.Text = "Sales Order";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(97, 169);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(58, 13);
+            this.label19.TabIndex = 38;
+            this.label19.Text = "Last Name";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(97, 143);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(51, 13);
+            this.label20.TabIndex = 37;
+            this.label20.Text = "Customer";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(160, 166);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 36;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(160, 140);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 35;
             // 
             // Settings
             // 
@@ -531,326 +890,6 @@
             this.Settings.TabIndex = 4;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
-            // 
-            // dataCustomer
-            // 
-            this.dataCustomer.AllowUserToAddRows = false;
-            this.dataCustomer.AllowUserToDeleteRows = false;
-            this.dataCustomer.AllowUserToOrderColumns = true;
-            this.dataCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Cust_ID,
-            this.cFirstName,
-            this.cLastName,
-            this.cStreet,
-            this.cCity,
-            this.cState,
-            this.cZip,
-            this.cPhone,
-            this.cEmail,
-            this.cSales_Rep});
-            this.dataCustomer.Location = new System.Drawing.Point(20, 276);
-            this.dataCustomer.Name = "dataCustomer";
-            this.dataCustomer.RowHeadersWidth = 51;
-            this.dataCustomer.Size = new System.Drawing.Size(1025, 313);
-            this.dataCustomer.TabIndex = 37;
-            this.dataCustomer.TabStop = false;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(516, 30);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(529, 215);
-            this.dataGridView2.TabIndex = 36;
-            this.dataGridView2.TabStop = false;
-            // 
-            // btCustClear
-            // 
-            this.btCustClear.Location = new System.Drawing.Point(124, 220);
-            this.btCustClear.Name = "btCustClear";
-            this.btCustClear.Size = new System.Drawing.Size(75, 23);
-            this.btCustClear.TabIndex = 35;
-            this.btCustClear.TabStop = false;
-            this.btCustClear.Text = "Clear";
-            this.btCustClear.UseVisualStyleBackColor = true;
-            this.btCustClear.Click += new System.EventHandler(this.BtCustClear_Click_1);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(68, 30);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(16, 13);
-            this.label13.TabIndex = 34;
-            this.label13.Text = "Id";
-            // 
-            // tbCustID
-            // 
-            this.tbCustID.Location = new System.Drawing.Point(90, 23);
-            this.tbCustID.Name = "tbCustID";
-            this.tbCustID.ReadOnly = true;
-            this.tbCustID.Size = new System.Drawing.Size(32, 20);
-            this.tbCustID.TabIndex = 33;
-            this.tbCustID.TabStop = false;
-            // 
-            // btCustAdd
-            // 
-            this.btCustAdd.Location = new System.Drawing.Point(43, 220);
-            this.btCustAdd.Name = "btCustAdd";
-            this.btCustAdd.Size = new System.Drawing.Size(75, 23);
-            this.btCustAdd.TabIndex = 100;
-            this.btCustAdd.Text = "Add";
-            this.btCustAdd.UseVisualStyleBackColor = true;
-            this.btCustAdd.Click += new System.EventHandler(this.BtCustAdd_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(200, 81);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Sales Rep";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(224, 55);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "Email";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(218, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Phone";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 117);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Street";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Last Name";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "First Name";
-            // 
-            // tbSalesRep
-            // 
-            this.tbSalesRep.Location = new System.Drawing.Point(261, 78);
-            this.tbSalesRep.Name = "tbSalesRep";
-            this.tbSalesRep.Size = new System.Drawing.Size(100, 20);
-            this.tbSalesRep.TabIndex = 99;
-            // 
-            // tbEmail
-            // 
-            this.tbEmail.Location = new System.Drawing.Point(261, 52);
-            this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(100, 20);
-            this.tbEmail.TabIndex = 88;
-            // 
-            // tbPhone
-            // 
-            this.tbPhone.Location = new System.Drawing.Point(261, 26);
-            this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(100, 20);
-            this.tbPhone.TabIndex = 77;
-            // 
-            // tbCustStreet
-            // 
-            this.tbCustStreet.Location = new System.Drawing.Point(90, 114);
-            this.tbCustStreet.Name = "tbCustStreet";
-            this.tbCustStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbCustStreet.TabIndex = 33;
-            // 
-            // tbLastName
-            // 
-            this.tbLastName.Location = new System.Drawing.Point(90, 75);
-            this.tbLastName.Name = "tbLastName";
-            this.tbLastName.Size = new System.Drawing.Size(100, 20);
-            this.tbLastName.TabIndex = 22;
-            // 
-            // tbFirstName
-            // 
-            this.tbFirstName.Location = new System.Drawing.Point(90, 49);
-            this.tbFirstName.Name = "tbFirstName";
-            this.tbFirstName.Size = new System.Drawing.Size(100, 20);
-            this.tbFirstName.TabIndex = 11;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(40, 143);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(24, 13);
-            this.label15.TabIndex = 39;
-            this.label15.Text = "City";
-            // 
-            // tbCustCity
-            // 
-            this.tbCustCity.Location = new System.Drawing.Point(90, 140);
-            this.tbCustCity.Name = "tbCustCity";
-            this.tbCustCity.Size = new System.Drawing.Size(100, 20);
-            this.tbCustCity.TabIndex = 44;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(40, 169);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 13);
-            this.label16.TabIndex = 41;
-            this.label16.Text = "State";
-            // 
-            // tbCustState
-            // 
-            this.tbCustState.Location = new System.Drawing.Point(90, 166);
-            this.tbCustState.Name = "tbCustState";
-            this.tbCustState.Size = new System.Drawing.Size(100, 20);
-            this.tbCustState.TabIndex = 55;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(25, 195);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(50, 13);
-            this.label17.TabIndex = 43;
-            this.label17.Text = "Zip Code";
-            // 
-            // tbCustZip
-            // 
-            this.tbCustZip.Location = new System.Drawing.Point(90, 192);
-            this.tbCustZip.Name = "tbCustZip";
-            this.tbCustZip.Size = new System.Drawing.Size(100, 20);
-            this.tbCustZip.TabIndex = 66;
-            // 
-            // Cust_ID
-            // 
-            this.Cust_ID.HeaderText = "ID";
-            this.Cust_ID.MinimumWidth = 6;
-            this.Cust_ID.Name = "Cust_ID";
-            this.Cust_ID.ReadOnly = true;
-            this.Cust_ID.Width = 125;
-            // 
-            // cFirstName
-            // 
-            this.cFirstName.HeaderText = "First Name";
-            this.cFirstName.MinimumWidth = 6;
-            this.cFirstName.Name = "cFirstName";
-            this.cFirstName.ReadOnly = true;
-            this.cFirstName.Width = 125;
-            // 
-            // cLastName
-            // 
-            this.cLastName.HeaderText = "Last Name";
-            this.cLastName.MinimumWidth = 6;
-            this.cLastName.Name = "cLastName";
-            this.cLastName.ReadOnly = true;
-            this.cLastName.Width = 125;
-            // 
-            // cStreet
-            // 
-            this.cStreet.HeaderText = "Street";
-            this.cStreet.MinimumWidth = 6;
-            this.cStreet.Name = "cStreet";
-            this.cStreet.ReadOnly = true;
-            this.cStreet.Width = 125;
-            // 
-            // cCity
-            // 
-            this.cCity.HeaderText = "City";
-            this.cCity.Name = "cCity";
-            // 
-            // cState
-            // 
-            this.cState.HeaderText = "State";
-            this.cState.Name = "cState";
-            // 
-            // cZip
-            // 
-            this.cZip.HeaderText = "Zip Code";
-            this.cZip.Name = "cZip";
-            // 
-            // cPhone
-            // 
-            this.cPhone.HeaderText = "Phone";
-            this.cPhone.MinimumWidth = 6;
-            this.cPhone.Name = "cPhone";
-            this.cPhone.ReadOnly = true;
-            this.cPhone.Width = 125;
-            // 
-            // cEmail
-            // 
-            this.cEmail.HeaderText = "Email";
-            this.cEmail.MinimumWidth = 6;
-            this.cEmail.Name = "cEmail";
-            this.cEmail.ReadOnly = true;
-            this.cEmail.Width = 125;
-            // 
-            // cSales_Rep
-            // 
-            this.cSales_Rep.HeaderText = "Sales Rep";
-            this.cSales_Rep.MinimumWidth = 6;
-            this.cSales_Rep.Name = "cSales_Rep";
-            this.cSales_Rep.ReadOnly = true;
-            this.cSales_Rep.Width = 125;
-            // 
-            // btCustRemove
-            // 
-            this.btCustRemove.Location = new System.Drawing.Point(414, 220);
-            this.btCustRemove.Name = "btCustRemove";
-            this.btCustRemove.Size = new System.Drawing.Size(75, 23);
-            this.btCustRemove.TabIndex = 44;
-            this.btCustRemove.TabStop = false;
-            this.btCustRemove.Text = "Remove";
-            this.btCustRemove.UseVisualStyleBackColor = true;
-            this.btCustRemove.Click += new System.EventHandler(this.BtCustRemove_Click);
-            // 
-            // btCustEdit
-            // 
-            this.btCustEdit.Location = new System.Drawing.Point(261, 138);
-            this.btCustEdit.Name = "btCustEdit";
-            this.btCustEdit.Size = new System.Drawing.Size(75, 23);
-            this.btCustEdit.TabIndex = 101;
-            this.btCustEdit.TabStop = false;
-            this.btCustEdit.Text = "Edit";
-            this.btCustEdit.UseVisualStyleBackColor = true;
-            this.btCustEdit.Click += new System.EventHandler(this.BtCustEdit_Click);
-            // 
-            // btCustSave
-            // 
-            this.btCustSave.Location = new System.Drawing.Point(43, 220);
-            this.btCustSave.Name = "btCustSave";
-            this.btCustSave.Size = new System.Drawing.Size(75, 23);
-            this.btCustSave.TabIndex = 102;
-            this.btCustSave.Text = "Save";
-            this.btCustSave.UseVisualStyleBackColor = true;
-            this.btCustSave.Visible = false;
-            this.btCustSave.Click += new System.EventHandler(this.BtCustSave_Click);
             // 
             // Form1
             // 
@@ -864,6 +903,8 @@
             this.tabControl1.ResumeLayout(false);
             this.Customers.ResumeLayout(false);
             this.Customers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.Employee.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.EmpEntry.ResumeLayout(false);
@@ -872,9 +913,7 @@
             this.Vendor.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.Order.ResumeLayout(false);
-            this.tabControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.Order.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -892,9 +931,6 @@
         private System.Windows.Forms.TabControl tabControl4;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabControl tabControl5;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage Settings;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -958,6 +994,13 @@
         private System.Windows.Forms.Button btCustRemove;
         private System.Windows.Forms.Button btCustEdit;
         private System.Windows.Forms.Button btCustSave;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ComboBox cbCustSalesRep;
     }
 }
 

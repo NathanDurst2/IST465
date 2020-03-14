@@ -8,12 +8,12 @@ namespace ERP
 {
     public class Employee
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public int Supervisor_ID { get; set; }
+        public int Employee_Id { get; set; }
+        public string Employee_FirstName { get; set; }
+        public string Employee_LastName { get; set; }
+        public string Employee_Address { get; set; }
+        public string Employee_Phone { get; set; }
+        public string Employee_Email { get; set; }
+        public int Employee_Supervisor_ID { get; set; }
     }
 }

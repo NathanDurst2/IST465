@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// Sean Testing
 namespace ERP
 {
     public class SqliteDataAccess
@@ -51,9 +50,19 @@ namespace ERP
                 cnn.Execute(String.Format("DELETE FROM Customer WHERE Cust_ID = {0}", Cust_ID));
             }
         }
-        private static string LoadConnectionString(string id = "Default")
+        public  static string LoadConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+        }
+
+        public static List<Employee> LoadAllEmployee()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Employee> c = cnn.Query<Employee>("select * from Employee").ToList();
+                return c;
+            }
         }
     }
 }
