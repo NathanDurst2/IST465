@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Estimate.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="SQLQuery.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

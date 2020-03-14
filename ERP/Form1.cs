@@ -192,8 +192,6 @@ namespace ERP
 
         private void CbOrderCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbOrderCustomer.SelectedIndex != 0)
-            {
                 string cust = cbOrderCustomer.Text;
                 int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
                 Customer c = SqliteDataAccess.LoadCustomer(cust_id)[0];
@@ -211,7 +209,7 @@ namespace ERP
                     tbOrderShippingZip.Text = tbOrderBillingZip.Text;
                 }
 
-            }
+            
         }
     }
     
