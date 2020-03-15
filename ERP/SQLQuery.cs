@@ -119,7 +119,7 @@ namespace ERP
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Items, Sales_Date, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Items, @Sales_Date, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
+                cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Items, Sales_Date, Sales_ShipDate, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Items, @Sales_Date, @Sales_ShipDate, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
             }
         }
     }

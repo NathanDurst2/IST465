@@ -386,7 +386,8 @@ namespace ERP
                 est.Cust_ID = cust_id;
                 est.Employee_ID = emp_id;
                 est.Sales_Items = "ABC123";
-                est.Sales_Date = DateTime.Today.ToString();
+                est.Sales_Date = DateTime.Today.ToShortDateString();
+                est.Sales_ShipDate = DateTime.Today.AddDays(2).ToShortDateString();
                 est.Sales_Subtotal = 0;
                 est.Sales_Tax = 0;
                 est.Sales_Total = 0;
