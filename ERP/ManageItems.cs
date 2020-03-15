@@ -12,7 +12,7 @@ namespace ERP
 {
     public partial class ManageItems : Form
     {
-        public ManageItems()
+        public ManageItems(List<Item> items)
         {
             InitializeComponent();
 
@@ -31,10 +31,11 @@ namespace ERP
                 dataAllItems.Rows[i].Cells["itemVendor"].Value = c[i].Vendor_ID;
                 dataAllItems.Rows[i].Cells["itemDesc"].Value = c[i].Item_Description;
             }
-
+            this.selectedItems = items;
             
         }
-        List<Item> selectedItems = new List<Item>();
+        
+        public List<Item> selectedItems = new List<Item>();
         private void BtSubmit_Click(object sender, EventArgs e)
         {
             this.Close();

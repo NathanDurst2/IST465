@@ -16,5 +16,13 @@ namespace ERP
         public long Estimate_Subtotal { get; set; }
         public long Estimate_Tax { get; set; }
         public long Estimate_Total { get; set; }
+        public long Estimate_BillStreet { get; set; }
+        public long Estimate_BillCity { get; set; }
+        public long Estimate_BillState { get; set; }
+        public long Estimate_BillZip { get; set; }
+        public long Estimate_ShipStreet { get; set; }
+        public long Estimate_ShipCity { get; set; }
+        public long Estimate_ShipState { get; set; }
+        public long Estimate_ShipZip { get; set; }
     }
 }

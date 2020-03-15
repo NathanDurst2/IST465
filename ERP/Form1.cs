@@ -297,11 +297,48 @@ namespace ERP
             String[] arrays = ID_Name.ToArray();
             cbOrderSalesRep.Items.AddRange(arrays);
         }
-
-        private void BtOrderManageItems_Click(object sender, EventArgs e)
+        bool newOrder = false;
+        List<Item> selectedItems;
+        public void BtOrderManageItems_Click(object sender, EventArgs e)
         {
-            ManageItems mi = new ManageItems();
+            ManageItems mi;
+            if (newOrder)
+            {
+                mi = new ManageItems(new List<Item>());
+            }
+            else
+            {
+                
+                mi = new ManageItems(new List<Item>());
+            }
+            List<Item> test = new List<Item>();
+
             mi.ShowDialog();
+            selectedItems = mi.selectedItems;
+        }
+
+        private void BtOrderAdd_Click(object sender, EventArgs e)
+        {
+            if (cbOrderType.Text == "Estimate")
+            {
+                Estimate est = new Estimate();
+
+                string emp = cbOrderSalesRep.Text;
+                int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
+
+                string cust = cbOrderCustomer.Text;
+                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+
+                est.Cust_ID = cust_id;
+                est.Employee_ID = emp_id;
+                est.Estimate_Items = selectedItems;
+                est.Estimate_Date = DateTime.Today.ToString();
+                est.Estimate_Subtotal = 0;
+            }
+            else if (cbOrderType.Text.StartsWith("Sales"))
+            {
+
+            }
         }
     }
 
