@@ -62,6 +62,7 @@
     <Compile Include="ManageItems.Designer.cs">
       <DependentUpon>ManageItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="_SalesOrder.cs" />
     <Compile Include="_Customer.cs" />
     <Compile Include="_Employee.cs" />
     <Compile Include="_Estimate.cs" />

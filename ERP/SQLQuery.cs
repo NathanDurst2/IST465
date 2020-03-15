@@ -90,5 +90,37 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Estimate> LoadAllEstimate()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Estimate> c = cnn.Query<Estimate>("select * from Estimate").ToList();
+                return c;
+            }
+        }
+        public static List<SalesOrder> LoadAllSalesOrder()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<SalesOrder> c = cnn.Query<SalesOrder>("select * from SalesOrder").ToList();
+                return c;
+            }
+        }
+        public static void AddEstimate(Estimate c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Estimate (Cust_ID, Employee_ID, Estimate_Items, Estimate_Date, Estimate_Subtotal, Estimate_Tax, Estimate_Total, Estimate_BillStreet, Estimate_BillCity, Estimate_BillState, Estimate_BillZip, Estimate_ShipStreet, Estimate_ShipCity, Estimate_ShipState, Estimate_ShipZip) values (@Cust_ID, @Employee_ID, @Estimate_Items, @Estimate_Date, @Estimate_Subtotal, @Estimate_Tax, @Estimate_Total, @Estimate_BillStreet, @Estimate_BillCity, @Estimate_BillState, @Estimate_BillZip, @Estimate_ShipStreet, @Estimate_ShipCity, @Estimate_ShipState, @Estimate_ShipZip)", c);
+            }
+        }
+        public static void AddSalesOrder(SalesOrder c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Items, Sales_Date, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Items, @Sales_Date, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
+            }
+        }
     }
 }

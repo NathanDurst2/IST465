@@ -213,6 +213,8 @@
             this.orderCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderSalesRep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingStreet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingState = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1855,6 +1857,8 @@
             this.orderCustomer,
             this.orderType,
             this.orderSalesRep,
+            this.orderDate,
+            this.orderShipDate,
             this.orderShippingStreet,
             this.orderShippingCity,
             this.orderShippingState,
@@ -1951,6 +1955,16 @@
             // 
             this.orderSalesRep.HeaderText = "Sales Rep";
             this.orderSalesRep.Name = "orderSalesRep";
+            // 
+            // orderDate
+            // 
+            this.orderDate.HeaderText = "Date";
+            this.orderDate.Name = "orderDate";
+            // 
+            // orderShipDate
+            // 
+            this.orderShipDate.HeaderText = "Ship Date";
+            this.orderShipDate.Name = "orderShipDate";
             // 
             // orderShippingStreet
             // 
@@ -2204,6 +2218,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orderCustomer;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderSalesRep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderShipDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingStreet;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingState;

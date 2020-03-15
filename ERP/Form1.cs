@@ -13,6 +13,7 @@ namespace ERP
             RefreshItems();
             RefreshVendors();
             RefreshEmployeee();
+            RefreshOrders();
             //this.tabControl2.SelectedIndexChanged += this.tabControl2_SelectedIndexChanged;
 
 
@@ -112,6 +113,30 @@ namespace ERP
                 dataEmployee.Rows[i].Cells["empPhone"].Value = c[i].Employee_Phone;
                 dataEmployee.Rows[i].Cells["empEmail"].Value = c[i].Employee_Email;
                 dataEmployee.Rows[i].Cells["empSupervisorID"].Value = c[i].Employee_Supervisor_ID;
+            }
+        }
+        private void RefreshOrders()
+        {
+            dataOrder.Rows.Clear();
+            dataOrder.DataSource = null;
+            List<Estimate> c = new List<Estimate>();
+            c = SqliteDataAccess.LoadAllEstimate();
+
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (dataOrder.Rows.Count == i)
+                {
+                    dataOrder.Rows.Add();
+                }
+                dataOrder.Rows[i].Cells["orderID"].Value = c[i].Estimate_ID;
+                dataOrder.Rows[i].Cells["orderCustomer"].Value = c[i].Cust_ID;
+                dataOrder.Rows[i].Cells["orderType"].Value = "Estimate";
+                dataOrder.Rows[i].Cells["orderSalesRep"].Value = c[i].Employee_ID;
+                dataOrder.Rows[i].Cells["orderShippingStreet"].Value = c[i].Estimate_ShipStreet;
+                dataOrder.Rows[i].Cells["orderShippingCity"].Value = c[i].Estimate_ShipCity;
+                dataOrder.Rows[i].Cells["orderShippingState"].Value = c[i].Estimate_ShipState;
+                dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[i].Estimate_ShipZip;
+
             }
         }
 
@@ -331,13 +356,51 @@ namespace ERP
 
                 est.Cust_ID = cust_id;
                 est.Employee_ID = emp_id;
-                est.Estimate_Items = selectedItems;
+                est.Estimate_Items = "ABC123";
                 est.Estimate_Date = DateTime.Today.ToString();
                 est.Estimate_Subtotal = 0;
+                est.Estimate_Tax = 0;
+                est.Estimate_Total = 0;
+                est.Estimate_BillStreet = tbOrderBillingStreet.Text;
+                est.Estimate_BillCity = tbOrderBillingCity.Text;
+                est.Estimate_BillState = tbOrderBillingState.Text;
+                est.Estimate_BillZip = tbOrderBillingZip.Text;
+                est.Estimate_ShipStreet = tbOrderShippingStreet.Text;
+                est.Estimate_ShipCity = tbOrderShippingCity.Text;
+                est.Estimate_ShipState = tbOrderShippingState.Text;
+                est.Estimate_ShipZip = tbOrderShippingZip.Text;
+
+                SqliteDataAccess.AddEstimate(est);
+                RefreshOrders();
             }
             else if (cbOrderType.Text.StartsWith("Sales"))
             {
+                SalesOrder est = new SalesOrder();
 
+                string emp = cbOrderSalesRep.Text;
+                int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
+
+                string cust = cbOrderCustomer.Text;
+                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+
+                est.Cust_ID = cust_id;
+                est.Employee_ID = emp_id;
+                est.Sales_Items = "ABC123";
+                est.Sales_Date = DateTime.Today.ToString();
+                est.Sales_Subtotal = 0;
+                est.Sales_Tax = 0;
+                est.Sales_Total = 0;
+                est.Sales_BillStreet = tbOrderBillingStreet.Text;
+                est.Sales_BillCity = tbOrderBillingCity.Text;
+                est.Sales_BillState = tbOrderBillingState.Text;
+                est.Sales_BillZip = tbOrderBillingZip.Text;
+                est.Sales_ShipStreet = tbOrderShippingStreet.Text;
+                est.Sales_ShipCity = tbOrderShippingCity.Text;
+                est.Sales_ShipState = tbOrderShippingState.Text;
+                est.Sales_ShipZip = tbOrderShippingZip.Text;
+
+                SqliteDataAccess.AddSalesOrder(est);
+                RefreshOrders();
             }
         }
     }
