@@ -4,9 +4,9 @@ using System.Data;
 using System.Windows.Forms;
 namespace ERP
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
             RefreshCustomers();
@@ -122,31 +122,76 @@ namespace ERP
             List<Estimate> c = new List<Estimate>();
             c = SqliteDataAccess.LoadAllEstimate();
 
-            for (int i = 0; i < c.Count; i++)
+            List<SalesOrder> s = new List<SalesOrder>();
+            s = SqliteDataAccess.LoadAllSalesOrder();
+
+            int neededRows = c.Count + s.Count;
+            if(neededRows > 0)
             {
-                if (dataOrder.Rows.Count == i)
+                dataOrder.Rows.Add();
+                if(neededRows >= 2)
                 {
-                    dataOrder.Rows.Add();
+                    dataOrder.Rows.AddCopies(0, neededRows - 1);
                 }
-                dataOrder.Rows[i].Cells["orderID"].Value = c[i].Estimate_ID;
-                dataOrder.Rows[i].Cells["orderCustomer"].Value = c[i].Cust_ID;
-                dataOrder.Rows[i].Cells["orderType"].Value = "Estimate";
-                dataOrder.Rows[i].Cells["orderSalesRep"].Value = c[i].Employee_ID;
-                dataOrder.Rows[i].Cells["orderShippingStreet"].Value = c[i].Estimate_ShipStreet;
-                dataOrder.Rows[i].Cells["orderShippingCity"].Value = c[i].Estimate_ShipCity;
-                dataOrder.Rows[i].Cells["orderShippingState"].Value = c[i].Estimate_ShipState;
-                dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[i].Estimate_ShipZip;
-
             }
-        }
 
-        //private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (tabControl2.SelectedTab == tabControl2.TabPages["Summary"])
-        //    {
-        //        RefreshCustomers();
-        //    }
-        //}
+            int y = 0;
+            for (int i = 0; i < c.Count + s.Count; i++, y++)
+            {
+                
+                if (y < c.Count)
+                {
+                    dataOrder.Rows[i].Cells["orderID"].Value = c[y].Estimate_ID;
+                    dataOrder.Rows[i].Cells["orderCustomer"].Value = c[y].Cust_ID;
+                    dataOrder.Rows[i].Cells["orderType"].Value = "Estimate";
+                    dataOrder.Rows[i].Cells["orderDate"].Value = c[y].Estimate_Date;
+                    dataOrder.Rows[i].Cells["orderSalesRep"].Value = c[y].Employee_ID;
+                    dataOrder.Rows[i].Cells["orderShippingStreet"].Value = c[y].Estimate_ShipStreet;
+                    dataOrder.Rows[i].Cells["orderShippingCity"].Value = c[y].Estimate_ShipCity;
+                    dataOrder.Rows[i].Cells["orderShippingState"].Value = c[y].Estimate_ShipState;
+                    dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[y].Estimate_ShipZip;
+                }
+                
+                if (y < s.Count)
+                {
+                    if(y < c.Count)
+                    {
+                        i++;
+                    }
+                    dataOrder.Rows[i].Cells["orderID"].Value = s[y].Sales_ID;
+                    dataOrder.Rows[i].Cells["orderCustomer"].Value = s[y].Cust_ID;
+                    dataOrder.Rows[i].Cells["orderType"].Value = "Sales Order";
+                    dataOrder.Rows[i].Cells["orderDate"].Value = s[y].Sales_Date;
+                    dataOrder.Rows[i].Cells["orderShipDate"].Value = s[y].Sales_ShipDate;
+                    dataOrder.Rows[i].Cells["orderSalesRep"].Value = s[y].Employee_ID;
+                    dataOrder.Rows[i].Cells["orderShippingStreet"].Value = s[y].Sales_ShipStreet;
+                    dataOrder.Rows[i].Cells["orderShippingCity"].Value = s[y].Sales_ShipCity;
+                    dataOrder.Rows[i].Cells["orderShippingState"].Value = s[y].Sales_ShipState;
+                    dataOrder.Rows[i].Cells["orderShippingZip"].Value = s[y].Sales_ShipZip;
+                }
+            }
+
+            //int lastRow = dataOrder.Rows.GetLastRow(DataGridViewElementStates.Visible);
+            //for (int i = lastRow; i < s.Count; i++)
+            //{
+            //    if (dataOrder.Rows.Count == i)
+            //    {
+            //        dataOrder.Rows.Add();
+            //    }
+            //    dataOrder.Rows[i].Cells["orderID"].Value = s[i].Sales_ID;
+            //    dataOrder.Rows[i].Cells["orderCustomer"].Value = s[i].Cust_ID;
+            //    dataOrder.Rows[i].Cells["orderType"].Value = "Sales Order";
+            //    dataOrder.Rows[i].Cells["orderDate"].Value = s[i].Sales_Date;
+            //    dataOrder.Rows[i].Cells["orderShipDate"].Value = s[i].Sales_ShipDate;
+            //    dataOrder.Rows[i].Cells["orderSalesRep"].Value = s[i].Employee_ID;
+            //    dataOrder.Rows[i].Cells["orderShippingStreet"].Value = s[i].Sales_ShipStreet;
+            //    dataOrder.Rows[i].Cells["orderShippingCity"].Value = s[i].Sales_ShipCity;
+            //    dataOrder.Rows[i].Cells["orderShippingState"].Value = s[i].Sales_ShipState;
+            //    dataOrder.Rows[i].Cells["orderShippingZip"].Value = s[i].Sales_ShipZip;
+
+            //}
+
+        }
 
         private void BtCustClear_Click_1(object sender, EventArgs e)
         {
@@ -333,13 +378,23 @@ namespace ERP
             }
             else
             {
-                
+
                 mi = new ManageItems(new List<Item>());
             }
-            List<Item> test = new List<Item>();
 
             mi.ShowDialog();
             selectedItems = mi.selectedItems;
+
+            if(selectedItems.Count > 0)
+            {
+                dataOrderItems.Rows.Add();
+                if(selectedItems.Count >= 2)
+                {
+                    dataOrderItems.Rows.AddCopies(0, selectedItems.Count - 1);
+                }
+            }
+            
+
         }
 
         private void BtOrderAdd_Click(object sender, EventArgs e)
@@ -356,8 +411,7 @@ namespace ERP
 
                 est.Cust_ID = cust_id;
                 est.Employee_ID = emp_id;
-                est.Estimate_Items = "ABC123";
-                est.Estimate_Date = DateTime.Today.ToString();
+                est.Estimate_Date = DateTime.Today.ToShortDateString();
                 est.Estimate_Subtotal = 0;
                 est.Estimate_Tax = 0;
                 est.Estimate_Total = 0;
@@ -370,8 +424,19 @@ namespace ERP
                 est.Estimate_ShipState = tbOrderShippingState.Text;
                 est.Estimate_ShipZip = tbOrderShippingZip.Text;
 
-                SqliteDataAccess.AddEstimate(est);
+                string est_id = SqliteDataAccess.AddEstimate(est);
                 RefreshOrders();
+
+                foreach(Item it in selectedItems)
+                {
+                    Estimate_Item ei = new Estimate_Item();
+
+                    ei.Estimate_ID = Convert.ToInt32(est_id);
+                    ei.Item_Number = it.Item_Number;
+
+                    SqliteDataAccess.AddEstimate_Item(ei);
+                }
+                selectedItems = new List<Item>();
             }
             else if (cbOrderType.Text.StartsWith("Sales"))
             {
@@ -385,7 +450,6 @@ namespace ERP
 
                 est.Cust_ID = cust_id;
                 est.Employee_ID = emp_id;
-                est.Sales_Items = "ABC123";
                 est.Sales_Date = DateTime.Today.ToShortDateString();
                 est.Sales_ShipDate = DateTime.Today.AddDays(2).ToShortDateString();
                 est.Sales_Subtotal = 0;
@@ -403,6 +467,11 @@ namespace ERP
                 SqliteDataAccess.AddSalesOrder(est);
                 RefreshOrders();
             }
+        }
+
+        private void BtOrderSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

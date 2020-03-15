@@ -108,18 +108,53 @@ namespace ERP
                 return c;
             }
         }
-        public static void AddEstimate(Estimate c)
+        public static List<SalesOrder_Item> LoadSalesOrder_ItemFOR(int saleID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Estimate (Cust_ID, Employee_ID, Estimate_Items, Estimate_Date, Estimate_Subtotal, Estimate_Tax, Estimate_Total, Estimate_BillStreet, Estimate_BillCity, Estimate_BillState, Estimate_BillZip, Estimate_ShipStreet, Estimate_ShipCity, Estimate_ShipState, Estimate_ShipZip) values (@Cust_ID, @Employee_ID, @Estimate_Items, @Estimate_Date, @Estimate_Subtotal, @Estimate_Tax, @Estimate_Total, @Estimate_BillStreet, @Estimate_BillCity, @Estimate_BillState, @Estimate_BillZip, @Estimate_ShipStreet, @Estimate_ShipCity, @Estimate_ShipState, @Estimate_ShipZip)", c);
+
+                List<SalesOrder_Item> c = cnn.Query<SalesOrder_Item>(string.Format("select * from SalesOrder_Item where Sales_ID = {0}", saleID)).ToList();
+                return c;
+            }
+        }
+        public static List<Estimate_Item> LoadEstimate_ItemFOR(int estimateID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Estimate_Item> c = cnn.Query<Estimate_Item>(string.Format("select * from Estimate_Item where Estimate_ID = {0}", estimateID)).ToList();
+                return c;
+            }
+        }
+        public static string AddEstimate(Estimate c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Estimate (Cust_ID, Employee_ID, Estimate_Date, Estimate_Subtotal, Estimate_Tax, Estimate_Total, Estimate_BillStreet, Estimate_BillCity, Estimate_BillState, Estimate_BillZip, Estimate_ShipStreet, Estimate_ShipCity, Estimate_ShipState, Estimate_ShipZip) values (@Cust_ID, @Employee_ID, @Estimate_Date, @Estimate_Subtotal, @Estimate_Tax, @Estimate_Total, @Estimate_BillStreet, @Estimate_BillCity, @Estimate_BillState, @Estimate_BillZip, @Estimate_ShipStreet, @Estimate_ShipCity, @Estimate_ShipState, @Estimate_ShipZip)", c);
+                dynamic e = cnn.QueryFirst("SELECT seq FROM sqlite_sequence where name=\"Estimate\"");
+                return e.seq.ToString();
             }
         }
         public static void AddSalesOrder(SalesOrder c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Items, Sales_Date, Sales_ShipDate, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Items, @Sales_Date, @Sales_ShipDate, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
+                cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Date, Sales_ShipDate, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Date, @Sales_ShipDate, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
+            }
+        }
+        public static void AddSalesOrder_Item(SalesOrder_Item c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into SalesOrder_Item (Sales_ID, Item_Number) values (@Sales_ID, @Item_Number)", c);
+            }
+        }
+        public static void AddEstimate_Item(Estimate_Item c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Estimate_Item (Estimate_ID, Item_Number) values (@Estimate_ID, @Item_Number)", c);
+
             }
         }
     }

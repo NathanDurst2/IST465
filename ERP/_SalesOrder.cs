@@ -11,7 +11,6 @@ namespace ERP
         public int Sales_ID { get; set; }
         public int Cust_ID { get; set; }
         public int Employee_ID { get; set; }
-        public string Sales_Items { get; set; }
         public string Sales_Date { get; set; }
         public string Sales_ShipDate { get; set; }
         public long Sales_Subtotal { get; set; }
