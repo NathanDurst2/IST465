@@ -473,6 +473,16 @@ namespace ERP
         {
 
         }
+        private void dataOrder_SelectionChanged(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
+            string estORSales = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+
+            if (estORSales == "Estimate")
+            {
+                List<Estimate_Item> list = SqliteDataAccess.LoadEstimate_ItemFOR(id);
+            }
+        }
     }
 
 }

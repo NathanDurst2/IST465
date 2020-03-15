@@ -1873,6 +1873,7 @@
             this.dataOrder.Size = new System.Drawing.Size(1025, 313);
             this.dataOrder.TabIndex = 117;
             this.dataOrder.TabStop = false;
+            this.dataOrder.SelectionChanged += new System.EventHandler(this.dataOrder_SelectionChanged);
             // 
             // orderID
             // 
