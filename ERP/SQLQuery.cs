@@ -29,6 +29,22 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Estimate> LoadEstimate(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<Estimate> c = cnn.Query<Estimate>(String.Format("select * from Estimate where Estimate_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
+        public static List<SalesOrder> LoadSalesOrder(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<SalesOrder> c = cnn.Query<SalesOrder>(String.Format("select * from SalesOrder where Sales_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
         public static List<Item> LoadItem(string id)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -56,6 +72,20 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM Customer WHERE Cust_ID = {0}", Cust_ID));
+            }
+        }
+        public static void DeleteEstimate_Item(int Estimate_ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Estimate_Item WHERE Estimate_ID = {0}", Estimate_ID));
+            }
+        }
+        public static void DeleteSalesOrder_Item(int SalesOrder_ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM SalesOrder_Item WHERE Sales_ID = {0}", SalesOrder_ID));
             }
         }
         public  static string LoadConnectionString(string id = "Default")
@@ -153,7 +183,7 @@ namespace ERP
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Estimate_Item (Estimate_ID, Item_Number) values (@Estimate_ID, @Item_Number)", c);
+                cnn.Execute("insert into Estimate_Item (Estimate_ID, Item_Number, Estimate_Item_Quantity) values (@Estimate_ID, @Item_Number, @Estimate_Item_Quantity)", c);
 
             }
         }

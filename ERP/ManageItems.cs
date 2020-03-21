@@ -12,7 +12,8 @@ namespace ERP
 {
     public partial class ManageItems : Form
     {
-        public ManageItems(List<Item> items)
+        public List<SelectedItems> selected = new List<SelectedItems>();
+        public ManageItems(List<SelectedItems> items)
         {
             InitializeComponent();
 
@@ -21,8 +22,23 @@ namespace ERP
             List<Item> c = new List<Item>();
             c = SqliteDataAccess.LoadAllItem();
 
+            if(items != null)
+                selected = items;
+            RefreshSelectedItems();
+
+            for(int i=0; i < c.Count; i++)
+            {
+                foreach(SelectedItems si in selected)
+                {
+                    if (c[i].Item_Number == si.Item_Number)
+                        c.RemoveAt(i);
+                }
+            }
+
+
             for (int i = 0; i < c.Count; i++)
             {
+                
                 if (dataAllItems.Rows.Count == i)
                 {
                     dataAllItems.Rows.Add();
@@ -31,11 +47,10 @@ namespace ERP
                 dataAllItems.Rows[i].Cells["itemVendor"].Value = c[i].Vendor_ID;
                 dataAllItems.Rows[i].Cells["itemDesc"].Value = c[i].Item_Description;
             }
-            this.selectedItems = items;
             
         }
         
-        public List<Item> selectedItems = new List<Item>();
+        
         private void BtSubmit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -44,60 +59,81 @@ namespace ERP
         private void BtAdd_Click(object sender, EventArgs e)
         {
             string itemNumber = (string)dataAllItems.Rows[dataAllItems.CurrentCell.RowIndex].Cells["itemNumber"].Value;
+            string itemDesc = (string)dataAllItems.Rows[dataAllItems.CurrentCell.RowIndex].Cells["itemDesc"].Value;
+            int itemVendorID = (int)dataAllItems.Rows[dataAllItems.CurrentCell.RowIndex].Cells["itemVendor"].Value;
             int index = dataAllItems.CurrentCell.RowIndex;
             dataAllItems.Rows.RemoveAt(index);
 
-            Item it = SqliteDataAccess.LoadItem(itemNumber)[0];
+            SelectedItems si = new SelectedItems();
+            si.Item_Number = itemNumber;
+            si.Item_Description = itemDesc;
+            si.Vendor_ID = itemVendorID;
 
-            selectedItems.Add(it);
-
+            selected.Add(si);
             RefreshSelectedItems();
+
+            dataSelectedItems.CurrentCell = dataSelectedItems.Rows[dataSelectedItems.Rows.Count-1].Cells["sItemQuantity"];
+            dataSelectedItems.CurrentCell.Value = 0;
+            dataSelectedItems.BeginEdit(true);
         }
         private void RefreshSelectedItems()
         {
             dataSelectedItems.Rows.Clear();
             dataSelectedItems.DataSource = null;
 
-            List<Item> c = selectedItems;
+            List<SelectedItems> c = selected;
 
-            for (int i = 0; i < c.Count; i++)
-            {
-                if (dataSelectedItems.Rows.Count == i)
+                for (int i = 0; i < c.Count; i++)
                 {
-                    dataSelectedItems.Rows.Add();
+                    if (dataSelectedItems.Rows.Count == i)
+                    {
+                        dataSelectedItems.Rows.Add();
+                    }
+                    dataSelectedItems.Rows[i].Cells["sItemNumber"].Value = c[i].Item_Number;
+                    dataSelectedItems.Rows[i].Cells["sItemVendor"].Value = c[i].Vendor_ID;
+                    dataSelectedItems.Rows[i].Cells["sItemDesc"].Value = c[i].Item_Description;
+                    dataSelectedItems.Rows[i].Cells["sItemQuantity"].Value = c[i].Item_Quantity;
                 }
-                dataSelectedItems.Rows[i].Cells["sItemNumber"].Value = c[i].Item_Number;
-                dataSelectedItems.Rows[i].Cells["sItemVendor"].Value = c[i].Vendor_ID;
-                dataSelectedItems.Rows[i].Cells["sItemDesc"].Value = c[i].Item_Description;
-            }
+            
         }
 
         private void BtRemove_Click(object sender, EventArgs e)
         {
             string itemNumber = (string)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemNumber"].Value;
+            string itemDesc = (string)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemDesc"].Value;
+            int itemVendorID = (int)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemVendor"].Value;
+
             int index = dataSelectedItems.CurrentCell.RowIndex;
             dataSelectedItems.Rows.RemoveAt(index);
 
-            Item it = SqliteDataAccess.LoadItem(itemNumber)[0];
-            Item RemoveExact = new Item();
+            selected.RemoveAt(index);
 
-            for(int i =0; i< selectedItems.Count; i++)
-            {
-                if(selectedItems[i].Item_Number == it.Item_Number)
-                {
-                    RemoveExact = selectedItems[i];
-                    break;
-                }
-            }
-            selectedItems.Remove(RemoveExact);
+            
             RefreshSelectedItems();
 
             dataAllItems.Rows.Add();
             int lastRow = dataAllItems.Rows.GetLastRow(DataGridViewElementStates.Visible);
 
-            dataAllItems.Rows[lastRow].Cells["itemNumber"].Value = RemoveExact.Item_Number;
-            dataAllItems.Rows[lastRow].Cells["itemDesc"].Value = RemoveExact.Item_Description;
-            dataAllItems.Rows[lastRow].Cells["itemVendor"].Value = RemoveExact.Vendor_ID;
+            dataAllItems.Rows[lastRow].Cells["itemNumber"].Value = itemNumber;
+            dataAllItems.Rows[lastRow].Cells["itemDesc"].Value = itemDesc;
+            dataAllItems.Rows[lastRow].Cells["itemVendor"].Value = itemVendorID;
+        }
+        private void dataSelectedItems_EndEdit(object sender, EventArgs e)
+        {
+            string itemNumber = (string)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemNumber"].Value;
+            string itemDesc = (string)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemDesc"].Value;
+            int itemVendorID = (int)dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemVendor"].Value;
+            int itemQuantity = Convert.ToInt32((dataSelectedItems.Rows[dataSelectedItems.CurrentCell.RowIndex].Cells["sItemQuantity"].Value));
+            int dataIndex = dataSelectedItems.CurrentCell.RowIndex;
+
+            SelectedItems si = new SelectedItems();
+            si.Item_Number = itemNumber;
+            si.Item_Description = itemDesc;
+            si.Vendor_ID = itemVendorID;
+            si.Item_Quantity = itemQuantity;
+
+            selected.RemoveAt(dataIndex);
+            selected.Insert(dataIndex, si);
 
 
         }

@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.dataAllItems = new System.Windows.Forms.DataGridView();
+            this.itemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataSelectedItems = new System.Windows.Forms.DataGridView();
             this.btAdd = new System.Windows.Forms.Button();
             this.btRemove = new System.Windows.Forms.Button();
             this.btSubmit = new System.Windows.Forms.Button();
-            this.itemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataAllItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSelectedItems)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +59,21 @@
             this.dataAllItems.Name = "dataAllItems";
             this.dataAllItems.Size = new System.Drawing.Size(349, 438);
             this.dataAllItems.TabIndex = 0;
+            // 
+            // itemNumber
+            // 
+            this.itemNumber.HeaderText = "Item Number";
+            this.itemNumber.Name = "itemNumber";
+            // 
+            // itemDesc
+            // 
+            this.itemDesc.HeaderText = "Description";
+            this.itemDesc.Name = "itemDesc";
+            // 
+            // itemVendor
+            // 
+            this.itemVendor.HeaderText = "Vendor";
+            this.itemVendor.Name = "itemVendor";
             // 
             // label1
             // 
@@ -85,11 +101,13 @@
             this.dataSelectedItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sItemNumber,
             this.sItemDesc,
-            this.sItemVendor});
+            this.sItemVendor,
+            this.sItemQuantity});
             this.dataSelectedItems.Location = new System.Drawing.Point(553, 31);
             this.dataSelectedItems.Name = "dataSelectedItems";
-            this.dataSelectedItems.Size = new System.Drawing.Size(349, 438);
+            this.dataSelectedItems.Size = new System.Drawing.Size(444, 438);
             this.dataSelectedItems.TabIndex = 3;
+            this.dataSelectedItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataSelectedItems_EndEdit);
             // 
             // btAdd
             // 
@@ -121,21 +139,6 @@
             this.btSubmit.UseVisualStyleBackColor = true;
             this.btSubmit.Click += new System.EventHandler(this.BtSubmit_Click);
             // 
-            // itemNumber
-            // 
-            this.itemNumber.HeaderText = "Item Number";
-            this.itemNumber.Name = "itemNumber";
-            // 
-            // itemDesc
-            // 
-            this.itemDesc.HeaderText = "Description";
-            this.itemDesc.Name = "itemDesc";
-            // 
-            // itemVendor
-            // 
-            this.itemVendor.HeaderText = "Vendor";
-            this.itemVendor.Name = "itemVendor";
-            // 
             // sItemNumber
             // 
             this.sItemNumber.HeaderText = "Item Number";
@@ -151,11 +154,16 @@
             this.sItemVendor.HeaderText = "Vendor";
             this.sItemVendor.Name = "sItemVendor";
             // 
+            // sItemQuantity
+            // 
+            this.sItemQuantity.HeaderText = "Quantity";
+            this.sItemQuantity.Name = "sItemQuantity";
+            // 
             // ManageItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 487);
+            this.ClientSize = new System.Drawing.Size(997, 487);
             this.Controls.Add(this.btSubmit);
             this.Controls.Add(this.btRemove);
             this.Controls.Add(this.btAdd);
@@ -181,11 +189,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataSelectedItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sItemNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sItemDesc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sItemVendor;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btRemove;
         private System.Windows.Forms.Button btSubmit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sItemNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sItemDesc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sItemVendor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sItemQuantity;
     }
 }

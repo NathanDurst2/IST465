@@ -18,6 +18,16 @@ namespace ERP
 
 
         }
+        private void tabControl_Selected(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab.Text == "Order")
+            {
+                dataOrder.ClearSelection();
+                dataOrderItems.ClearSelection();
+                dataOrderItems.Rows.Clear();
+                dataOrderItems.DataSource = null;
+            }
+        }
 
         private void RefreshCustomers()
         {
@@ -126,10 +136,10 @@ namespace ERP
             s = SqliteDataAccess.LoadAllSalesOrder();
 
             int neededRows = c.Count + s.Count;
-            if(neededRows > 0)
+            if (neededRows > 0)
             {
                 dataOrder.Rows.Add();
-                if(neededRows >= 2)
+                if (neededRows >= 2)
                 {
                     dataOrder.Rows.AddCopies(0, neededRows - 1);
                 }
@@ -138,7 +148,7 @@ namespace ERP
             int y = 0;
             for (int i = 0; i < c.Count + s.Count; i++, y++)
             {
-                
+
                 if (y < c.Count)
                 {
                     dataOrder.Rows[i].Cells["orderID"].Value = c[y].Estimate_ID;
@@ -151,10 +161,10 @@ namespace ERP
                     dataOrder.Rows[i].Cells["orderShippingState"].Value = c[y].Estimate_ShipState;
                     dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[y].Estimate_ShipZip;
                 }
-                
+
                 if (y < s.Count)
                 {
-                    if(y < c.Count)
+                    if (y < c.Count)
                     {
                         i++;
                     }
@@ -190,6 +200,51 @@ namespace ERP
             //    dataOrder.Rows[i].Cells["orderShippingZip"].Value = s[i].Sales_ShipZip;
 
             //}
+
+        }
+        private void RefreshOrderItems()
+        {
+            dataOrderItems.Rows.Clear();
+            dataOrderItems.DataSource = null;
+            string estOrSales = "";
+            int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
+            try
+            {
+                estOrSales = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+            }
+            catch (NullReferenceException)
+            { }
+
+
+
+            if (estOrSales == "Estimate")
+            {
+                List<Estimate_Item> c = SqliteDataAccess.LoadEstimate_ItemFOR(id);
+                for (int i = 0; i < c.Count; i++)
+                {
+                    if (dataOrderItems.Rows.Count == i)
+                    {
+                        dataOrderItems.Rows.Add();
+                    }
+                    dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = c[i].Item_Number;
+                    //dataOrderItems.Rows[i].Cells["orderItemsDesc"].Value = c[i].Item_Description;
+                    dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = c[i].Estimate_Item_Quantity;
+                }
+            }
+            else if (estOrSales == "Sales Order")
+            {
+                List<SalesOrder_Item> c = SqliteDataAccess.LoadSalesOrder_ItemFOR(id);
+                for (int i = 0; i < c.Count; i++)
+                {
+                    if (dataOrderItems.Rows.Count == i)
+                    {
+                        dataOrderItems.Rows.Add();
+                    }
+                    dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = c[i].Item_Number;
+                    //dataOrderItems.Rows[i].Cells["orderItemsDesc"].Value = c[i].Item_Description;
+                    dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = c[i].SalesOrder_Item_Quantity;
+                }
+            }
 
         }
 
@@ -367,33 +422,32 @@ namespace ERP
             String[] arrays = ID_Name.ToArray();
             cbOrderSalesRep.Items.AddRange(arrays);
         }
-        bool newOrder = false;
-        List<Item> selectedItems;
+        List<SelectedItems> selectedItems;
         public void BtOrderManageItems_Click(object sender, EventArgs e)
         {
-            ManageItems mi;
-            if (newOrder)
-            {
-                mi = new ManageItems(new List<Item>());
-            }
-            else
-            {
+            dataOrderItems.Rows.Clear();
+            dataOrderItems.DataSource = null;
 
-                mi = new ManageItems(new List<Item>());
-            }
+            ManageItems mi = new ManageItems(selectedItems);
 
             mi.ShowDialog();
-            selectedItems = mi.selectedItems;
+            selectedItems = mi.selected;
 
-            if(selectedItems.Count > 0)
+            if (selectedItems.Count > 0)
             {
                 dataOrderItems.Rows.Add();
-                if(selectedItems.Count >= 2)
+                if (selectedItems.Count >= 2)
                 {
                     dataOrderItems.Rows.AddCopies(0, selectedItems.Count - 1);
                 }
+                for (int i = 0; i < selectedItems.Count; i++)
+                {
+                    dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = selectedItems[i].Item_Number;
+                    //dataOrderItems.Rows[i].Cells[""].Value = selectedItems[i].Item_Description;
+                    dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = selectedItems[i].Item_Quantity;
+                }
             }
-            
+
 
         }
 
@@ -427,16 +481,18 @@ namespace ERP
                 string est_id = SqliteDataAccess.AddEstimate(est);
                 RefreshOrders();
 
-                foreach(Item it in selectedItems)
+                foreach (SelectedItems it in selectedItems)
                 {
                     Estimate_Item ei = new Estimate_Item();
-
+                    MessageBox.Show("test");
                     ei.Estimate_ID = Convert.ToInt32(est_id);
                     ei.Item_Number = it.Item_Number;
+                    ei.Estimate_Item_Quantity = it.Item_Quantity.ToString();
 
                     SqliteDataAccess.AddEstimate_Item(ei);
                 }
-                selectedItems = new List<Item>();
+                //Clears out the list of items so that the next order is empty
+                selectedItems = new List<SelectedItems>();
             }
             else if (cbOrderType.Text.StartsWith("Sales"))
             {
@@ -475,12 +531,64 @@ namespace ERP
         }
         private void dataOrder_SelectionChanged(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
-            string estORSales = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+            RefreshOrderItems();
+        }
 
-            if (estORSales == "Estimate")
+        private void BtOrderEdit_Click(object sender, EventArgs e)
+        {
+            int orderID = (int)dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value;
+            string estOrSales = "";
+            try
             {
-                List<Estimate_Item> list = SqliteDataAccess.LoadEstimate_ItemFOR(id);
+                estOrSales = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+            }
+            catch (NullReferenceException)
+            { }
+
+            if (estOrSales == "Estimate")
+            {
+                List<Estimate> estList = SqliteDataAccess.LoadEstimate(orderID);
+                Estimate est = estList[0];
+                List<Estimate_Item> itemList = SqliteDataAccess.LoadEstimate_ItemFOR(est.Estimate_ID);
+                CbOrderCustomer_Click(null, null);
+                selectedItems = new List<SelectedItems>();
+
+                foreach (Estimate_Item estItem in itemList)
+                {
+                    SelectedItems si = new SelectedItems();
+                    si.Item_Number = estItem.Item_Number;
+                    si.Item_Quantity = Convert.ToInt32(estItem.Estimate_Item_Quantity);
+                    selectedItems.Add(si);
+                }
+
+                tbOrderID.Text = est.Estimate_ID.ToString();
+                cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
+                cbOrderType.SelectedIndex = cbOrderType.FindString("Estimate");
+                btOrderSave.Visible = true;
+                btOrderSave.BringToFront();
+            }
+
+            if (estOrSales == "Sales Order")
+            {
+                List<SalesOrder> estList = SqliteDataAccess.LoadSalesOrder(orderID);
+                SalesOrder est = estList[0];
+                List<SalesOrder_Item> itemList = SqliteDataAccess.LoadSalesOrder_ItemFOR(est.Sales_ID);
+                CbOrderCustomer_Click(null, null);
+                selectedItems = new List<SelectedItems>();
+
+                foreach (SalesOrder_Item estItem in itemList)
+                {
+                    SelectedItems si = new SelectedItems();
+                    si.Item_Number = estItem.Item_Number;
+                    si.Item_Quantity = Convert.ToInt32(estItem.SalesOrder_Item_Quantity);
+                    selectedItems.Add(si);
+                }
+
+                tbOrderID.Text = est.Sales_ID.ToString();
+                cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
+                cbOrderType.SelectedIndex = cbOrderType.FindString("SalesOrder");
+                btOrderSave.Visible = true;
+                btOrderSave.BringToFront();
             }
         }
     }

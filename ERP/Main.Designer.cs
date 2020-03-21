@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.Customers = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -213,16 +213,16 @@
             this.orderShippingState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataOrderItems = new System.Windows.Forms.DataGridView();
+            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btOrderClear = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.tbOrderID = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.btOrderAdd = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
-            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.Customers.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
@@ -243,19 +243,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataOrderItems)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.Customers);
-            this.tabControl1.Controls.Add(this.Employee);
-            this.tabControl1.Controls.Add(this.Vendor);
-            this.tabControl1.Controls.Add(this.Items);
-            this.tabControl1.Controls.Add(this.Order);
-            this.tabControl1.Controls.Add(this.Settings);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1073, 611);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.Customers);
+            this.tabControl.Controls.Add(this.Employee);
+            this.tabControl.Controls.Add(this.Vendor);
+            this.tabControl.Controls.Add(this.Items);
+            this.tabControl.Controls.Add(this.Order);
+            this.tabControl.Controls.Add(this.Settings);
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1073, 611);
+            this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_Selected);
             // 
             // Customers
             // 
@@ -1839,6 +1840,7 @@
             this.btOrderEdit.TabStop = false;
             this.btOrderEdit.Text = "Edit";
             this.btOrderEdit.UseVisualStyleBackColor = true;
+            this.btOrderEdit.Click += new System.EventHandler(this.BtOrderEdit_Click);
             // 
             // btOrderRemove
             // 
@@ -1944,6 +1946,21 @@
             this.dataOrderItems.TabIndex = 116;
             this.dataOrderItems.TabStop = false;
             // 
+            // orderItemsNumber
+            // 
+            this.orderItemsNumber.HeaderText = "Item Number";
+            this.orderItemsNumber.Name = "orderItemsNumber";
+            // 
+            // orderItemsDesc
+            // 
+            this.orderItemsDesc.HeaderText = "Description";
+            this.orderItemsDesc.Name = "orderItemsDesc";
+            // 
+            // orderItemQuantity
+            // 
+            this.orderItemQuantity.HeaderText = "Quantity";
+            this.orderItemQuantity.Name = "orderItemQuantity";
+            // 
             // btOrderClear
             // 
             this.btOrderClear.Location = new System.Drawing.Point(123, 217);
@@ -2000,31 +2017,16 @@
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
             // 
-            // orderItemsNumber
-            // 
-            this.orderItemsNumber.HeaderText = "Item Number";
-            this.orderItemsNumber.Name = "orderItemsNumber";
-            // 
-            // orderItemsDesc
-            // 
-            this.orderItemsDesc.HeaderText = "Description";
-            this.orderItemsDesc.Name = "orderItemsDesc";
-            // 
-            // orderItemQuantity
-            // 
-            this.orderItemQuantity.HeaderText = "Quantity";
-            this.orderItemQuantity.Name = "orderItemQuantity";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1072, 635);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Simple ERP";
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.Customers.ResumeLayout(false);
             this.Customers.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -2059,7 +2061,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage Customers;
         private System.Windows.Forms.TabPage Employee;
         private System.Windows.Forms.TabPage Items;

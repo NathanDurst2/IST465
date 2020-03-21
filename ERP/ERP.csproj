@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_SelectedItems.cs" />
     <Compile Include="_Estimate_Item.cs" />
     <Compile Include="ManageItems.cs">
       <SubType>Form</SubType>

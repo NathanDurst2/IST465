@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ERP
 {
-    public class SalesOrder_Item
+    public class SelectedItems
     {
-        public int Sales_ID { get; set; }
         public string Item_Number { get; set; }
-        public int SalesOrder_Item_Quantity { get; set; }
+        public int Vendor_ID { get; set; }
+        public string Item_Description { get; set; }
+        public int Item_Quantity { get; set; }
     }
 }
