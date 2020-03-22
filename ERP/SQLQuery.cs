@@ -29,6 +29,22 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Employee> LoadEmployee(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<Employee> c = cnn.Query<Employee>(String.Format("select * from Employee where Employee_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
+        public static List<Vendor> LoadVendor(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<Vendor> c = cnn.Query<Vendor>(String.Format("select * from Vendor where Vendor_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
         public static List<Estimate> LoadEstimate(int id)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -65,6 +81,13 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("UPDATE Customer SET Customer_FirstName = @Customer_FirstName, Customer_LastName = @Customer_LastName, Customer_Street = @Customer_Street, Customer_City = @Customer_City, Customer_State = @Customer_State, Customer_Zip = @Customer_Zip, Customer_Phone = @Customer_Phone, Customer_Email = @Customer_Email, Employee_ID = @Employee_ID WHERE Cust_ID = @Cust_ID", c);
+            }
+        }
+        public static void EditEstimate(Estimate c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE Estimate SET Cust_ID = @Cust_ID, Employee_ID = @Employee_ID, Estimate_Date = @Estimate_Date, Estimate_Subtotal = @Estimate_Subtotal, Estimate_Tax = @Estimate_Tax, Estimate_Total = @Estimate_Total, Estimate_BillStreet = @Estimate_BillStreet, Estimate_BillCity = @Estimate_BillCity, Estimate_BillState = @Estimate_BillState, Estimate_BillZip = @Estimate_BillZip, Estimate_ShipStreet = @Estimate_ShipStreet, Estimate_ShipCity = @Estimate_ShipCity, Estimate_ShipState = @Estimate_ShipState, Estimate_ShipZip = @Estimate_ShipZip WHERE Estimate_ID = @Estimate_ID", c);
             }
         }
         public static void DeleteCustomer(string Cust_ID)

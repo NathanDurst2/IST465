@@ -11,8 +11,8 @@ namespace ERP
         public string Item_Number { get; set; }
         public int Vendor_ID { get; set; }
         public string Item_Description { get; set; }
-        public long Item_PurchasePrice { get; set; }
-        public long Item_SellPrice { get; set; }
+        public double Item_PurchasePrice { get; set; }
+        public double Item_SellPrice { get; set; }
         public string Item_UPC { get; set; }
     }
 }
