@@ -213,15 +213,15 @@
             this.orderShippingState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataOrderItems = new System.Windows.Forms.DataGridView();
-            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btOrderClear = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.tbOrderID = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.btOrderAdd = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
+            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.Customers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1857,6 +1857,7 @@
             this.dataOrder.AllowUserToAddRows = false;
             this.dataOrder.AllowUserToDeleteRows = false;
             this.dataOrder.AllowUserToOrderColumns = true;
+            this.dataOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.orderID,
@@ -1935,31 +1936,24 @@
             // 
             this.dataOrderItems.AllowUserToAddRows = false;
             this.dataOrderItems.AllowUserToDeleteRows = false;
+            this.dataOrderItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataOrderItems.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dataOrderItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataOrderItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.orderItemsNumber,
             this.orderItemsDesc,
             this.orderItemQuantity});
+            this.dataOrderItems.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataOrderItems.Location = new System.Drawing.Point(515, 27);
             this.dataOrderItems.Name = "dataOrderItems";
+            this.dataOrderItems.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataOrderItems.ShowCellErrors = false;
+            this.dataOrderItems.ShowCellToolTips = false;
+            this.dataOrderItems.ShowEditingIcon = false;
+            this.dataOrderItems.ShowRowErrors = false;
             this.dataOrderItems.Size = new System.Drawing.Size(529, 215);
             this.dataOrderItems.TabIndex = 116;
             this.dataOrderItems.TabStop = false;
-            // 
-            // orderItemsNumber
-            // 
-            this.orderItemsNumber.HeaderText = "Item Number";
-            this.orderItemsNumber.Name = "orderItemsNumber";
-            // 
-            // orderItemsDesc
-            // 
-            this.orderItemsDesc.HeaderText = "Description";
-            this.orderItemsDesc.Name = "orderItemsDesc";
-            // 
-            // orderItemQuantity
-            // 
-            this.orderItemQuantity.HeaderText = "Quantity";
-            this.orderItemQuantity.Name = "orderItemQuantity";
             // 
             // btOrderClear
             // 
@@ -2016,6 +2010,23 @@
             this.Settings.TabIndex = 4;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
+            // 
+            // orderItemsNumber
+            // 
+            this.orderItemsNumber.HeaderText = "Item Number";
+            this.orderItemsNumber.Name = "orderItemsNumber";
+            this.orderItemsNumber.Width = 125;
+            // 
+            // orderItemsDesc
+            // 
+            this.orderItemsDesc.HeaderText = "Description";
+            this.orderItemsDesc.Name = "orderItemsDesc";
+            this.orderItemsDesc.Width = 260;
+            // 
+            // orderItemQuantity
+            // 
+            this.orderItemQuantity.HeaderText = "Quantity";
+            this.orderItemQuantity.Name = "orderItemQuantity";
             // 
             // Main
             // 
