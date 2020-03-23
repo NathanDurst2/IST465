@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Customers = new System.Windows.Forms.TabPage();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tbCustZip = new System.Windows.Forms.TextBox();
@@ -56,7 +61,12 @@
             this.cPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cSales_Rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataCustOrders = new System.Windows.Forms.DataGridView();
+            this.custOrdersID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.custOrdersType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.custOrdersDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.custOrdersShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.custOrdersTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btCustClear = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.tbCustID = new System.Windows.Forms.TextBox();
@@ -172,6 +182,11 @@
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.tbItemDesc = new System.Windows.Forms.TextBox();
             this.Order = new System.Windows.Forms.TabPage();
+            this.btOrderNew = new System.Windows.Forms.Button();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.tbOrderTotal = new System.Windows.Forms.TextBox();
+            this.tbOrderSubTotal = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cbOrderSalesRep = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -204,21 +219,6 @@
             this.btOrderEdit = new System.Windows.Forms.Button();
             this.btOrderRemove = new System.Windows.Forms.Button();
             this.dataOrder = new System.Windows.Forms.DataGridView();
-            this.dataOrderItems = new System.Windows.Forms.DataGridView();
-            this.btOrderClear = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.tbOrderID = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.btOrderAdd = new System.Windows.Forms.Button();
-            this.Settings = new System.Windows.Forms.TabPage();
-            this.tbOrderTotal = new System.Windows.Forms.TextBox();
-            this.tbOrderSubTotal = new System.Windows.Forms.TextBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderItemPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -230,12 +230,23 @@
             this.orderShippingCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderShippingZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btOrderNew = new System.Windows.Forms.Button();
+            this.dataOrderItems = new System.Windows.Forms.DataGridView();
+            this.orderItemsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemsDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderItemPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btOrderClear = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbOrderID = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btOrderAdd = new System.Windows.Forms.Button();
+            this.Settings = new System.Windows.Forms.TabPage();
+            this.btEmpSave = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.Customers.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataCustOrders)).BeginInit();
             this.Employee.SuspendLayout();
             this.groupEmpAddress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmployee)).BeginInit();
@@ -269,13 +280,15 @@
             // 
             // Customers
             // 
+            this.Customers.Controls.Add(this.label55);
+            this.Customers.Controls.Add(this.label54);
             this.Customers.Controls.Add(this.groupBox5);
             this.Customers.Controls.Add(this.cbCustSalesRep);
             this.Customers.Controls.Add(this.btCustSave);
             this.Customers.Controls.Add(this.btCustEdit);
             this.Customers.Controls.Add(this.btCustRemove);
             this.Customers.Controls.Add(this.dataCustomer);
-            this.Customers.Controls.Add(this.dataGridView2);
+            this.Customers.Controls.Add(this.dataCustOrders);
             this.Customers.Controls.Add(this.btCustClear);
             this.Customers.Controls.Add(this.label13);
             this.Customers.Controls.Add(this.tbCustID);
@@ -296,6 +309,24 @@
             this.Customers.TabIndex = 0;
             this.Customers.Text = "Customers";
             this.Customers.UseVisualStyleBackColor = true;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(513, 14);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(38, 13);
+            this.label55.TabIndex = 137;
+            this.label55.Text = "Orders";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(17, 263);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(56, 13);
+            this.label54.TabIndex = 136;
+            this.label54.Text = "Customers";
             // 
             // groupBox5
             // 
@@ -444,6 +475,7 @@
             this.dataCustomer.Size = new System.Drawing.Size(1025, 313);
             this.dataCustomer.TabIndex = 37;
             this.dataCustomer.TabStop = false;
+            this.dataCustomer.SelectionChanged += new System.EventHandler(this.dataCustomer_SelectionChanged);
             // 
             // Cust_ID
             // 
@@ -516,14 +548,52 @@
             this.cSales_Rep.ReadOnly = true;
             this.cSales_Rep.Width = 125;
             // 
-            // dataGridView2
+            // dataCustOrders
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(516, 30);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(529, 215);
-            this.dataGridView2.TabIndex = 36;
-            this.dataGridView2.TabStop = false;
+            this.dataCustOrders.AllowUserToAddRows = false;
+            this.dataCustOrders.AllowUserToDeleteRows = false;
+            this.dataCustOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataCustOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.custOrdersID,
+            this.custOrdersType,
+            this.custOrdersDate,
+            this.custOrdersShipDate,
+            this.custOrdersTotal});
+            this.dataCustOrders.Location = new System.Drawing.Point(516, 30);
+            this.dataCustOrders.Name = "dataCustOrders";
+            this.dataCustOrders.Size = new System.Drawing.Size(529, 215);
+            this.dataCustOrders.TabIndex = 36;
+            this.dataCustOrders.TabStop = false;
+            // 
+            // custOrdersID
+            // 
+            this.custOrdersID.HeaderText = "Order ID";
+            this.custOrdersID.Name = "custOrdersID";
+            this.custOrdersID.Width = 75;
+            // 
+            // custOrdersType
+            // 
+            this.custOrdersType.HeaderText = "Order Type";
+            this.custOrdersType.Name = "custOrdersType";
+            // 
+            // custOrdersDate
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.custOrdersDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.custOrdersDate.HeaderText = "Date";
+            this.custOrdersDate.Name = "custOrdersDate";
+            // 
+            // custOrdersShipDate
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.custOrdersShipDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.custOrdersShipDate.HeaderText = "Ship Date";
+            this.custOrdersShipDate.Name = "custOrdersShipDate";
+            // 
+            // custOrdersTotal
+            // 
+            this.custOrdersTotal.HeaderText = "Total";
+            this.custOrdersTotal.Name = "custOrdersTotal";
             // 
             // btCustClear
             // 
@@ -639,6 +709,7 @@
             // 
             // Employee
             // 
+            this.Employee.Controls.Add(this.btEmpSave);
             this.Employee.Controls.Add(this.btEmpEdit);
             this.Employee.Controls.Add(this.btEmpRemove);
             this.Employee.Controls.Add(this.cbEmpSupervisor);
@@ -674,6 +745,7 @@
             this.btEmpEdit.TabStop = false;
             this.btEmpEdit.Text = "Edit";
             this.btEmpEdit.UseVisualStyleBackColor = true;
+            this.btEmpEdit.Click += new System.EventHandler(this.BtEmpEdit_Click);
             // 
             // btEmpRemove
             // 
@@ -684,6 +756,7 @@
             this.btEmpRemove.TabStop = false;
             this.btEmpRemove.Text = "Remove";
             this.btEmpRemove.UseVisualStyleBackColor = true;
+            this.btEmpRemove.Click += new System.EventHandler(this.BtEmpRemove_Click);
             // 
             // cbEmpSupervisor
             // 
@@ -693,6 +766,7 @@
             this.cbEmpSupervisor.Name = "cbEmpSupervisor";
             this.cbEmpSupervisor.Size = new System.Drawing.Size(121, 21);
             this.cbEmpSupervisor.TabIndex = 75;
+            this.cbEmpSupervisor.Click += new System.EventHandler(this.cbEmpSupervisor_Click);
             // 
             // groupEmpAddress
             // 
@@ -704,9 +778,9 @@
             this.groupEmpAddress.Controls.Add(this.tbEmpCity);
             this.groupEmpAddress.Controls.Add(this.label51);
             this.groupEmpAddress.Controls.Add(this.tbEmpStreet);
-            this.groupEmpAddress.Location = new System.Drawing.Point(43, 105);
+            this.groupEmpAddress.Location = new System.Drawing.Point(34, 105);
             this.groupEmpAddress.Name = "groupEmpAddress";
-            this.groupEmpAddress.Size = new System.Drawing.Size(169, 122);
+            this.groupEmpAddress.Size = new System.Drawing.Size(178, 122);
             this.groupEmpAddress.TabIndex = 105;
             this.groupEmpAddress.TabStop = false;
             this.groupEmpAddress.Text = "Address";
@@ -714,7 +788,7 @@
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(-1, 99);
+            this.label48.Location = new System.Drawing.Point(5, 99);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(50, 13);
             this.label48.TabIndex = 71;
@@ -722,7 +796,7 @@
             // 
             // tbEmpZip
             // 
-            this.tbEmpZip.Location = new System.Drawing.Point(64, 96);
+            this.tbEmpZip.Location = new System.Drawing.Point(70, 96);
             this.tbEmpZip.Name = "tbEmpZip";
             this.tbEmpZip.Size = new System.Drawing.Size(100, 20);
             this.tbEmpZip.TabIndex = 74;
@@ -730,7 +804,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(14, 73);
+            this.label49.Location = new System.Drawing.Point(20, 73);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(32, 13);
             this.label49.TabIndex = 70;
@@ -738,7 +812,7 @@
             // 
             // tbEmpState
             // 
-            this.tbEmpState.Location = new System.Drawing.Point(64, 70);
+            this.tbEmpState.Location = new System.Drawing.Point(70, 70);
             this.tbEmpState.Name = "tbEmpState";
             this.tbEmpState.Size = new System.Drawing.Size(100, 20);
             this.tbEmpState.TabIndex = 73;
@@ -746,7 +820,7 @@
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(14, 47);
+            this.label50.Location = new System.Drawing.Point(20, 47);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(24, 13);
             this.label50.TabIndex = 69;
@@ -754,7 +828,7 @@
             // 
             // tbEmpCity
             // 
-            this.tbEmpCity.Location = new System.Drawing.Point(64, 44);
+            this.tbEmpCity.Location = new System.Drawing.Point(70, 44);
             this.tbEmpCity.Name = "tbEmpCity";
             this.tbEmpCity.Size = new System.Drawing.Size(100, 20);
             this.tbEmpCity.TabIndex = 72;
@@ -762,7 +836,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(14, 21);
+            this.label51.Location = new System.Drawing.Point(20, 21);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(35, 13);
             this.label51.TabIndex = 67;
@@ -770,7 +844,7 @@
             // 
             // tbEmpStreet
             // 
-            this.tbEmpStreet.Location = new System.Drawing.Point(64, 18);
+            this.tbEmpStreet.Location = new System.Drawing.Point(70, 18);
             this.tbEmpStreet.Name = "tbEmpStreet";
             this.tbEmpStreet.Size = new System.Drawing.Size(100, 20);
             this.tbEmpStreet.TabIndex = 68;
@@ -857,6 +931,7 @@
             this.btEmpClear.TabIndex = 47;
             this.btEmpClear.Text = "Clear";
             this.btEmpClear.UseVisualStyleBackColor = true;
+            this.btEmpClear.Click += new System.EventHandler(this.BtEmpClear_Click);
             // 
             // btEmpAdd
             // 
@@ -866,6 +941,7 @@
             this.btEmpAdd.TabIndex = 46;
             this.btEmpAdd.Text = "Add";
             this.btEmpAdd.UseVisualStyleBackColor = true;
+            this.btEmpAdd.Click += new System.EventHandler(this.BtEmpAdd_Click);
             // 
             // label14
             // 
@@ -995,6 +1071,7 @@
             this.btVendorAdd.TabStop = false;
             this.btVendorAdd.Text = "Add";
             this.btVendorAdd.UseVisualStyleBackColor = true;
+            this.btVendorAdd.Click += new System.EventHandler(this.BtVendorAdd_Click);
             // 
             // cbVendorTerms
             // 
@@ -1128,6 +1205,7 @@
             this.btVendorSave.Text = "Save";
             this.btVendorSave.UseVisualStyleBackColor = true;
             this.btVendorSave.Visible = false;
+            this.btVendorSave.Click += new System.EventHandler(this.BtVendorSave_Click);
             // 
             // btVendorEdit
             // 
@@ -1138,6 +1216,7 @@
             this.btVendorEdit.TabStop = false;
             this.btVendorEdit.Text = "Edit";
             this.btVendorEdit.UseVisualStyleBackColor = true;
+            this.btVendorEdit.Click += new System.EventHandler(this.BtVendorEdit_Click);
             // 
             // btVendorRemove
             // 
@@ -1148,6 +1227,7 @@
             this.btVendorRemove.TabStop = false;
             this.btVendorRemove.Text = "Remove";
             this.btVendorRemove.UseVisualStyleBackColor = true;
+            this.btVendorRemove.Click += new System.EventHandler(this.BtVendorRemove_Click);
             // 
             // dataVendor
             // 
@@ -1232,6 +1312,7 @@
             this.btVendorClear.TabStop = false;
             this.btVendorClear.Text = "Clear";
             this.btVendorClear.UseVisualStyleBackColor = true;
+            this.btVendorClear.Click += new System.EventHandler(this.BtVendorClear_Click);
             // 
             // label41
             // 
@@ -1572,6 +1653,50 @@
             this.Order.Text = "Order";
             this.Order.UseVisualStyleBackColor = true;
             // 
+            // btOrderNew
+            // 
+            this.btOrderNew.Location = new System.Drawing.Point(84, 18);
+            this.btOrderNew.Name = "btOrderNew";
+            this.btOrderNew.Size = new System.Drawing.Size(44, 23);
+            this.btOrderNew.TabIndex = 148;
+            this.btOrderNew.Text = "New";
+            this.btOrderNew.UseVisualStyleBackColor = true;
+            this.btOrderNew.Click += new System.EventHandler(this.BtOrderNew_Click);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(789, 250);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(31, 13);
+            this.label53.TabIndex = 147;
+            this.label53.Text = "Total";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(570, 250);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(53, 13);
+            this.label52.TabIndex = 146;
+            this.label52.Text = "Sub Total";
+            // 
+            // tbOrderTotal
+            // 
+            this.tbOrderTotal.Enabled = false;
+            this.tbOrderTotal.Location = new System.Drawing.Point(823, 246);
+            this.tbOrderTotal.Name = "tbOrderTotal";
+            this.tbOrderTotal.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderTotal.TabIndex = 145;
+            // 
+            // tbOrderSubTotal
+            // 
+            this.tbOrderSubTotal.Enabled = false;
+            this.tbOrderSubTotal.Location = new System.Drawing.Point(626, 247);
+            this.tbOrderSubTotal.Name = "tbOrderSubTotal";
+            this.tbOrderSubTotal.Size = new System.Drawing.Size(100, 20);
+            this.tbOrderSubTotal.TabIndex = 144;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -1878,6 +2003,7 @@
             this.btOrderRemove.TabStop = false;
             this.btOrderRemove.Text = "Remove";
             this.btOrderRemove.UseVisualStyleBackColor = true;
+            this.btOrderRemove.Click += new System.EventHandler(this.BtOrderRemove_Click);
             // 
             // dataOrder
             // 
@@ -1906,6 +2032,69 @@
             this.dataOrder.TabStop = false;
             this.dataOrder.SelectionChanged += new System.EventHandler(this.dataOrder_SelectionChanged);
             // 
+            // orderID
+            // 
+            this.orderID.HeaderText = "ID";
+            this.orderID.Name = "orderID";
+            this.orderID.Width = 50;
+            // 
+            // orderCustomer
+            // 
+            this.orderCustomer.HeaderText = "Customer";
+            this.orderCustomer.Name = "orderCustomer";
+            // 
+            // orderType
+            // 
+            this.orderType.HeaderText = "Type";
+            this.orderType.Name = "orderType";
+            // 
+            // orderSalesRep
+            // 
+            this.orderSalesRep.HeaderText = "Sales Rep";
+            this.orderSalesRep.Name = "orderSalesRep";
+            // 
+            // orderDate
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.orderDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.orderDate.HeaderText = "Date";
+            this.orderDate.Name = "orderDate";
+            // 
+            // orderShipDate
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.orderShipDate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.orderShipDate.HeaderText = "Ship Date";
+            this.orderShipDate.Name = "orderShipDate";
+            // 
+            // orderTotal
+            // 
+            this.orderTotal.HeaderText = "Total Price";
+            this.orderTotal.Name = "orderTotal";
+            // 
+            // orderShippingStreet
+            // 
+            this.orderShippingStreet.HeaderText = "Shipping Street";
+            this.orderShippingStreet.Name = "orderShippingStreet";
+            this.orderShippingStreet.Width = 150;
+            // 
+            // orderShippingCity
+            // 
+            this.orderShippingCity.HeaderText = "Shipping City";
+            this.orderShippingCity.Name = "orderShippingCity";
+            // 
+            // orderShippingState
+            // 
+            this.orderShippingState.HeaderText = "Shipping State";
+            this.orderShippingState.Name = "orderShippingState";
+            this.orderShippingState.Width = 125;
+            // 
+            // orderShippingZip
+            // 
+            this.orderShippingZip.HeaderText = "Shipping Zipcode";
+            this.orderShippingZip.Name = "orderShippingZip";
+            this.orderShippingZip.Width = 125;
+            // 
             // dataOrderItems
             // 
             this.dataOrderItems.AllowUserToAddRows = false;
@@ -1929,6 +2118,28 @@
             this.dataOrderItems.Size = new System.Drawing.Size(529, 215);
             this.dataOrderItems.TabIndex = 116;
             this.dataOrderItems.TabStop = false;
+            // 
+            // orderItemsNumber
+            // 
+            this.orderItemsNumber.HeaderText = "Item Number";
+            this.orderItemsNumber.Name = "orderItemsNumber";
+            this.orderItemsNumber.Width = 125;
+            // 
+            // orderItemsDesc
+            // 
+            this.orderItemsDesc.HeaderText = "Description";
+            this.orderItemsDesc.Name = "orderItemsDesc";
+            this.orderItemsDesc.Width = 160;
+            // 
+            // orderItemQuantity
+            // 
+            this.orderItemQuantity.HeaderText = "Quantity";
+            this.orderItemQuantity.Name = "orderItemQuantity";
+            // 
+            // orderItemPrice
+            // 
+            this.orderItemPrice.HeaderText = "Price/Unit";
+            this.orderItemPrice.Name = "orderItemPrice";
             // 
             // btOrderClear
             // 
@@ -1988,134 +2199,16 @@
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
             // 
-            // tbOrderTotal
+            // btEmpSave
             // 
-            this.tbOrderTotal.Enabled = false;
-            this.tbOrderTotal.Location = new System.Drawing.Point(823, 246);
-            this.tbOrderTotal.Name = "tbOrderTotal";
-            this.tbOrderTotal.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderTotal.TabIndex = 145;
-            // 
-            // tbOrderSubTotal
-            // 
-            this.tbOrderSubTotal.Enabled = false;
-            this.tbOrderSubTotal.Location = new System.Drawing.Point(626, 247);
-            this.tbOrderSubTotal.Name = "tbOrderSubTotal";
-            this.tbOrderSubTotal.Size = new System.Drawing.Size(100, 20);
-            this.tbOrderSubTotal.TabIndex = 144;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(570, 250);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(53, 13);
-            this.label52.TabIndex = 146;
-            this.label52.Text = "Sub Total";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(789, 250);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(31, 13);
-            this.label53.TabIndex = 147;
-            this.label53.Text = "Total";
-            // 
-            // orderItemsNumber
-            // 
-            this.orderItemsNumber.HeaderText = "Item Number";
-            this.orderItemsNumber.Name = "orderItemsNumber";
-            this.orderItemsNumber.Width = 125;
-            // 
-            // orderItemsDesc
-            // 
-            this.orderItemsDesc.HeaderText = "Description";
-            this.orderItemsDesc.Name = "orderItemsDesc";
-            this.orderItemsDesc.Width = 160;
-            // 
-            // orderItemQuantity
-            // 
-            this.orderItemQuantity.HeaderText = "Quantity";
-            this.orderItemQuantity.Name = "orderItemQuantity";
-            // 
-            // orderItemPrice
-            // 
-            this.orderItemPrice.HeaderText = "Price/Unit";
-            this.orderItemPrice.Name = "orderItemPrice";
-            // 
-            // orderID
-            // 
-            this.orderID.HeaderText = "ID";
-            this.orderID.Name = "orderID";
-            this.orderID.Width = 50;
-            // 
-            // orderCustomer
-            // 
-            this.orderCustomer.HeaderText = "Customer";
-            this.orderCustomer.Name = "orderCustomer";
-            // 
-            // orderType
-            // 
-            this.orderType.HeaderText = "Type";
-            this.orderType.Name = "orderType";
-            // 
-            // orderSalesRep
-            // 
-            this.orderSalesRep.HeaderText = "Sales Rep";
-            this.orderSalesRep.Name = "orderSalesRep";
-            // 
-            // orderDate
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.orderDate.DefaultCellStyle = dataGridViewCellStyle5;
-            this.orderDate.HeaderText = "Date";
-            this.orderDate.Name = "orderDate";
-            // 
-            // orderShipDate
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.orderShipDate.DefaultCellStyle = dataGridViewCellStyle6;
-            this.orderShipDate.HeaderText = "Ship Date";
-            this.orderShipDate.Name = "orderShipDate";
-            // 
-            // orderTotal
-            // 
-            this.orderTotal.HeaderText = "Total Price";
-            this.orderTotal.Name = "orderTotal";
-            // 
-            // orderShippingStreet
-            // 
-            this.orderShippingStreet.HeaderText = "Shipping Street";
-            this.orderShippingStreet.Name = "orderShippingStreet";
-            this.orderShippingStreet.Width = 150;
-            // 
-            // orderShippingCity
-            // 
-            this.orderShippingCity.HeaderText = "Shipping City";
-            this.orderShippingCity.Name = "orderShippingCity";
-            // 
-            // orderShippingState
-            // 
-            this.orderShippingState.HeaderText = "Shipping State";
-            this.orderShippingState.Name = "orderShippingState";
-            this.orderShippingState.Width = 125;
-            // 
-            // orderShippingZip
-            // 
-            this.orderShippingZip.HeaderText = "Shipping Zipcode";
-            this.orderShippingZip.Name = "orderShippingZip";
-            this.orderShippingZip.Width = 125;
-            // 
-            // btOrderNew
-            // 
-            this.btOrderNew.Location = new System.Drawing.Point(84, 18);
-            this.btOrderNew.Name = "btOrderNew";
-            this.btOrderNew.Size = new System.Drawing.Size(44, 23);
-            this.btOrderNew.TabIndex = 148;
-            this.btOrderNew.Text = "New";
-            this.btOrderNew.UseVisualStyleBackColor = true;
-            this.btOrderNew.Click += new System.EventHandler(this.BtOrderNew_Click);
+            this.btEmpSave.Location = new System.Drawing.Point(49, 229);
+            this.btEmpSave.Name = "btEmpSave";
+            this.btEmpSave.Size = new System.Drawing.Size(75, 23);
+            this.btEmpSave.TabIndex = 130;
+            this.btEmpSave.Text = "Save";
+            this.btEmpSave.UseVisualStyleBackColor = true;
+            this.btEmpSave.Visible = false;
+            this.btEmpSave.Click += new System.EventHandler(this.BtEmpSave_Click);
             // 
             // Main
             // 
@@ -2123,8 +2216,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1072, 635);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.ShowIcon = false;
             this.Text = "Simple ERP";
             this.tabControl.ResumeLayout(false);
             this.Customers.ResumeLayout(false);
@@ -2132,7 +2225,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataCustOrders)).EndInit();
             this.Employee.ResumeLayout(false);
             this.Employee.PerformLayout();
             this.groupEmpAddress.ResumeLayout(false);
@@ -2168,7 +2261,7 @@
         private System.Windows.Forms.TabPage Order;
         private System.Windows.Forms.TabPage Settings;
         private System.Windows.Forms.DataGridView dataCustomer;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataCustOrders;
         private System.Windows.Forms.Button btCustClear;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tbCustID;
@@ -2362,6 +2455,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingState;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderShippingZip;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersShipDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersTotal;
+        private System.Windows.Forms.Button btEmpSave;
     }
 }
 

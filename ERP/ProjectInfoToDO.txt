@@ -1,1 +1,14 @@
-﻿
+﻿Order Tab
+	Ship Date
+	Ship Method
+	Estimate to Sales Order (forced or free?)
+	Sales order status? (Open, in progress, completed)
+Inventory Management
+	Purchase Orders
+	Manually set inventory levels
+	Sales Order auto deduct amount in stock
+Settings Tab
+	User logon
+	User management
+	Tax rate
+

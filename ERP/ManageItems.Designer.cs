@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageItems));
             this.dataAllItems = new System.Windows.Forms.DataGridView();
             this.itemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -35,13 +36,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataSelectedItems = new System.Windows.Forms.DataGridView();
-            this.btAdd = new System.Windows.Forms.Button();
-            this.btRemove = new System.Windows.Forms.Button();
-            this.btSubmit = new System.Windows.Forms.Button();
             this.sItemNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemVendor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sItemQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btAdd = new System.Windows.Forms.Button();
+            this.btRemove = new System.Windows.Forms.Button();
+            this.btSubmit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataAllItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSelectedItems)).BeginInit();
             this.SuspendLayout();
@@ -109,6 +110,26 @@
             this.dataSelectedItems.TabIndex = 3;
             this.dataSelectedItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataSelectedItems_EndEdit);
             // 
+            // sItemNumber
+            // 
+            this.sItemNumber.HeaderText = "Item Number";
+            this.sItemNumber.Name = "sItemNumber";
+            // 
+            // sItemDesc
+            // 
+            this.sItemDesc.HeaderText = "Description";
+            this.sItemDesc.Name = "sItemDesc";
+            // 
+            // sItemVendor
+            // 
+            this.sItemVendor.HeaderText = "Vendor";
+            this.sItemVendor.Name = "sItemVendor";
+            // 
+            // sItemQuantity
+            // 
+            this.sItemQuantity.HeaderText = "Quantity";
+            this.sItemQuantity.Name = "sItemQuantity";
+            // 
             // btAdd
             // 
             this.btAdd.Location = new System.Drawing.Point(393, 111);
@@ -139,26 +160,6 @@
             this.btSubmit.UseVisualStyleBackColor = true;
             this.btSubmit.Click += new System.EventHandler(this.BtSubmit_Click);
             // 
-            // sItemNumber
-            // 
-            this.sItemNumber.HeaderText = "Item Number";
-            this.sItemNumber.Name = "sItemNumber";
-            // 
-            // sItemDesc
-            // 
-            this.sItemDesc.HeaderText = "Description";
-            this.sItemDesc.Name = "sItemDesc";
-            // 
-            // sItemVendor
-            // 
-            this.sItemVendor.HeaderText = "Vendor";
-            this.sItemVendor.Name = "sItemVendor";
-            // 
-            // sItemQuantity
-            // 
-            this.sItemQuantity.HeaderText = "Quantity";
-            this.sItemQuantity.Name = "sItemQuantity";
-            // 
             // ManageItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +172,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataAllItems);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ManageItems";
             this.Text = "ManageItems";
             ((System.ComponentModel.ISupportInitialize)(this.dataAllItems)).EndInit();

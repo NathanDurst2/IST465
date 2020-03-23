@@ -90,11 +90,46 @@ namespace ERP
                 cnn.Execute("UPDATE Estimate SET Cust_ID = @Cust_ID, Employee_ID = @Employee_ID, Estimate_Date = @Estimate_Date, Estimate_Subtotal = @Estimate_Subtotal, Estimate_Tax = @Estimate_Tax, Estimate_Total = @Estimate_Total, Estimate_BillStreet = @Estimate_BillStreet, Estimate_BillCity = @Estimate_BillCity, Estimate_BillState = @Estimate_BillState, Estimate_BillZip = @Estimate_BillZip, Estimate_ShipStreet = @Estimate_ShipStreet, Estimate_ShipCity = @Estimate_ShipCity, Estimate_ShipState = @Estimate_ShipState, Estimate_ShipZip = @Estimate_ShipZip WHERE Estimate_ID = @Estimate_ID", c);
             }
         }
+        public static void EditSalesOrder(SalesOrder c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE SalesOrder SET Cust_ID = @Cust_ID, Employee_ID = @Employee_ID, Sales_Date = @Sales_Date, Sales_ShipDate = @Sales_ShipDate, Sales_Subtotal = @Sales_Subtotal, Sales_Tax = @Sales_Tax, Sales_Total = @Sales_Total, Sales_BillStreet = @Sales_BillStreet, Sales_BillCity = @Sales_BillCity, Sales_BillState = @Sales_BillState, Sales_BillZip = @Sales_BillZip, Sales_ShipStreet = @Sales_ShipStreet, Sales_ShipCity = @Sales_ShipCity, Sales_ShipState = @Sales_ShipState, Sales_ShipZip = @Sales_ShipZip WHERE Sales_ID = @Sales_ID", c);
+            }
+        }
+        public static void EditEmployee(Employee c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE Employee SET Employee_FirstName = @Employee_FirstName, Employee_LastName = @Employee_LastName, Employee_Street = @Employee_Street, Employee_City = @Employee_City, Employee_State = @Employee_State, Employee_Zip = @Employee_Zip, Employee_Phone = @Employee_Phone, Employee_Email = @Employee_Email, Employee_Supervisor_ID = @Employee_Supervisor_ID WHERE Employee_Id = @Employee_ID", c);
+            }
+        }
+        public static void EditVendor(Vendor c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE Vendor SET Vendor_Name = @Vendor_Name, Vendor_Street = @Vendor_Street, Vendor_City = @Vendor_City, Vendor_State = @Vendor_State, Vendor_Zip = @Vendor_Zip, Vendor_Phone = @Vendor_Phone, Vendor_Email = @Vendor_Email, Vendor_CreditLimit = @Vendor_CreditLimit, Vendor_Terms = @Vendor_Terms WHERE Vendor_Id = @Vendor_ID", c);
+            }
+        }
         public static void DeleteCustomer(string Cust_ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM Customer WHERE Cust_ID = {0}", Cust_ID));
+            }
+        }
+        public static void DeleteEmployee(int Employee_Id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Employee WHERE Employee_ID = {0}", Employee_Id));
+            }
+        }
+        public static void DeleteVendor(int Vendor_Id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Vendor WHERE Vendor_ID = {0}", Vendor_Id));
             }
         }
         public static void DeleteEstimate_Item(int Estimate_ID)
@@ -104,11 +139,25 @@ namespace ERP
                 cnn.Execute(String.Format("DELETE FROM Estimate_Item WHERE Estimate_ID = {0}", Estimate_ID));
             }
         }
+        public static void DeleteEstimate(int Estimate_ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Estimate WHERE Estimate_ID = {0}", Estimate_ID));
+            }
+        }
         public static void DeleteSalesOrder_Item(int SalesOrder_ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM SalesOrder_Item WHERE Sales_ID = {0}", SalesOrder_ID));
+            }
+        }
+        public static void DeleteSalesOrder(int SalesOrder_ID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM SalesOrder WHERE Sales_ID = {0}", SalesOrder_ID));
             }
         }
         public  static string LoadConnectionString(string id = "Default")
@@ -179,6 +228,24 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Estimate> LoadEstimateFromCustID(int custID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<Estimate> c = cnn.Query<Estimate>(string.Format("select * from Estimate where Cust_ID = {0}", custID)).ToList();
+                return c;
+            }
+        }
+        public static List<SalesOrder> LoadSalesOrderFromCustID(int custID)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<SalesOrder> c = cnn.Query<SalesOrder>(string.Format("select * from SalesOrder where Cust_ID = {0}", custID)).ToList();
+                return c;
+            }
+        }
         public static string AddEstimate(Estimate c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -188,18 +255,35 @@ namespace ERP
                 return e.seq.ToString();
             }
         }
-        public static void AddSalesOrder(SalesOrder c)
+
+        public static string AddSalesOrder(SalesOrder c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into SalesOrder (Cust_ID, Employee_ID, Sales_Date, Sales_ShipDate, Sales_Subtotal, Sales_Tax, Sales_Total, Sales_BillStreet, Sales_BillCity, Sales_BillState, Sales_BillZip, Sales_ShipStreet, Sales_ShipCity, Sales_ShipState, Sales_ShipZip) values (@Cust_ID, @Employee_ID, @Sales_Date, @Sales_ShipDate, @Sales_Subtotal, @Sales_Tax, @Sales_Total, @Sales_BillStreet, @Sales_BillCity, @Sales_BillState, @Sales_BillZip, @Sales_ShipStreet, @Sales_ShipCity, @Sales_ShipState, @Sales_ShipZip)", c);
+                dynamic e = cnn.QueryFirst("SELECT seq FROM sqlite_sequence where name=\"SalesOrder\"");
+                return e.seq.ToString();
+            }
+        }
+        public static void AddEmployee(Employee c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Employee (Employee_FirstName, Employee_LastName, Employee_Street, Employee_City, Employee_State, Employee_Zip, Employee_Phone, Employee_Email, Employee_Supervisor_ID) values (@Employee_FirstName, @Employee_LastName, @Employee_Street, @Employee_City, @Employee_State, @Employee_Zip, @Employee_Phone, @Employee_Email, @Employee_Supervisor_ID)", c);
+            }
+        }
+        public static void AddVendor(Vendor c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Vendor (Vendor_Name, Vendor_Street, Vendor_City, Vendor_State, Vendor_Zip, Vendor_Phone, Vendor_Email, Vendor_CreditLimit, Vendor_Terms) values (@Vendor_Name, @Vendor_Street, @Vendor_City, @Vendor_State, @Vendor_Zip, @Vendor_Phone, @Vendor_Email, @Vendor_CreditLimit, @Vendor_Terms)", c);
             }
         }
         public static void AddSalesOrder_Item(SalesOrder_Item c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into SalesOrder_Item (Sales_ID, Item_Number) values (@Sales_ID, @Item_Number)", c);
+                cnn.Execute("insert into SalesOrder_Item (Sales_ID, Item_Number, SalesOrder_Item_Quantity) values (@Sales_ID, @Item_Number, @SalesOrder_Item_Quantity)", c);
             }
         }
         public static void AddEstimate_Item(Estimate_Item c)
