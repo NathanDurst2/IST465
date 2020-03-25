@@ -122,7 +122,12 @@ namespace ERP
                 {
                     dataEmployee.Rows.Add();
                 }
-                Employee emp = SqliteDataAccess.LoadEmployee(c[i].Employee_Supervisor_ID)[0];
+                try
+                {
+                    Employee emp = SqliteDataAccess.LoadEmployee(c[i].Employee_Supervisor_ID)[0];
+                    dataEmployee.Rows[i].Cells["empSupervisorID"].Value = String.Format(c[i].Employee_Supervisor_ID.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName);
+                }
+                catch (ArgumentOutOfRangeException) { }
                 dataEmployee.Rows[i].Cells["empID"].Value = c[i].Employee_Id;
                 dataEmployee.Rows[i].Cells["empFirstName"].Value = c[i].Employee_FirstName;
                 dataEmployee.Rows[i].Cells["empLastName"].Value = c[i].Employee_LastName;
@@ -132,7 +137,6 @@ namespace ERP
                 dataEmployee.Rows[i].Cells["empZip"].Value = c[i].Employee_Zip;
                 dataEmployee.Rows[i].Cells["empPhone"].Value = c[i].Employee_Phone;
                 dataEmployee.Rows[i].Cells["empEmail"].Value = c[i].Employee_Email;
-                dataEmployee.Rows[i].Cells["empSupervisorID"].Value = String.Format(c[i].Employee_Supervisor_ID.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName);
             }
         }
         private void RefreshOrders()
@@ -262,7 +266,7 @@ namespace ERP
                     dataCustOrders.Rows[i].Cells["custOrdersShipDate"].Value = estimates[i].Order_ShipDate;
                     dataCustOrders.Rows[i].Cells["custOrderStatus"].Value = estimates[i].Order_Status;
                 }
-                if(estimates[i].Order_Status == "Canceled" || estimates[i].Order_Status == "Closed")
+                if (estimates[i].Order_Status == "Canceled" || estimates[i].Order_Status == "Closed")
                 {
                     dataCustOrders.Rows[i].Visible = false;
                 }
@@ -637,7 +641,7 @@ namespace ERP
                 si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
                 selectedItems.Add(si);
             }
-            if(est.Order_Type == "Sales Order")
+            if (est.Order_Type == "Sales Order")
             {
                 orderDatePicker.Value = DateTime.Parse(est.Order_ShipDate);
                 cbOrderStatus.SelectedIndex = cbOrderStatus.FindString(est.Order_Status);
@@ -798,7 +802,10 @@ namespace ERP
             emp.Employee_Phone = tbEmpPhone.Text;
             emp.Employee_Email = tbEmpEmail.Text;
             string supervisor = cbEmpSupervisor.Text;
-            emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+            if (supervisor.Length > 0 & supervisor.Contains(" -"))
+            {
+                emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+            }
             SqliteDataAccess.AddEmployee(emp);
             BtEmpClear_Click(null, null);
             RefreshEmployeee();
@@ -837,7 +844,8 @@ namespace ERP
             emp.Employee_Phone = tbEmpPhone.Text;
             emp.Employee_Email = tbEmpEmail.Text;
             string supervisor = cbEmpSupervisor.Text;
-            emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+            if (supervisor.Length > 0 & supervisor.Contains(" -"))
+                emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
             SqliteDataAccess.EditEmployee(emp);
             btEmpSave.Visible = false;
             BtEmpClear_Click(null, null);
@@ -867,7 +875,7 @@ namespace ERP
             ven.Vendor_Phone = tbVendorPhone.Text;
             ven.Vendor_Email = tbVendorEmail.Text;
             ven.Vendor_CreditLimit = tbVendorCreditLimit.Text;
-            ven.Vendor_Terms = cbVendorTerms.SelectedIndex.ToString();
+            ven.Vendor_Terms = cbVendorTerms.SelectedItem.ToString();
             SqliteDataAccess.AddVendor(ven);
             RefreshVendors();
             BtVendorClear_Click(null, null);

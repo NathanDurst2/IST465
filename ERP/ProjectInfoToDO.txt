@@ -8,6 +8,8 @@ Logon Screen
 	Company Name
 Database
 	Change database location
-
+Item
+	All features
+	Purchase orders from this screen? (Maybe add purchase order tab for invoices and purchase orders?)
 	
 
