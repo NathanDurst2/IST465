@@ -27,8 +27,9 @@ namespace ERP
                 tbOrderSubTotal.Text = "";
                 tbOrderTotal.Text = "";
                 selectedItems = new List<SelectedItems>();
+                RefreshOrders();
             }
-            if(tabControl.SelectedTab.Text == "Customers")
+            if (tabControl.SelectedTab.Text == "Customers")
             {
                 dataCustomer.ClearSelection();
                 dataCustOrders.ClearSelection();
@@ -138,13 +139,10 @@ namespace ERP
         {
             dataOrder.Rows.Clear();
             dataOrder.DataSource = null;
-            List<Estimate> c = new List<Estimate>();
-            c = SqliteDataAccess.LoadAllEstimate();
+            List<Order> c = new List<Order>();
+            c = SqliteDataAccess.LoadAllOrder();
 
-            List<SalesOrder> s = new List<SalesOrder>();
-            s = SqliteDataAccess.LoadAllSalesOrder();
-
-            int neededRows = c.Count + s.Count;
+            int neededRows = c.Count;
             if (neededRows > 0)
             {
                 dataOrder.Rows.Add();
@@ -155,45 +153,31 @@ namespace ERP
             }
 
             int y = 0;
-            for (int i = 0; i < c.Count + s.Count; i++, y++)
+            for (int i = 0; i < c.Count; i++, y++)
             {
+                Customer cust = SqliteDataAccess.LoadCustomer(c[i].Cust_ID)[0];
+                Employee emp = SqliteDataAccess.LoadEmployee(c[i].Employee_ID)[0];
+                dataOrder.Rows[i].Cells["orderID"].Value = c[i].Order_ID;
+                dataOrder.Rows[i].Cells["orderCustomer"].Value = String.Format(c[y].Cust_ID.ToString() + " - " + cust.Customer_FirstName + " " + cust.Customer_LastName);
+                dataOrder.Rows[i].Cells["orderDate"].Value = c[i].Order_Date;
+                dataOrder.Rows[i].Cells["orderShipDate"].Value = "-";
+                dataOrder.Rows[i].Cells["orderTotal"].Value = String.Format("$ " + Math.Round(c[i].Order_Total, 2));
+                dataOrder.Rows[i].Cells["orderSalesRep"].Value = String.Format(c[i].Employee_ID.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName);
+                dataOrder.Rows[i].Cells["orderShippingStreet"].Value = c[i].Order_ShipStreet;
+                dataOrder.Rows[i].Cells["orderShippingCity"].Value = c[i].Order_ShipCity;
+                dataOrder.Rows[i].Cells["orderShippingState"].Value = c[i].Order_ShipState;
+                dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[i].Order_ShipZip;
 
-                if (y < c.Count)
+                if (c[i].Order_Type == "Estimate")
                 {
-                    Customer cust = SqliteDataAccess.LoadCustomer(c[y].Cust_ID)[0];
-                    Employee emp = SqliteDataAccess.LoadEmployee(c[y].Employee_ID)[0];
-                    dataOrder.Rows[i].Cells["orderID"].Value = c[y].Estimate_ID;
-                    dataOrder.Rows[i].Cells["orderCustomer"].Value = String.Format(c[y].Cust_ID.ToString() + " - " + cust.Customer_FirstName + " " + cust.Customer_LastName);
                     dataOrder.Rows[i].Cells["orderType"].Value = "Estimate";
-                    dataOrder.Rows[i].Cells["orderDate"].Value = c[y].Estimate_Date;
                     dataOrder.Rows[i].Cells["orderShipDate"].Value = "-";
-                    dataOrder.Rows[i].Cells["orderTotal"].Value = Math.Round(c[y].Estimate_Total, 2);
-                    dataOrder.Rows[i].Cells["orderSalesRep"].Value = String.Format(c[y].Employee_ID.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName);
-                    dataOrder.Rows[i].Cells["orderShippingStreet"].Value = c[y].Estimate_ShipStreet;
-                    dataOrder.Rows[i].Cells["orderShippingCity"].Value = c[y].Estimate_ShipCity;
-                    dataOrder.Rows[i].Cells["orderShippingState"].Value = c[y].Estimate_ShipState;
-                    dataOrder.Rows[i].Cells["orderShippingZip"].Value = c[y].Estimate_ShipZip;
                 }
-
-                if (y < s.Count)
+                else if (c[i].Order_Type == "Sales Order")
                 {
-                    if (y < c.Count)
-                    {
-                        i++;
-                    }
-                    Customer cust = SqliteDataAccess.LoadCustomer(s[y].Cust_ID)[0];
-                    Employee emp = SqliteDataAccess.LoadEmployee(s[y].Employee_ID)[0];
-                    dataOrder.Rows[i].Cells["orderID"].Value = s[y].Sales_ID;
-                    dataOrder.Rows[i].Cells["orderCustomer"].Value = String.Format(s[y].Cust_ID.ToString() + " - " + cust.Customer_FirstName + " " + cust.Customer_LastName);
                     dataOrder.Rows[i].Cells["orderType"].Value = "Sales Order";
-                    dataOrder.Rows[i].Cells["orderDate"].Value = s[y].Sales_Date;
-                    dataOrder.Rows[i].Cells["orderTotal"].Value = Math.Round(s[y].Sales_Total, 2);
-                    dataOrder.Rows[i].Cells["orderShipDate"].Value = s[y].Sales_ShipDate;
-                    dataOrder.Rows[i].Cells["orderSalesRep"].Value = String.Format(s[y].Employee_ID.ToString() + " - " + emp.Employee_FirstName + " " + emp.Employee_LastName);
-                    dataOrder.Rows[i].Cells["orderShippingStreet"].Value = s[y].Sales_ShipStreet;
-                    dataOrder.Rows[i].Cells["orderShippingCity"].Value = s[y].Sales_ShipCity;
-                    dataOrder.Rows[i].Cells["orderShippingState"].Value = s[y].Sales_ShipState;
-                    dataOrder.Rows[i].Cells["orderShippingZip"].Value = s[y].Sales_ShipZip;
+                    dataOrder.Rows[i].Cells["orderShipDate"].Value = c[i].Order_ShipDate;
+                    dataOrder.Rows[i].Cells["orderStatus"].Value = c[i].Order_Status;
                 }
             }
 
@@ -203,71 +187,43 @@ namespace ERP
             dataOrderItems.Rows.Clear();
             dataOrderItems.DataSource = null;
             string orderType = "";
-            int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
+            int id = 0;
+
             try
             {
+                id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
                 orderType = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
             }
             catch (NullReferenceException)
             { }
 
 
+            List<Order_Item> c = SqliteDataAccess.LoadOrder_ItemFOR(id);
 
-            if (orderType == "Estimate")
+            selectedItems = new List<SelectedItems>();
+
+            foreach (Order_Item estItem in c)
             {
-
-                List<Estimate_Item> c = SqliteDataAccess.LoadEstimate_ItemFOR(id);
-
-                selectedItems = new List<SelectedItems>();
-
-                foreach (Estimate_Item estItem in c)
-                {
-                    SelectedItems si = new SelectedItems();
-                    si.Item_Number = estItem.Item_Number;
-                    si.Item_Quantity = Convert.ToInt32(estItem.Estimate_Item_Quantity);
-                    si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
-                    selectedItems.Add(si);
-                }
-
-                for (int i = 0; i < c.Count; i++)
-                {
-                    List<Item> items = SqliteDataAccess.LoadItem(c[i].Item_Number);
-                    if (dataOrderItems.Rows.Count == i)
-                    {
-                        dataOrderItems.Rows.Add();
-                    }
-                    dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = c[i].Item_Number;
-                    dataOrderItems.Rows[i].Cells["orderItemsDesc"].Value = items[0].Item_Description;
-                    dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = c[i].Estimate_Item_Quantity;
-                    dataOrderItems.Rows[i].Cells["orderItemPrice"].Value = items[0].Item_SellPrice;
-                }
+                SelectedItems si = new SelectedItems();
+                si.Item_Number = estItem.Item_Number;
+                si.Item_Quantity = Convert.ToInt32(estItem.Order_Item_Quantity);
+                si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
+                selectedItems.Add(si);
             }
-            else if (orderType == "Sales Order")
+
+            for (int i = 0; i < c.Count; i++)
             {
-                List<SalesOrder_Item> c = SqliteDataAccess.LoadSalesOrder_ItemFOR(id);
-
-                selectedItems = new List<SelectedItems>();
-
-                foreach (SalesOrder_Item estItem in c)
+                List<Item> items = SqliteDataAccess.LoadItem(c[i].Item_Number);
+                if (dataOrderItems.Rows.Count == i)
                 {
-                    SelectedItems si = new SelectedItems();
-                    si.Item_Number = estItem.Item_Number;
-                    si.Item_Quantity = Convert.ToInt32(estItem.SalesOrder_Item_Quantity);
-                    selectedItems.Add(si);
+                    dataOrderItems.Rows.Add();
                 }
-                for (int i = 0; i < c.Count; i++)
-                {
-                    List<Item> items = SqliteDataAccess.LoadItem(c[i].Item_Number);
-                    if (dataOrderItems.Rows.Count == i)
-                    {
-                        dataOrderItems.Rows.Add();
-                    }
-                    dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = c[i].Item_Number;
-                    dataOrderItems.Rows[i].Cells["orderItemsDesc"].Value = items[0].Item_Description;
-                    dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = c[i].SalesOrder_Item_Quantity;
-                    dataOrderItems.Rows[i].Cells["orderItemPrice"].Value = items[0].Item_SellPrice;
-                }
+                dataOrderItems.Rows[i].Cells["orderItemsNumber"].Value = c[i].Item_Number;
+                dataOrderItems.Rows[i].Cells["orderItemsDesc"].Value = items[0].Item_Description;
+                dataOrderItems.Rows[i].Cells["orderItemQuantity"].Value = c[i].Order_Item_Quantity;
+                dataOrderItems.Rows[i].Cells["orderItemPrice"].Value = items[0].Item_SellPrice;
             }
+
             double subTotal = 0;
 
             foreach (SelectedItems si in selectedItems)
@@ -285,28 +241,31 @@ namespace ERP
             dataCustOrders.DataSource = null;
 
             int id = Convert.ToInt32(dataCustomer.Rows[dataCustomer.CurrentCell.RowIndex].Cells["Cust_ID"].Value);
-            List<Estimate> estimates = SqliteDataAccess.LoadEstimateFromCustID(id);
-            List<SalesOrder> salesOrders = SqliteDataAccess.LoadSalesOrderFromCustID(id);
-            int count = 0;
-            foreach(Estimate est in estimates)
+            List<Order> estimates = SqliteDataAccess.LoadOrderFromCustID(id);
+
+            for (int i = 0; i < estimates.Count; i++)
             {
                 dataCustOrders.Rows.Add();
-                dataCustOrders.Rows[count].Cells["custOrdersID"].Value = est.Estimate_ID.ToString();
-                dataCustOrders.Rows[count].Cells["custOrdersType"].Value = "Estimate";
-                dataCustOrders.Rows[count].Cells["custOrdersDate"].Value = est.Estimate_Date;
-                dataCustOrders.Rows[count].Cells["custOrdersShipDate"].Value = "-";
-                dataCustOrders.Rows[count].Cells["custOrdersTotal"].Value = est.Estimate_Total.ToString();
-                count++;
-            }
-            foreach (SalesOrder est in salesOrders)
-            {
-                dataCustOrders.Rows.Add();
-                dataCustOrders.Rows[count].Cells["custOrdersID"].Value = est.Sales_ID.ToString();
-                dataCustOrders.Rows[count].Cells["custOrdersType"].Value = "Sales Order";
-                dataCustOrders.Rows[count].Cells["custOrdersDate"].Value = est.Sales_Date;
-                dataCustOrders.Rows[count].Cells["custOrdersShipDate"].Value = est.Sales_ShipDate;
-                dataCustOrders.Rows[count].Cells["custOrdersTotal"].Value = est.Sales_Total.ToString();
-                count++;
+                dataCustOrders.Rows[i].Cells["custOrdersID"].Value = estimates[i].Order_ID.ToString();
+                dataCustOrders.Rows[i].Cells["custOrdersDate"].Value = estimates[i].Order_Date;
+
+                dataCustOrders.Rows[i].Cells["custOrdersTotal"].Value = String.Format("$ " + Math.Round(estimates[i].Order_Total, 2));
+
+                if (estimates[i].Order_Type == "Estimate")
+                {
+                    dataCustOrders.Rows[i].Cells["custOrdersType"].Value = "Estimate";
+                    dataCustOrders.Rows[i].Cells["custOrdersShipDate"].Value = "-";
+                }
+                else if (estimates[i].Order_Type == "Sales Order")
+                {
+                    dataCustOrders.Rows[i].Cells["custOrdersType"].Value = "Sales Order";
+                    dataCustOrders.Rows[i].Cells["custOrdersShipDate"].Value = estimates[i].Order_ShipDate;
+                    dataCustOrders.Rows[i].Cells["custOrderStatus"].Value = estimates[i].Order_Status;
+                }
+                if(estimates[i].Order_Status == "Canceled" || estimates[i].Order_Status == "Closed")
+                {
+                    dataCustOrders.Rows[i].Visible = false;
+                }
             }
 
         }
@@ -541,97 +500,61 @@ namespace ERP
         private void BtOrderAdd_Click(object sender, EventArgs e)
         {
             orderButtonsDisable();
-            if (cbOrderType.Text == "Estimate")
+
+            Order est = new Order();
+
+            string emp = cbOrderSalesRep.Text;
+            int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
+
+            string cust = cbOrderCustomer.Text;
+            int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+
+            est.Cust_ID = cust_id;
+            est.Employee_ID = emp_id;
+            est.Order_Date = DateTime.Today.ToShortDateString();
+
+            est.Order_Type = cbOrderType.Text;
+            if (est.Order_Type == "Sales Order")
             {
-                Estimate est = new Estimate();
-
-                string emp = cbOrderSalesRep.Text;
-                int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
-
-                string cust = cbOrderCustomer.Text;
-                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
-
-                est.Cust_ID = cust_id;
-                est.Employee_ID = emp_id;
-                est.Estimate_Date = DateTime.Today.ToShortDateString();
-                double subTotal = 0;
-                foreach (SelectedItems si in selectedItems)
-                    subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
-
-                est.Estimate_Subtotal = subTotal;
-                est.Estimate_Tax = (subTotal * 0.07);
-                est.Estimate_Total = (est.Estimate_Subtotal + est.Estimate_Tax);
-                est.Estimate_BillStreet = tbOrderBillingStreet.Text;
-                est.Estimate_BillCity = tbOrderBillingCity.Text;
-                est.Estimate_BillState = tbOrderBillingState.Text;
-                est.Estimate_BillZip = tbOrderBillingZip.Text;
-                est.Estimate_ShipStreet = tbOrderShippingStreet.Text;
-                est.Estimate_ShipCity = tbOrderShippingCity.Text;
-                est.Estimate_ShipState = tbOrderShippingState.Text;
-                est.Estimate_ShipZip = tbOrderShippingZip.Text;
-
-                string est_id = SqliteDataAccess.AddEstimate(est);
-                RefreshOrders();
-
-                foreach (SelectedItems it in selectedItems)
-                {
-                    Estimate_Item ei = new Estimate_Item();
-                    ei.Estimate_ID = Convert.ToInt32(est_id);
-                    ei.Item_Number = it.Item_Number;
-                    ei.Estimate_Item_Quantity = it.Item_Quantity.ToString();
-
-                    SqliteDataAccess.AddEstimate_Item(ei);
-                }
-                //Clears out the list of items so that the next order is empty
-                selectedItems = new List<SelectedItems>();
+                est.Order_ShipDate = orderDatePicker.Value.ToShortDateString();
+                est.Order_Status = cbOrderStatus.Text;
             }
-            else if (cbOrderType.Text.StartsWith("Sales"))
+
+            double subTotal = 0;
+            foreach (SelectedItems si in selectedItems)
+                subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
+
+            est.Order_Subtotal = subTotal;
+            est.Order_Tax = (subTotal * 0.07);
+            est.Order_Total = (est.Order_Subtotal + est.Order_Tax);
+            est.Order_BillStreet = tbOrderBillingStreet.Text;
+            est.Order_BillCity = tbOrderBillingCity.Text;
+            est.Order_BillState = tbOrderBillingState.Text;
+            est.Order_BillZip = tbOrderBillingZip.Text;
+            est.Order_ShipStreet = tbOrderShippingStreet.Text;
+            est.Order_ShipCity = tbOrderShippingCity.Text;
+            est.Order_ShipState = tbOrderShippingState.Text;
+            est.Order_ShipZip = tbOrderShippingZip.Text;
+
+            string est_id = SqliteDataAccess.AddOrder(est);
+
+            foreach (SelectedItems it in selectedItems)
             {
-                SalesOrder est = new SalesOrder();
+                Order_Item ei = new Order_Item();
+                ei.Order_ID = Convert.ToInt32(est_id);
+                ei.Item_Number = it.Item_Number;
+                ei.Order_Item_Quantity = it.Item_Quantity;
 
-                string emp = cbOrderSalesRep.Text;
-                int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
-
-                string cust = cbOrderCustomer.Text;
-                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
-
-                est.Cust_ID = cust_id;
-                est.Employee_ID = emp_id;
-                est.Sales_Date = DateTime.Today.ToShortDateString();
-                est.Sales_ShipDate = DateTime.Today.AddDays(2).ToShortDateString();
-                double subTotal = 0;
-                foreach (SelectedItems si in selectedItems)
-                    subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
-
-                est.Sales_Subtotal = subTotal;
-                est.Sales_Tax = (subTotal * 0.07);
-                est.Sales_Total = (est.Sales_Subtotal + est.Sales_Tax);
-                est.Sales_BillStreet = tbOrderBillingStreet.Text;
-                est.Sales_BillCity = tbOrderBillingCity.Text;
-                est.Sales_BillState = tbOrderBillingState.Text;
-                est.Sales_BillZip = tbOrderBillingZip.Text;
-                est.Sales_ShipStreet = tbOrderShippingStreet.Text;
-                est.Sales_ShipCity = tbOrderShippingCity.Text;
-                est.Sales_ShipState = tbOrderShippingState.Text;
-                est.Sales_ShipZip = tbOrderShippingZip.Text;
-
-                string est_id = SqliteDataAccess.AddSalesOrder(est);
-                RefreshOrders();
-
-                foreach (SelectedItems it in selectedItems)
-                {
-                    SalesOrder_Item ei = new SalesOrder_Item();
-                    ei.Sales_ID = Convert.ToInt32(est_id);
-                    ei.Item_Number = it.Item_Number;
-                    ei.SalesOrder_Item_Quantity = it.Item_Quantity;
-
-                    SqliteDataAccess.AddSalesOrder_Item(ei);
-                }
-                //Clears out the list of items so that the next order is empty
-                selectedItems = new List<SelectedItems>();
+                SqliteDataAccess.AddOrder_Item(ei);
             }
+            //Clears out the list of items so that the next order is empty
+            selectedItems = new List<SelectedItems>();
+
+            //Clears out the list of items so that the next order is empty
+            selectedItems = new List<SelectedItems>();
             BtOrderClear_Click(null, null);
             orderButtonsDisable();
+            RefreshOrders();
         }
 
         private void BtOrderSave_Click(object sender, EventArgs e)
@@ -639,94 +562,50 @@ namespace ERP
             orderButtonsDisable();
             if (cbOrderCustomer != null)
             {
-                string orderType = cbOrderType.Text;
-                if (orderType == "Estimate")
+                Order es = new Order();
+                es.Order_ID = Convert.ToInt32(tbOrderID.Text); tbOrderID.Clear();
+                es.Cust_ID = Convert.ToInt32(cbOrderCustomer.Text.Substring(0, cbOrderCustomer.Text.IndexOf(" -"))); cbOrderCustomer.Items.Clear();
+                es.Employee_ID = Convert.ToInt32(cbOrderSalesRep.Text.Substring(0, cbOrderSalesRep.Text.IndexOf(" -"))); cbOrderSalesRep.Items.Clear();
+                es.Order_Date = DateTime.Today.ToShortDateString();
+                es.Order_Type = cbOrderType.Text;
+                if (es.Order_Type == "Sales Order")
                 {
-                    Estimate es = new Estimate();
-                    es.Estimate_ID = Convert.ToInt32(tbOrderID.Text); tbOrderID.Clear();
-                    es.Cust_ID = Convert.ToInt32(cbOrderCustomer.Text.Substring(0, cbOrderCustomer.Text.IndexOf(" -"))); cbOrderCustomer.Items.Clear();
-                    es.Employee_ID = Convert.ToInt32(cbOrderSalesRep.Text.Substring(0, cbOrderSalesRep.Text.IndexOf(" -"))); cbOrderSalesRep.Items.Clear();
-                    es.Estimate_Date = DateTime.Today.ToShortDateString();
-
-                    double subTotal = 0;
-                    foreach (SelectedItems si in selectedItems)
-                        subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
-                    es.Estimate_Subtotal = subTotal;
-                    es.Estimate_Tax = subTotal * 0.07;
-                    es.Estimate_Total = es.Estimate_Subtotal + es.Estimate_Tax;
-                    cbOrderType.SelectedIndex = -1;
-                    checkShippingBilling.Checked = false;
-                    es.Estimate_BillStreet = tbOrderBillingStreet.Text; tbOrderBillingStreet.Clear();
-                    es.Estimate_BillCity = tbOrderBillingCity.Text; tbOrderBillingCity.Clear();
-                    es.Estimate_BillState = tbOrderBillingState.Text; tbOrderBillingState.Clear();
-                    es.Estimate_BillZip = tbOrderBillingZip.Text; tbOrderBillingZip.Clear();
-                    es.Estimate_ShipStreet = tbOrderShippingStreet.Text; tbOrderShippingStreet.Clear();
-                    es.Estimate_ShipCity = tbOrderShippingCity.Text; tbOrderShippingCity.Clear();
-                    es.Estimate_ShipState = tbOrderShippingState.Text; tbOrderShippingState.Clear();
-                    es.Estimate_ShipZip = tbOrderShippingZip.Text; tbOrderShippingZip.Clear();
-                    SqliteDataAccess.DeleteEstimate_Item(es.Estimate_ID);
-                    SqliteDataAccess.EditEstimate(es);
-                    foreach (SelectedItems it in selectedItems)
-                    {
-                        Estimate_Item ei = new Estimate_Item();
-                        ei.Estimate_ID = Convert.ToInt32(es.Estimate_ID);
-                        ei.Item_Number = it.Item_Number;
-                        ei.Estimate_Item_Quantity = it.Item_Quantity.ToString();
-
-                        SqliteDataAccess.AddEstimate_Item(ei);
-                    }
-                    RefreshOrders();
-                    RefreshOrderItems();
-                    btOrderSave.Visible = false;
-                    btOrderSave.SendToBack();
-
+                    es.Order_ShipDate = orderDatePicker.Value.ToShortDateString();
+                    es.Order_Status = cbOrderStatus.Text;
                 }
-                else if (orderType == "Sales Order")
+
+                double subTotal = 0;
+                foreach (SelectedItems si in selectedItems)
+                    subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
+
+                es.Order_Subtotal = subTotal;
+                es.Order_Tax = subTotal * 0.07;
+                es.Order_Total = es.Order_Subtotal + es.Order_Tax;
+                cbOrderType.SelectedIndex = -1;
+                checkShippingBilling.Checked = false;
+                es.Order_BillStreet = tbOrderBillingStreet.Text; tbOrderBillingStreet.Clear();
+                es.Order_BillCity = tbOrderBillingCity.Text; tbOrderBillingCity.Clear();
+                es.Order_BillState = tbOrderBillingState.Text; tbOrderBillingState.Clear();
+                es.Order_BillZip = tbOrderBillingZip.Text; tbOrderBillingZip.Clear();
+                es.Order_ShipStreet = tbOrderShippingStreet.Text; tbOrderShippingStreet.Clear();
+                es.Order_ShipCity = tbOrderShippingCity.Text; tbOrderShippingCity.Clear();
+                es.Order_ShipState = tbOrderShippingState.Text; tbOrderShippingState.Clear();
+                es.Order_ShipZip = tbOrderShippingZip.Text; tbOrderShippingZip.Clear();
+                SqliteDataAccess.DeleteOrder_Item(es.Order_ID);
+                SqliteDataAccess.EditOrder(es);
+                foreach (SelectedItems it in selectedItems)
                 {
-                    SalesOrder es = new SalesOrder();
-                    es.Sales_ID = Convert.ToInt32(tbOrderID.Text); tbOrderID.Clear();
-                    es.Cust_ID = Convert.ToInt32(cbOrderCustomer.Text.Substring(0, cbOrderCustomer.Text.IndexOf(" -"))); cbOrderCustomer.Items.Clear();
-                    es.Employee_ID = Convert.ToInt32(cbOrderSalesRep.Text.Substring(0, cbOrderSalesRep.Text.IndexOf(" -"))); cbOrderSalesRep.Items.Clear();
-                    es.Sales_Date = DateTime.Today.ToShortDateString();
-                    // Fix
-                    es.Sales_ShipDate = DateTime.Today.ToShortDateString();
+                    Order_Item ei = new Order_Item();
+                    ei.Order_ID = Convert.ToInt32(es.Order_ID);
+                    ei.Item_Number = it.Item_Number;
+                    ei.Order_Item_Quantity = it.Item_Quantity;
 
-                    double subTotal = 0;
-                    foreach (SelectedItems si in selectedItems)
-                        subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
-                    es.Sales_Subtotal = subTotal;
-                    es.Sales_Tax = subTotal * 0.07;
-                    es.Sales_Total = es.Sales_Subtotal + es.Sales_Tax;
-                    cbOrderType.SelectedIndex = -1;
-                    checkShippingBilling.Checked = false;
-                    es.Sales_BillStreet = tbOrderBillingStreet.Text; tbOrderBillingStreet.Clear();
-                    es.Sales_BillCity = tbOrderBillingCity.Text; tbOrderBillingCity.Clear();
-                    es.Sales_BillState = tbOrderBillingState.Text; tbOrderBillingState.Clear();
-                    es.Sales_BillZip = tbOrderBillingZip.Text; tbOrderBillingZip.Clear();
-                    es.Sales_ShipStreet = tbOrderShippingStreet.Text; tbOrderShippingStreet.Clear();
-                    es.Sales_ShipCity = tbOrderShippingCity.Text; tbOrderShippingCity.Clear();
-                    es.Sales_ShipState = tbOrderShippingState.Text; tbOrderShippingState.Clear();
-                    es.Sales_ShipZip = tbOrderShippingZip.Text; tbOrderShippingZip.Clear();
-                    SqliteDataAccess.DeleteSalesOrder_Item(es.Sales_ID);
-                    SqliteDataAccess.EditSalesOrder(es);
-                    foreach (SelectedItems it in selectedItems)
-                    {
-                        SalesOrder_Item ei = new SalesOrder_Item();
-                        ei.Sales_ID = Convert.ToInt32(es.Sales_ID);
-                        ei.Item_Number = it.Item_Number;
-                        ei.SalesOrder_Item_Quantity = it.Item_Quantity;
-
-                        SqliteDataAccess.AddSalesOrder_Item(ei);
-                    }
-                    RefreshOrders();
-                    RefreshOrderItems();
-                    btOrderSave.Visible = false;
-                    btOrderSave.SendToBack();
+                    SqliteDataAccess.AddOrder_Item(ei);
                 }
-                else
-                {
-                    MessageBox.Show("Missing order type");
-                }
+                RefreshOrders();
+                RefreshOrderItems();
+                btOrderSave.Visible = false;
+                btOrderSave.SendToBack();
             }
         }
         private void dataOrder_SelectionChanged(object sender, EventArgs e)
@@ -744,77 +623,38 @@ namespace ERP
             btOrderNew.Visible = false;
 
             int orderID = (int)dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value;
-            string orderType = "";
-            try
+
+            Order est = SqliteDataAccess.LoadOrder(orderID)[0];
+            List<Order_Item> itemList = SqliteDataAccess.LoadOrder_ItemFOR(est.Order_ID);
+            CbOrderCustomer_Click(null, null);
+            selectedItems = new List<SelectedItems>();
+
+            foreach (Order_Item estItem in itemList)
             {
-                orderType = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+                SelectedItems si = new SelectedItems();
+                si.Item_Number = estItem.Item_Number;
+                si.Item_Quantity = Convert.ToInt32(estItem.Order_Item_Quantity);
+                si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
+                selectedItems.Add(si);
             }
-            catch (NullReferenceException)
-            { }
-
-            if (orderType == "Estimate")
+            if(est.Order_Type == "Sales Order")
             {
-                List<Estimate> estList = SqliteDataAccess.LoadEstimate(orderID);
-                Estimate est = estList[0];
-                List<Estimate_Item> itemList = SqliteDataAccess.LoadEstimate_ItemFOR(est.Estimate_ID);
-                CbOrderCustomer_Click(null, null);
-                selectedItems = new List<SelectedItems>();
-
-                foreach (Estimate_Item estItem in itemList)
-                {
-                    SelectedItems si = new SelectedItems();
-                    si.Item_Number = estItem.Item_Number;
-                    si.Item_Quantity = Convert.ToInt32(estItem.Estimate_Item_Quantity);
-                    si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
-                    selectedItems.Add(si);
-                }
-
-                tbOrderID.Text = est.Estimate_ID.ToString();
-                cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
-                cbOrderType.SelectedIndex = cbOrderType.FindString("Estimate");
-                tbOrderBillingStreet.Text = est.Estimate_BillStreet;
-                tbOrderBillingCity.Text = est.Estimate_BillCity;
-                tbOrderBillingState.Text = est.Estimate_BillState;
-                tbOrderShippingZip.Text = est.Estimate_ShipZip;
-                tbOrderShippingStreet.Text = est.Estimate_ShipStreet;
-                tbOrderShippingCity.Text = est.Estimate_ShipCity;
-                tbOrderShippingState.Text = est.Estimate_ShipState;
-                tbOrderShippingZip.Text = est.Estimate_ShipZip;
-                btOrderSave.Visible = true;
-                btOrderSave.BringToFront();
+                orderDatePicker.Value = DateTime.Parse(est.Order_ShipDate);
+                cbOrderStatus.SelectedIndex = cbOrderStatus.FindString(est.Order_Status);
             }
-
-            if (orderType == "Sales Order")
-            {
-                List<SalesOrder> estList = SqliteDataAccess.LoadSalesOrder(orderID);
-                SalesOrder est = estList[0];
-                List<SalesOrder_Item> itemList = SqliteDataAccess.LoadSalesOrder_ItemFOR(est.Sales_ID);
-                CbOrderCustomer_Click(null, null);
-                selectedItems = new List<SelectedItems>();
-
-                foreach (SalesOrder_Item estItem in itemList)
-                {
-                    SelectedItems si = new SelectedItems();
-                    si.Item_Number = estItem.Item_Number;
-                    si.Item_Quantity = Convert.ToInt32(estItem.SalesOrder_Item_Quantity);
-                    si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
-                    selectedItems.Add(si);
-                }
-
-                tbOrderID.Text = est.Sales_ID.ToString();
-                cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
-                cbOrderType.SelectedIndex = cbOrderType.FindString("Sales Order");
-                tbOrderBillingStreet.Text = est.Sales_BillStreet;
-                tbOrderBillingCity.Text = est.Sales_BillCity;
-                tbOrderBillingState.Text = est.Sales_BillState;
-                tbOrderShippingZip.Text = est.Sales_ShipZip;
-                tbOrderShippingStreet.Text = est.Sales_ShipStreet;
-                tbOrderShippingCity.Text = est.Sales_ShipCity;
-                tbOrderShippingState.Text = est.Sales_ShipState;
-                tbOrderShippingZip.Text = est.Sales_ShipZip;
-                btOrderSave.Visible = true;
-                btOrderSave.BringToFront();
-            }
+            tbOrderID.Text = est.Order_ID.ToString();
+            cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
+            cbOrderType.SelectedIndex = cbOrderType.FindString(est.Order_Type);
+            tbOrderBillingStreet.Text = est.Order_BillStreet;
+            tbOrderBillingCity.Text = est.Order_BillCity;
+            tbOrderBillingState.Text = est.Order_BillState;
+            tbOrderShippingZip.Text = est.Order_ShipZip;
+            tbOrderShippingStreet.Text = est.Order_ShipStreet;
+            tbOrderShippingCity.Text = est.Order_ShipCity;
+            tbOrderShippingState.Text = est.Order_ShipState;
+            tbOrderShippingZip.Text = est.Order_ShipZip;
+            btOrderSave.Visible = true;
+            btOrderSave.BringToFront();
         }
 
         private void BtOrderClear_Click(object sender, EventArgs e)
@@ -846,6 +686,25 @@ namespace ERP
             btOrderSave.Visible = false;
             BtOrderClear_Click(null, null);
             orderButtonsEnable();
+            orderDatePicker.Value = DateTime.Today.AddDays(2);
+            cbOrderStatus.SelectedIndex = cbOrderStatus.FindString("Open");
+        }
+        private void cbOrderType_SelectionChanged(object sender, EventArgs e)
+        {
+            if (cbOrderType.Text == "Sales Order")
+            {
+                labelOrderStatus.Visible = true;
+                labelOrderShipDate.Visible = true;
+                cbOrderStatus.Visible = true;
+                orderDatePicker.Visible = true;
+            }
+            else
+            {
+                labelOrderStatus.Visible = false;
+                labelOrderShipDate.Visible = false;
+                cbOrderStatus.Visible = false;
+                orderDatePicker.Visible = false;
+            }
         }
         private void orderButtonsDisable()
         {
@@ -900,31 +759,16 @@ namespace ERP
             catch (NullReferenceException)
             { }
 
-            if (orderType == "Estimate")
+            DialogResult result = MessageBox.Show("Are you sure you wish to delete this order?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                DialogResult result = MessageBox.Show("Are you sure you wish to delete this order?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SqliteDataAccess.DeleteEstimate(id);
-                    SqliteDataAccess.DeleteEstimate_Item(id);
-                    RefreshOrders();
-                    RefreshOrderItems();
-                }
-                
-            }
-            else if (orderType == "Sales Order")
-            {
-                DialogResult result = MessageBox.Show("Are you sure you wish to delete this order?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    SqliteDataAccess.DeleteSalesOrder(id);
-                    SqliteDataAccess.DeleteSalesOrder_Item(id);
-                    RefreshOrders();
-                    RefreshOrderItems();
-                }
+                SqliteDataAccess.DeleteOrder(id);
+                SqliteDataAccess.DeleteOrder_Item(id);
+                RefreshOrders();
+                RefreshOrderItems();
             }
 
-            
+
         }
         private void BtEmpClear_Click(object sender, EventArgs e)
         {
@@ -962,7 +806,7 @@ namespace ERP
 
         private void BtEmpEdit_Click(object sender, EventArgs e)
         {
-            
+
             int id = Convert.ToInt32(dataEmployee.Rows[dataEmployee.CurrentCell.RowIndex].Cells["empID"].Value);
             Employee emp = SqliteDataAccess.LoadEmployee(id)[0];
             tbEmpID.Text = emp.Employee_Id.ToString();
