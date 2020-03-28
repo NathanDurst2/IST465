@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Configuration;
 using System.Windows.Forms;
+
 namespace ERP
 {
     public partial class Main : Form
     {
+        User session = new User();
         public Main()
         {
             InitializeComponent();
@@ -14,8 +16,11 @@ namespace ERP
             RefreshVendors();
             RefreshEmployeee();
             RefreshOrders();
+            lbCompany.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
         }
         List<SelectedItems> selectedItems = new List<SelectedItems>();
+        double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
+        
         private void tabControl_Selected(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab.Text == "Order")
@@ -33,6 +38,19 @@ namespace ERP
             {
                 dataCustomer.ClearSelection();
                 dataCustOrders.ClearSelection();
+            }
+            if (tabControl.SelectedTab.Text == "Settings")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["Custom"].ConnectionString;
+                if (connectionString != "")
+                {
+                    tbDatabaseLoc.Text = connectionString.Replace("Data Source=", "").Replace("; Version=3;", "");
+                }
+                var settings = (AppSettingsSection)ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSection("appSettings");
+                tbSettingCompanyName.Text = settings.Settings["companyName"].Value;
+                tbSettingDefaultTaxRate.Text = settings.Settings["taxRate"].Value;
+                RefreshUsers();
+
             }
         }
 
@@ -82,6 +100,31 @@ namespace ERP
                 dataItem.Rows[i].Cells["itemPurchasePrice"].Value = c[i].Item_PurchasePrice;
                 dataItem.Rows[i].Cells["itemSellPrice"].Value = c[i].Item_SellPrice;
                 dataItem.Rows[i].Cells["itemUPC"].Value = c[i].Item_UPC;
+            }
+        }
+        private void RefreshUsers()
+        {
+            dataUsers.Rows.Clear();
+            dataUsers.DataSource = null;
+            List<User> c = new List<User>();
+            c = SqliteDataAccess.LoadAllUsers();
+
+            for (int i = 0; i < c.Count; i++)
+            {
+                if (dataUsers.Rows.Count == i)
+                {
+                    dataUsers.Rows.Add();
+                }
+                dataUsers.Rows[i].Cells["usersUsername"].Value = c[i].Username;
+                dataUsers.Rows[i].Cells["usersLastLogin"].Value = c[i].LastLogon;
+                if (c[i].isAdmin == "1")
+                {
+                    dataUsers.Rows[i].Cells["usersIsAdmin"].Value = true;
+                }
+
+
+
+
             }
         }
         private void RefreshVendors()
@@ -529,7 +572,7 @@ namespace ERP
                 subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
 
             est.Order_Subtotal = subTotal;
-            est.Order_Tax = (subTotal * 0.07);
+            est.Order_Tax = (subTotal * taxRate);
             est.Order_Total = (est.Order_Subtotal + est.Order_Tax);
             est.Order_BillStreet = tbOrderBillingStreet.Text;
             est.Order_BillCity = tbOrderBillingCity.Text;
@@ -583,7 +626,7 @@ namespace ERP
                     subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
 
                 es.Order_Subtotal = subTotal;
-                es.Order_Tax = subTotal * 0.07;
+                es.Order_Tax = subTotal * taxRate;
                 es.Order_Total = es.Order_Subtotal + es.Order_Tax;
                 cbOrderType.SelectedIndex = -1;
                 checkShippingBilling.Checked = false;
@@ -944,6 +987,117 @@ namespace ERP
                 SqliteDataAccess.DeleteVendor(id);
                 RefreshVendors();
             }
+        }
+
+        private void BtSettingBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                tbDatabaseLoc.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void BtSettingsSave_Click(object sender, EventArgs e)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            var appSetting = (AppSettingsSection)config.GetSection("appSettings");
+            if (appSetting != null && tbSettingCompanyName.Text != "")
+            {
+                appSetting.Settings["companyName"].Value = tbSettingCompanyName.Text;
+                ConfigurationManager.RefreshSection("appSettings");
+                config.Save();
+            }
+            if (connectionStringsSection != null && tbDatabaseLoc.Text != "")
+            {
+                connectionStringsSection.ConnectionStrings["Custom"].ConnectionString = String.Format("Data Source=" + tbDatabaseLoc.Text + "; Version=3;");
+                config.Save();
+                ConfigurationManager.RefreshSection("connectionStrings");
+            }
+            else
+            {
+                connectionStringsSection.ConnectionStrings["Custom"].ConnectionString = "";
+                config.Save();
+                ConfigurationManager.RefreshSection("connectionStrings");
+            }
+            MessageBox.Show("A restart will be required for these changes to take affect.");
+        }
+
+        private void BtLogin_Click(object sender, EventArgs e)
+        {
+            if (tbLoginUser.Text != "" && tbLoginPass.Text != "")
+            {
+                User user = SqliteDataAccess.VerifyPassword(tbLoginUser.Text)[0];
+                if (user != null)
+                {
+                    if (SecurePasswordHasher.Verify(tbLoginPass.Text, user.Password))
+                    {
+                        if (user.LastLogon == null)
+                        {
+                            PasswordReset reset = new PasswordReset(user);
+                            reset.ShowDialog();
+                            SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
+                        }
+                        tabControl.Visible = true;
+                        btLogin.Visible = false;
+                        tbLoginPass.Visible = false;
+                        tbLoginUser.Visible = false;
+                        lbLogin1.Visible = false;
+                        lbLogin2.Visible = false;
+                        this.BackgroundImage = null;
+                        lbCompany.Visible = false;
+                        session = user;
+                        lbSessionUsername.Parent = this;
+                        lbSessionUsername.BringToFront();
+                        lbSessionUsername.Text = String.Format(session.Username + " - " + DateTime.Now.ToString());
+                        SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
+                        if (user.isAdmin == "0")
+                        {
+                            this.tabSettings.Parent = null;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect username and/or password. Contact your Administrator if this error persists.");
+                    }
+                }
+            }
+        }
+
+        private void BtSettingsUserAdd_Click(object sender, EventArgs e)
+        {
+            if (tbSettingsUsername.Text != "")
+            {
+                User user = new User();
+                user.Username = tbSettingsUsername.Text;
+                user.Password = SecurePasswordHasher.Hash("password");
+                if (settingsIsAdmin.Checked)
+                {
+                    user.isAdmin = "1";
+                }
+                else
+                {
+                    user.isAdmin = "0";
+                }
+                SqliteDataAccess.AddUser(user);
+                tbSettingsUsername.Clear();
+                settingsIsAdmin.Checked = false;
+                RefreshUsers();
+            }
+        }
+
+        private void BtSettingsUserRemove_Click(object sender, EventArgs e)
+        {
+            string username = (string)dataUsers.Rows[dataUsers.CurrentCell.RowIndex].Cells["usersUsername"].Value;
+
+            DialogResult result = MessageBox.Show("Are you sure you wish to delete this user?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                SqliteDataAccess.DeleteUser(username);
+                RefreshUsers();
+            }
+
         }
     }
 

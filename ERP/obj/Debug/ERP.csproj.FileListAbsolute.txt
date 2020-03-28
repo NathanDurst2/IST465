@@ -64,3 +64,4 @@ C:\Users\sbruc\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.pdb
 C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\erp.db
 C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.ManageItems.resources
 C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.Main.resources
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.PasswordReset.resources

@@ -131,9 +131,16 @@ namespace ERP
                 cnn.Execute(String.Format("DELETE FROM [Order] WHERE Order_ID = {0}", Order_ID));
             }
         }
-        public  static string LoadConnectionString(string id = "Default")
+        public static string LoadConnectionString(string id = "Default")
         {
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+            if(ConfigurationManager.ConnectionStrings["Custom"].ConnectionString == "")
+            {
+                return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+            }
+            else
+            {
+                return ConfigurationManager.ConnectionStrings["Custom"].ConnectionString;
+            }
         }
 
         public static List<Employee> LoadAllEmployee()
@@ -220,6 +227,52 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into Order_Item (Order_ID, Item_Number, Order_Item_Quantity) values (@Order_ID, @Item_Number, @Order_Item_Quantity)", c);
+            }
+        }
+        public static void AddUser(User c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Users (Username, Password, isAdmin, LastLogon) values (@Username, @Password, @isAdmin, @LastLogon)", c);
+            }
+        }
+        public static void DeleteUser(string username)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Users WHERE Username = '{0}'", username));
+            }
+        }
+        public static void SetUserLastLogon(string lastLogon, string username)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("UPDATE Users set LastLogon = '{0}' WHERE Username = '{1}'", lastLogon, username));
+            }
+        }
+        public static void SetUserPassword(string password, string username)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("UPDATE Users set password = '{0}' WHERE Username = '{1}'", password, username));
+            }
+        }
+        public static List<User> VerifyPassword(string username)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<User> c = cnn.Query<User>(String.Format("select * from [Users] where Username = '{0}'", username )).ToList();
+                return c;
+            }
+        }
+        public static List<User> LoadAllUsers()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<User> c = cnn.Query<User>("select * from [Users]").ToList();
+                return c;
             }
         }
     }
