@@ -1,9 +1,5 @@
 ﻿Settings Tab
-	User logon
-	User management
-	Tax rate
 	Upload Logo (auto size)
-	Write to settings file
 Item
 	All features
 	Purchase orders from this screen? (Maybe add purchase order tab for invoices and purchase orders?)

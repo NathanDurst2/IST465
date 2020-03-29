@@ -1050,6 +1050,7 @@ namespace ERP
                         session = user;
                         lbSessionUsername.Parent = this;
                         lbSessionUsername.BringToFront();
+                        linkChangePassword.Visible = true;
                         lbSessionUsername.Text = String.Format(session.Username + " - " + DateTime.Now.ToString());
                         SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
                         if (user.isAdmin == "0")
@@ -1098,6 +1099,12 @@ namespace ERP
                 RefreshUsers();
             }
 
+        }
+
+        private void LinkChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            PasswordReset reset = new PasswordReset(session);
+            reset.ShowDialog();
         }
     }
 
