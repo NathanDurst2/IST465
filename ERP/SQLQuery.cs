@@ -61,6 +61,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<Item> LoadVendorItem(string id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<Item> c = cnn.Query<Item>(String.Format("select * from Item where Vendor_ID = \"{0}\"", id)).ToList();
+                return c;
+            }
+        }
         public static void SaveCustomer(Customer c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -208,6 +216,15 @@ namespace ERP
                 return e.seq.ToString();
             }
         }
+        public static string AddPurchaseOrder(PurchaseOrder c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into [PurchaseOrder] (Vendor_ID, PO_Date, PO_ShipDate, PO_Subtotal, PO_Tax, PO_Total, PO_ShipStreet, PO_ShipCity, PO_ShipState, PO_ShipZip) values (@Vendor_ID, @PO_Date, @PO_ShipDate, @PO_Subtotal, @PO_Tax, @PO_Total, @PO_ShipStreet, @PO_ShipCity, @PO_ShipState, @PO_ShipZip)", c);
+                dynamic e = cnn.QueryFirst("SELECT seq FROM sqlite_sequence where name=\"PurchaseOrder\"");
+                return e.seq.ToString();
+            }
+        }
         public static void AddEmployee(Employee c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -227,6 +244,13 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into Order_Item (Order_ID, Item_Number, Order_Item_Quantity) values (@Order_ID, @Item_Number, @Order_Item_Quantity)", c);
+            }
+        }
+        public static void AddPurchaseOrder_Item(PurchaseOrder_Item c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into PurchaseOrder_Item (PO_ID, Item_Number, Item_Quantity, Item_Cost) values (@PO_ID, @Item_Number, @Item_Quantity, @Item_Cost)", c);
             }
         }
         public static void AddUser(User c)

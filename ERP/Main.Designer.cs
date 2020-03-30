@@ -32,9 +32,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.Customers = new System.Windows.Forms.TabPage();
+            this.tabCustomers = new System.Windows.Forms.TabPage();
             this.label55 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -81,7 +89,8 @@
             this.tbPhone = new System.Windows.Forms.TextBox();
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
-            this.Employee = new System.Windows.Forms.TabPage();
+            this.tabEmployee = new System.Windows.Forms.TabPage();
+            this.label63 = new System.Windows.Forms.Label();
             this.btEmpSave = new System.Windows.Forms.Button();
             this.btEmpEdit = new System.Windows.Forms.Button();
             this.btEmpRemove = new System.Windows.Forms.Button();
@@ -119,7 +128,12 @@
             this.tbEmpPhone = new System.Windows.Forms.TextBox();
             this.tbEmpLastName = new System.Windows.Forms.TextBox();
             this.tbEmpFirstName = new System.Windows.Forms.TextBox();
-            this.Vendor = new System.Windows.Forms.TabPage();
+            this.tabVendor = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btAddPOs = new System.Windows.Forms.Button();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.dataPurchaseOrders = new System.Windows.Forms.DataGridView();
             this.btVendorAdd = new System.Windows.Forms.Button();
             this.cbVendorTerms = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
@@ -157,7 +171,7 @@
             this.tbVendorEmail = new System.Windows.Forms.TextBox();
             this.tbVendorPhone = new System.Windows.Forms.TextBox();
             this.tbVendorName = new System.Windows.Forms.TextBox();
-            this.Items = new System.Windows.Forms.TabPage();
+            this.tabItems = new System.Windows.Forms.TabPage();
             this.btItemAdd = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.dataItem = new System.Windows.Forms.DataGridView();
@@ -183,7 +197,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.tbItemDesc = new System.Windows.Forms.TextBox();
-            this.Order = new System.Windows.Forms.TabPage();
+            this.tabOrder = new System.Windows.Forms.TabPage();
             this.orderDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelOrderStatus = new System.Windows.Forms.Label();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
@@ -275,26 +289,24 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
-            this.dataPurchaseOrders = new System.Windows.Forms.DataGridView();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btManagePOs = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
-            this.Customers.SuspendLayout();
+            this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustOrders)).BeginInit();
-            this.Employee.SuspendLayout();
+            this.tabEmployee.SuspendLayout();
             this.groupEmpAddress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmployee)).BeginInit();
-            this.Vendor.SuspendLayout();
+            this.tabVendor.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPurchaseOrders)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataVendor)).BeginInit();
-            this.Items.SuspendLayout();
+            this.tabItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataItem)).BeginInit();
-            this.Order.SuspendLayout();
+            this.tabOrder.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -302,17 +314,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataOrderItems)).BeginInit();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPurchaseOrders)).BeginInit();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.Customers);
-            this.tabControl.Controls.Add(this.Employee);
-            this.tabControl.Controls.Add(this.Vendor);
-            this.tabControl.Controls.Add(this.Items);
-            this.tabControl.Controls.Add(this.Order);
+            this.tabControl.Controls.Add(this.tabCustomers);
+            this.tabControl.Controls.Add(this.tabEmployee);
+            this.tabControl.Controls.Add(this.tabVendor);
+            this.tabControl.Controls.Add(this.tabItems);
+            this.tabControl.Controls.Add(this.tabOrder);
             this.tabControl.Controls.Add(this.tabSettings);
             this.tabControl.Location = new System.Drawing.Point(-1, -2);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
@@ -323,37 +333,37 @@
             this.tabControl.Visible = false;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_Selected);
             // 
-            // Customers
+            // tabCustomers
             // 
-            this.Customers.Controls.Add(this.label55);
-            this.Customers.Controls.Add(this.label54);
-            this.Customers.Controls.Add(this.groupBox5);
-            this.Customers.Controls.Add(this.cbCustSalesRep);
-            this.Customers.Controls.Add(this.btCustSave);
-            this.Customers.Controls.Add(this.btCustEdit);
-            this.Customers.Controls.Add(this.btCustRemove);
-            this.Customers.Controls.Add(this.dataCustomer);
-            this.Customers.Controls.Add(this.dataCustOrders);
-            this.Customers.Controls.Add(this.btCustClear);
-            this.Customers.Controls.Add(this.label13);
-            this.Customers.Controls.Add(this.tbCustID);
-            this.Customers.Controls.Add(this.btCustAdd);
-            this.Customers.Controls.Add(this.label6);
-            this.Customers.Controls.Add(this.label5);
-            this.Customers.Controls.Add(this.label4);
-            this.Customers.Controls.Add(this.label2);
-            this.Customers.Controls.Add(this.label1);
-            this.Customers.Controls.Add(this.tbEmail);
-            this.Customers.Controls.Add(this.tbPhone);
-            this.Customers.Controls.Add(this.tbLastName);
-            this.Customers.Controls.Add(this.tbFirstName);
-            this.Customers.Location = new System.Drawing.Point(4, 22);
-            this.Customers.Name = "Customers";
-            this.Customers.Padding = new System.Windows.Forms.Padding(3);
-            this.Customers.Size = new System.Drawing.Size(1065, 615);
-            this.Customers.TabIndex = 0;
-            this.Customers.Text = "Customers";
-            this.Customers.UseVisualStyleBackColor = true;
+            this.tabCustomers.Controls.Add(this.label55);
+            this.tabCustomers.Controls.Add(this.label54);
+            this.tabCustomers.Controls.Add(this.groupBox5);
+            this.tabCustomers.Controls.Add(this.cbCustSalesRep);
+            this.tabCustomers.Controls.Add(this.btCustSave);
+            this.tabCustomers.Controls.Add(this.btCustEdit);
+            this.tabCustomers.Controls.Add(this.btCustRemove);
+            this.tabCustomers.Controls.Add(this.dataCustomer);
+            this.tabCustomers.Controls.Add(this.dataCustOrders);
+            this.tabCustomers.Controls.Add(this.btCustClear);
+            this.tabCustomers.Controls.Add(this.label13);
+            this.tabCustomers.Controls.Add(this.tbCustID);
+            this.tabCustomers.Controls.Add(this.btCustAdd);
+            this.tabCustomers.Controls.Add(this.label6);
+            this.tabCustomers.Controls.Add(this.label5);
+            this.tabCustomers.Controls.Add(this.label4);
+            this.tabCustomers.Controls.Add(this.label2);
+            this.tabCustomers.Controls.Add(this.label1);
+            this.tabCustomers.Controls.Add(this.tbEmail);
+            this.tabCustomers.Controls.Add(this.tbPhone);
+            this.tabCustomers.Controls.Add(this.tbLastName);
+            this.tabCustomers.Controls.Add(this.tbFirstName);
+            this.tabCustomers.Location = new System.Drawing.Point(4, 22);
+            this.tabCustomers.Name = "tabCustomers";
+            this.tabCustomers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCustomers.Size = new System.Drawing.Size(1065, 615);
+            this.tabCustomers.TabIndex = 0;
+            this.tabCustomers.Text = "Customers";
+            this.tabCustomers.UseVisualStyleBackColor = true;
             // 
             // label55
             // 
@@ -508,6 +518,8 @@
             this.dataCustomer.AllowUserToAddRows = false;
             this.dataCustomer.AllowUserToDeleteRows = false;
             this.dataCustomer.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataCustomer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cust_ID,
@@ -603,6 +615,8 @@
             // 
             this.dataCustOrders.AllowUserToAddRows = false;
             this.dataCustOrders.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataCustOrders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataCustOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataCustOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.custOrdersID,
@@ -635,15 +649,15 @@
             // 
             // custOrdersDate
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.custOrdersDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.custOrdersDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.custOrdersDate.HeaderText = "Date";
             this.custOrdersDate.Name = "custOrdersDate";
             // 
             // custOrdersShipDate
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.custOrdersShipDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.custOrdersShipDate.DefaultCellStyle = dataGridViewCellStyle4;
             this.custOrdersShipDate.HeaderText = "Ship Date";
             this.custOrdersShipDate.Name = "custOrdersShipDate";
             // 
@@ -764,35 +778,44 @@
             this.tbFirstName.Size = new System.Drawing.Size(100, 20);
             this.tbFirstName.TabIndex = 11;
             // 
-            // Employee
+            // tabEmployee
             // 
-            this.Employee.Controls.Add(this.label63);
-            this.Employee.Controls.Add(this.btEmpSave);
-            this.Employee.Controls.Add(this.btEmpEdit);
-            this.Employee.Controls.Add(this.btEmpRemove);
-            this.Employee.Controls.Add(this.cbEmpSupervisor);
-            this.Employee.Controls.Add(this.groupEmpAddress);
-            this.Employee.Controls.Add(this.dataEmployee);
-            this.Employee.Controls.Add(this.btEmpClear);
-            this.Employee.Controls.Add(this.btEmpAdd);
-            this.Employee.Controls.Add(this.label14);
-            this.Employee.Controls.Add(this.tbEmpID);
-            this.Employee.Controls.Add(this.label7);
-            this.Employee.Controls.Add(this.label8);
-            this.Employee.Controls.Add(this.label9);
-            this.Employee.Controls.Add(this.label11);
-            this.Employee.Controls.Add(this.label12);
-            this.Employee.Controls.Add(this.tbEmpEmail);
-            this.Employee.Controls.Add(this.tbEmpPhone);
-            this.Employee.Controls.Add(this.tbEmpLastName);
-            this.Employee.Controls.Add(this.tbEmpFirstName);
-            this.Employee.Location = new System.Drawing.Point(4, 22);
-            this.Employee.Name = "Employee";
-            this.Employee.Padding = new System.Windows.Forms.Padding(3);
-            this.Employee.Size = new System.Drawing.Size(1065, 615);
-            this.Employee.TabIndex = 1;
-            this.Employee.Text = "Employee";
-            this.Employee.UseVisualStyleBackColor = true;
+            this.tabEmployee.Controls.Add(this.label63);
+            this.tabEmployee.Controls.Add(this.btEmpSave);
+            this.tabEmployee.Controls.Add(this.btEmpEdit);
+            this.tabEmployee.Controls.Add(this.btEmpRemove);
+            this.tabEmployee.Controls.Add(this.cbEmpSupervisor);
+            this.tabEmployee.Controls.Add(this.groupEmpAddress);
+            this.tabEmployee.Controls.Add(this.dataEmployee);
+            this.tabEmployee.Controls.Add(this.btEmpClear);
+            this.tabEmployee.Controls.Add(this.btEmpAdd);
+            this.tabEmployee.Controls.Add(this.label14);
+            this.tabEmployee.Controls.Add(this.tbEmpID);
+            this.tabEmployee.Controls.Add(this.label7);
+            this.tabEmployee.Controls.Add(this.label8);
+            this.tabEmployee.Controls.Add(this.label9);
+            this.tabEmployee.Controls.Add(this.label11);
+            this.tabEmployee.Controls.Add(this.label12);
+            this.tabEmployee.Controls.Add(this.tbEmpEmail);
+            this.tabEmployee.Controls.Add(this.tbEmpPhone);
+            this.tabEmployee.Controls.Add(this.tbEmpLastName);
+            this.tabEmployee.Controls.Add(this.tbEmpFirstName);
+            this.tabEmployee.Location = new System.Drawing.Point(4, 22);
+            this.tabEmployee.Name = "tabEmployee";
+            this.tabEmployee.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEmployee.Size = new System.Drawing.Size(1065, 615);
+            this.tabEmployee.TabIndex = 1;
+            this.tabEmployee.Text = "Employee";
+            this.tabEmployee.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(16, 250);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(41, 13);
+            this.label63.TabIndex = 138;
+            this.label63.Text = "Vendor";
             // 
             // btEmpSave
             // 
@@ -923,6 +946,8 @@
             this.dataEmployee.AllowUserToAddRows = false;
             this.dataEmployee.AllowUserToDeleteRows = false;
             this.dataEmployee.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataEmployee.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataEmployee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.empID,
@@ -1102,38 +1127,99 @@
             this.tbEmpFirstName.Size = new System.Drawing.Size(100, 20);
             this.tbEmpFirstName.TabIndex = 32;
             // 
-            // Vendor
+            // tabVendor
             // 
-            this.Vendor.Controls.Add(this.groupBox6);
-            this.Vendor.Controls.Add(this.label62);
-            this.Vendor.Controls.Add(this.label61);
-            this.Vendor.Controls.Add(this.dataPurchaseOrders);
-            this.Vendor.Controls.Add(this.btVendorAdd);
-            this.Vendor.Controls.Add(this.cbVendorTerms);
-            this.Vendor.Controls.Add(this.label42);
-            this.Vendor.Controls.Add(this.label46);
-            this.Vendor.Controls.Add(this.tbVendorCreditLimit);
-            this.Vendor.Controls.Add(this.groupBox4);
-            this.Vendor.Controls.Add(this.btVendorSave);
-            this.Vendor.Controls.Add(this.btVendorEdit);
-            this.Vendor.Controls.Add(this.btVendorRemove);
-            this.Vendor.Controls.Add(this.dataVendor);
-            this.Vendor.Controls.Add(this.btVendorClear);
-            this.Vendor.Controls.Add(this.label41);
-            this.Vendor.Controls.Add(this.tbVendorID);
-            this.Vendor.Controls.Add(this.label43);
-            this.Vendor.Controls.Add(this.label44);
-            this.Vendor.Controls.Add(this.label47);
-            this.Vendor.Controls.Add(this.tbVendorEmail);
-            this.Vendor.Controls.Add(this.tbVendorPhone);
-            this.Vendor.Controls.Add(this.tbVendorName);
-            this.Vendor.Location = new System.Drawing.Point(4, 22);
-            this.Vendor.Name = "Vendor";
-            this.Vendor.Padding = new System.Windows.Forms.Padding(3);
-            this.Vendor.Size = new System.Drawing.Size(1065, 615);
-            this.Vendor.TabIndex = 5;
-            this.Vendor.Text = "Vendor";
-            this.Vendor.UseVisualStyleBackColor = true;
+            this.tabVendor.Controls.Add(this.groupBox6);
+            this.tabVendor.Controls.Add(this.label62);
+            this.tabVendor.Controls.Add(this.label61);
+            this.tabVendor.Controls.Add(this.dataPurchaseOrders);
+            this.tabVendor.Controls.Add(this.btVendorAdd);
+            this.tabVendor.Controls.Add(this.cbVendorTerms);
+            this.tabVendor.Controls.Add(this.label42);
+            this.tabVendor.Controls.Add(this.label46);
+            this.tabVendor.Controls.Add(this.tbVendorCreditLimit);
+            this.tabVendor.Controls.Add(this.groupBox4);
+            this.tabVendor.Controls.Add(this.btVendorSave);
+            this.tabVendor.Controls.Add(this.btVendorEdit);
+            this.tabVendor.Controls.Add(this.btVendorRemove);
+            this.tabVendor.Controls.Add(this.dataVendor);
+            this.tabVendor.Controls.Add(this.btVendorClear);
+            this.tabVendor.Controls.Add(this.label41);
+            this.tabVendor.Controls.Add(this.tbVendorID);
+            this.tabVendor.Controls.Add(this.label43);
+            this.tabVendor.Controls.Add(this.label44);
+            this.tabVendor.Controls.Add(this.label47);
+            this.tabVendor.Controls.Add(this.tbVendorEmail);
+            this.tabVendor.Controls.Add(this.tbVendorPhone);
+            this.tabVendor.Controls.Add(this.tbVendorName);
+            this.tabVendor.Location = new System.Drawing.Point(4, 22);
+            this.tabVendor.Name = "tabVendor";
+            this.tabVendor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVendor.Size = new System.Drawing.Size(1065, 615);
+            this.tabVendor.TabIndex = 5;
+            this.tabVendor.Text = "Vendor";
+            this.tabVendor.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.button1);
+            this.groupBox6.Controls.Add(this.btAddPOs);
+            this.groupBox6.Location = new System.Drawing.Point(435, 54);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(88, 132);
+            this.groupBox6.TabIndex = 141;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "POs";
+            // 
+            // btAddPOs
+            // 
+            this.btAddPOs.Location = new System.Drawing.Point(6, 19);
+            this.btAddPOs.Name = "btAddPOs";
+            this.btAddPOs.Size = new System.Drawing.Size(75, 23);
+            this.btAddPOs.TabIndex = 0;
+            this.btAddPOs.Text = "Add";
+            this.btAddPOs.UseVisualStyleBackColor = true;
+            this.btAddPOs.Click += new System.EventHandler(this.BtManagePOs_Click);
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(532, 5);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.TabIndex = 138;
+            this.label62.Text = "Purchase Orders";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(17, 245);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(41, 13);
+            this.label61.TabIndex = 137;
+            this.label61.Text = "Vendor";
+            // 
+            // dataPurchaseOrders
+            // 
+            this.dataPurchaseOrders.AllowUserToAddRows = false;
+            this.dataPurchaseOrders.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataPurchaseOrders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataPurchaseOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataPurchaseOrders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.dataPurchaseOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPurchaseOrders.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataPurchaseOrders.Location = new System.Drawing.Point(535, 21);
+            this.dataPurchaseOrders.Name = "dataPurchaseOrders";
+            this.dataPurchaseOrders.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataPurchaseOrders.ShowCellErrors = false;
+            this.dataPurchaseOrders.ShowCellToolTips = false;
+            this.dataPurchaseOrders.ShowEditingIcon = false;
+            this.dataPurchaseOrders.ShowRowErrors = false;
+            this.dataPurchaseOrders.Size = new System.Drawing.Size(510, 215);
+            this.dataPurchaseOrders.TabIndex = 136;
+            this.dataPurchaseOrders.TabStop = false;
             // 
             // btVendorAdd
             // 
@@ -1307,6 +1393,8 @@
             this.dataVendor.AllowUserToAddRows = false;
             this.dataVendor.AllowUserToDeleteRows = false;
             this.dataVendor.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataVendor.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataVendor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataVendor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.vendorID,
@@ -1453,33 +1541,33 @@
             this.tbVendorName.Size = new System.Drawing.Size(100, 20);
             this.tbVendorName.TabIndex = 104;
             // 
-            // Items
+            // tabItems
             // 
-            this.Items.Controls.Add(this.btItemAdd);
-            this.Items.Controls.Add(this.label36);
-            this.Items.Controls.Add(this.dataItem);
-            this.Items.Controls.Add(this.cbItemVendor);
-            this.Items.Controls.Add(this.btItemSave);
-            this.Items.Controls.Add(this.btItemEdit);
-            this.Items.Controls.Add(this.btItemRemove);
-            this.Items.Controls.Add(this.label18);
-            this.Items.Controls.Add(this.tbItemUPC);
-            this.Items.Controls.Add(this.label24);
-            this.Items.Controls.Add(this.tbItemSell);
-            this.Items.Controls.Add(this.label25);
-            this.Items.Controls.Add(this.tbItemPurchase);
-            this.Items.Controls.Add(this.btItemClear);
-            this.Items.Controls.Add(this.label34);
-            this.Items.Controls.Add(this.label35);
-            this.Items.Controls.Add(this.label39);
-            this.Items.Controls.Add(this.tbItemNumber);
-            this.Items.Controls.Add(this.tbItemDesc);
-            this.Items.Location = new System.Drawing.Point(4, 22);
-            this.Items.Name = "Items";
-            this.Items.Size = new System.Drawing.Size(1065, 615);
-            this.Items.TabIndex = 2;
-            this.Items.Text = "Items";
-            this.Items.UseVisualStyleBackColor = true;
+            this.tabItems.Controls.Add(this.btItemAdd);
+            this.tabItems.Controls.Add(this.label36);
+            this.tabItems.Controls.Add(this.dataItem);
+            this.tabItems.Controls.Add(this.cbItemVendor);
+            this.tabItems.Controls.Add(this.btItemSave);
+            this.tabItems.Controls.Add(this.btItemEdit);
+            this.tabItems.Controls.Add(this.btItemRemove);
+            this.tabItems.Controls.Add(this.label18);
+            this.tabItems.Controls.Add(this.tbItemUPC);
+            this.tabItems.Controls.Add(this.label24);
+            this.tabItems.Controls.Add(this.tbItemSell);
+            this.tabItems.Controls.Add(this.label25);
+            this.tabItems.Controls.Add(this.tbItemPurchase);
+            this.tabItems.Controls.Add(this.btItemClear);
+            this.tabItems.Controls.Add(this.label34);
+            this.tabItems.Controls.Add(this.label35);
+            this.tabItems.Controls.Add(this.label39);
+            this.tabItems.Controls.Add(this.tbItemNumber);
+            this.tabItems.Controls.Add(this.tbItemDesc);
+            this.tabItems.Location = new System.Drawing.Point(4, 22);
+            this.tabItems.Name = "tabItems";
+            this.tabItems.Size = new System.Drawing.Size(1065, 615);
+            this.tabItems.TabIndex = 2;
+            this.tabItems.Text = "Items";
+            this.tabItems.UseVisualStyleBackColor = true;
             // 
             // btItemAdd
             // 
@@ -1505,6 +1593,8 @@
             this.dataItem.AllowUserToAddRows = false;
             this.dataItem.AllowUserToDeleteRows = false;
             this.dataItem.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataItem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.itemNumber,
@@ -1692,43 +1782,43 @@
             this.tbItemDesc.Size = new System.Drawing.Size(100, 20);
             this.tbItemDesc.TabIndex = 105;
             // 
-            // Order
+            // tabOrder
             // 
-            this.Order.Controls.Add(this.orderDatePicker);
-            this.Order.Controls.Add(this.labelOrderStatus);
-            this.Order.Controls.Add(this.cbOrderStatus);
-            this.Order.Controls.Add(this.btOrderNew);
-            this.Order.Controls.Add(this.label53);
-            this.Order.Controls.Add(this.label52);
-            this.Order.Controls.Add(this.tbOrderTotal);
-            this.Order.Controls.Add(this.tbOrderSubTotal);
-            this.Order.Controls.Add(this.label10);
-            this.Order.Controls.Add(this.cbOrderSalesRep);
-            this.Order.Controls.Add(this.groupBox3);
-            this.Order.Controls.Add(this.cbOrderType);
-            this.Order.Controls.Add(this.label23);
-            this.Order.Controls.Add(this.label20);
-            this.Order.Controls.Add(this.label19);
-            this.Order.Controls.Add(this.groupBox2);
-            this.Order.Controls.Add(this.groupBox1);
-            this.Order.Controls.Add(this.cbOrderCustomer);
-            this.Order.Controls.Add(this.btOrderSave);
-            this.Order.Controls.Add(this.btOrderEdit);
-            this.Order.Controls.Add(this.btOrderRemove);
-            this.Order.Controls.Add(this.dataOrder);
-            this.Order.Controls.Add(this.dataOrderItems);
-            this.Order.Controls.Add(this.btOrderClear);
-            this.Order.Controls.Add(this.label21);
-            this.Order.Controls.Add(this.tbOrderID);
-            this.Order.Controls.Add(this.label22);
-            this.Order.Controls.Add(this.btOrderAdd);
-            this.Order.Controls.Add(this.labelOrderShipDate);
-            this.Order.Location = new System.Drawing.Point(4, 22);
-            this.Order.Name = "Order";
-            this.Order.Size = new System.Drawing.Size(1065, 615);
-            this.Order.TabIndex = 3;
-            this.Order.Text = "Order";
-            this.Order.UseVisualStyleBackColor = true;
+            this.tabOrder.Controls.Add(this.orderDatePicker);
+            this.tabOrder.Controls.Add(this.labelOrderStatus);
+            this.tabOrder.Controls.Add(this.cbOrderStatus);
+            this.tabOrder.Controls.Add(this.btOrderNew);
+            this.tabOrder.Controls.Add(this.label53);
+            this.tabOrder.Controls.Add(this.label52);
+            this.tabOrder.Controls.Add(this.tbOrderTotal);
+            this.tabOrder.Controls.Add(this.tbOrderSubTotal);
+            this.tabOrder.Controls.Add(this.label10);
+            this.tabOrder.Controls.Add(this.cbOrderSalesRep);
+            this.tabOrder.Controls.Add(this.groupBox3);
+            this.tabOrder.Controls.Add(this.cbOrderType);
+            this.tabOrder.Controls.Add(this.label23);
+            this.tabOrder.Controls.Add(this.label20);
+            this.tabOrder.Controls.Add(this.label19);
+            this.tabOrder.Controls.Add(this.groupBox2);
+            this.tabOrder.Controls.Add(this.groupBox1);
+            this.tabOrder.Controls.Add(this.cbOrderCustomer);
+            this.tabOrder.Controls.Add(this.btOrderSave);
+            this.tabOrder.Controls.Add(this.btOrderEdit);
+            this.tabOrder.Controls.Add(this.btOrderRemove);
+            this.tabOrder.Controls.Add(this.dataOrder);
+            this.tabOrder.Controls.Add(this.dataOrderItems);
+            this.tabOrder.Controls.Add(this.btOrderClear);
+            this.tabOrder.Controls.Add(this.label21);
+            this.tabOrder.Controls.Add(this.tbOrderID);
+            this.tabOrder.Controls.Add(this.label22);
+            this.tabOrder.Controls.Add(this.btOrderAdd);
+            this.tabOrder.Controls.Add(this.labelOrderShipDate);
+            this.tabOrder.Location = new System.Drawing.Point(4, 22);
+            this.tabOrder.Name = "tabOrder";
+            this.tabOrder.Size = new System.Drawing.Size(1065, 615);
+            this.tabOrder.TabIndex = 3;
+            this.tabOrder.Text = "Order";
+            this.tabOrder.UseVisualStyleBackColor = true;
             // 
             // orderDatePicker
             // 
@@ -2124,6 +2214,8 @@
             this.dataOrder.AllowUserToAddRows = false;
             this.dataOrder.AllowUserToDeleteRows = false;
             this.dataOrder.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataOrder.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -2170,15 +2262,15 @@
             // 
             // orderDate
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.orderDate.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.orderDate.DefaultCellStyle = dataGridViewCellStyle10;
             this.orderDate.HeaderText = "Date";
             this.orderDate.Name = "orderDate";
             // 
             // orderShipDate
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.orderShipDate.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.orderShipDate.DefaultCellStyle = dataGridViewCellStyle11;
             this.orderShipDate.HeaderText = "Ship Date";
             this.orderShipDate.Name = "orderShipDate";
             // 
@@ -2219,6 +2311,8 @@
             // 
             this.dataOrderItems.AllowUserToAddRows = false;
             this.dataOrderItems.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataOrderItems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataOrderItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataOrderItems.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dataOrderItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -2590,71 +2684,25 @@
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
             // 
-            // dataPurchaseOrders
+            // button1
             // 
-            this.dataPurchaseOrders.AllowUserToAddRows = false;
-            this.dataPurchaseOrders.AllowUserToDeleteRows = false;
-            this.dataPurchaseOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataPurchaseOrders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
-            this.dataPurchaseOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPurchaseOrders.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataPurchaseOrders.Location = new System.Drawing.Point(535, 21);
-            this.dataPurchaseOrders.Name = "dataPurchaseOrders";
-            this.dataPurchaseOrders.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataPurchaseOrders.ShowCellErrors = false;
-            this.dataPurchaseOrders.ShowCellToolTips = false;
-            this.dataPurchaseOrders.ShowEditingIcon = false;
-            this.dataPurchaseOrders.ShowRowErrors = false;
-            this.dataPurchaseOrders.Size = new System.Drawing.Size(510, 215);
-            this.dataPurchaseOrders.TabIndex = 136;
-            this.dataPurchaseOrders.TabStop = false;
+            this.button1.Location = new System.Drawing.Point(6, 60);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 128;
+            this.button1.TabStop = false;
+            this.button1.Text = "Edit";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // label61
+            // button2
             // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(17, 245);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(41, 13);
-            this.label61.TabIndex = 137;
-            this.label61.Text = "Vendor";
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(532, 5);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
-            this.label62.TabIndex = 138;
-            this.label62.Text = "Purchase Orders";
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(16, 250);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(41, 13);
-            this.label63.TabIndex = 138;
-            this.label63.Text = "Vendor";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.btManagePOs);
-            this.groupBox6.Location = new System.Drawing.Point(422, 86);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(88, 120);
-            this.groupBox6.TabIndex = 141;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "POs";
-            // 
-            // btManagePOs
-            // 
-            this.btManagePOs.Enabled = false;
-            this.btManagePOs.Location = new System.Drawing.Point(6, 35);
-            this.btManagePOs.Name = "btManagePOs";
-            this.btManagePOs.Size = new System.Drawing.Size(75, 54);
-            this.btManagePOs.TabIndex = 0;
-            this.btManagePOs.Text = "Manage POs";
-            this.btManagePOs.UseVisualStyleBackColor = true;
+            this.button2.Location = new System.Drawing.Point(6, 101);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 129;
+            this.button2.TabStop = false;
+            this.button2.Text = "Remove";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -2677,27 +2725,29 @@
             this.Name = "Main";
             this.Text = "Simple ERP";
             this.tabControl.ResumeLayout(false);
-            this.Customers.ResumeLayout(false);
-            this.Customers.PerformLayout();
+            this.tabCustomers.ResumeLayout(false);
+            this.tabCustomers.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataCustOrders)).EndInit();
-            this.Employee.ResumeLayout(false);
-            this.Employee.PerformLayout();
+            this.tabEmployee.ResumeLayout(false);
+            this.tabEmployee.PerformLayout();
             this.groupEmpAddress.ResumeLayout(false);
             this.groupEmpAddress.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmployee)).EndInit();
-            this.Vendor.ResumeLayout(false);
-            this.Vendor.PerformLayout();
+            this.tabVendor.ResumeLayout(false);
+            this.tabVendor.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataPurchaseOrders)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataVendor)).EndInit();
-            this.Items.ResumeLayout(false);
-            this.Items.PerformLayout();
+            this.tabItems.ResumeLayout(false);
+            this.tabItems.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataItem)).EndInit();
-            this.Order.ResumeLayout(false);
-            this.Order.PerformLayout();
+            this.tabOrder.ResumeLayout(false);
+            this.tabOrder.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -2708,8 +2758,6 @@
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPurchaseOrders)).EndInit();
-            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2718,10 +2766,10 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage Customers;
-        private System.Windows.Forms.TabPage Employee;
-        private System.Windows.Forms.TabPage Items;
-        private System.Windows.Forms.TabPage Order;
+        private System.Windows.Forms.TabPage tabCustomers;
+        private System.Windows.Forms.TabPage tabEmployee;
+        private System.Windows.Forms.TabPage tabItems;
+        private System.Windows.Forms.TabPage tabOrder;
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.DataGridView dataCustomer;
         private System.Windows.Forms.DataGridView dataCustOrders;
@@ -2811,7 +2859,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn itemPurchasePrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemSellPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemUPC;
-        private System.Windows.Forms.TabPage Vendor;
+        private System.Windows.Forms.TabPage tabVendor;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox tbVendorZip;
@@ -2961,10 +3009,12 @@
         private System.Windows.Forms.LinkLabel linkChangePassword;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button btManagePOs;
+        private System.Windows.Forms.Button btAddPOs;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.DataGridView dataPurchaseOrders;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

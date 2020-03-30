@@ -62,7 +62,16 @@
     <Compile Include="PasswordReset.Designer.cs">
       <DependentUpon>PasswordReset.cs</DependentUpon>
     </Compile>
+    <Compile Include="_PurchaseOrder_Item.cs" />
+    <Compile Include="_PurchaseOrder.cs" />
+    <Compile Include="PurchaseOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrders.Designer.cs">
+      <DependentUpon>PurchaseOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="SecurePasswordHasher.cs" />
+    <Compile Include="_SelectedItemVendor.cs" />
     <Compile Include="_User.cs" />
     <Compile Include="_Order.cs" />
     <Compile Include="_SelectedItems.cs" />
@@ -104,6 +113,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PurchaseOrders.resx">
+      <DependentUpon>PurchaseOrders.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="erp.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

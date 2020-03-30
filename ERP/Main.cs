@@ -1028,40 +1028,48 @@ namespace ERP
         {
             if (tbLoginUser.Text != "" && tbLoginPass.Text != "")
             {
-                User user = SqliteDataAccess.VerifyPassword(tbLoginUser.Text)[0];
-                if (user != null)
+                try
                 {
-                    if (SecurePasswordHasher.Verify(tbLoginPass.Text, user.Password))
+
+                    User user = SqliteDataAccess.VerifyPassword(tbLoginUser.Text)[0];
+                    if (user != null)
                     {
-                        if (user.LastLogon == null)
+                        if (SecurePasswordHasher.Verify(tbLoginPass.Text, user.Password))
                         {
-                            PasswordReset reset = new PasswordReset(user);
-                            reset.ShowDialog();
+                            if (user.LastLogon == null)
+                            {
+                                PasswordReset reset = new PasswordReset(user);
+                                reset.ShowDialog();
+                                SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
+                            }
+                            tabControl.Visible = true;
+                            btLogin.Visible = false;
+                            tbLoginPass.Visible = false;
+                            tbLoginUser.Visible = false;
+                            lbLogin1.Visible = false;
+                            lbLogin2.Visible = false;
+                            this.BackgroundImage = null;
+                            lbCompany.Visible = false;
+                            session = user;
+                            lbSessionUsername.Parent = this;
+                            lbSessionUsername.BringToFront();
+                            linkChangePassword.Visible = true;
+                            lbSessionUsername.Text = String.Format(session.Username + " - " + DateTime.Now.ToString());
                             SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
+                            if (user.isAdmin == "0")
+                            {
+                                this.tabSettings.Parent = null;
+                            }
                         }
-                        tabControl.Visible = true;
-                        btLogin.Visible = false;
-                        tbLoginPass.Visible = false;
-                        tbLoginUser.Visible = false;
-                        lbLogin1.Visible = false;
-                        lbLogin2.Visible = false;
-                        this.BackgroundImage = null;
-                        lbCompany.Visible = false;
-                        session = user;
-                        lbSessionUsername.Parent = this;
-                        lbSessionUsername.BringToFront();
-                        linkChangePassword.Visible = true;
-                        lbSessionUsername.Text = String.Format(session.Username + " - " + DateTime.Now.ToString());
-                        SqliteDataAccess.SetUserLastLogon(DateTime.Now.ToString(), user.Username);
-                        if (user.isAdmin == "0")
+                        else
                         {
-                            this.tabSettings.Parent = null;
+                            MessageBox.Show("Incorrect username and/or password. Contact your Administrator if this error persists.");
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Incorrect username and/or password. Contact your Administrator if this error persists.");
-                    }
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show("Incorrect username and/or password. Contact your Administrator if this error persists.");
                 }
             }
         }
@@ -1105,6 +1113,12 @@ namespace ERP
         {
             PasswordReset reset = new PasswordReset(session);
             reset.ShowDialog();
+        }
+
+        private void BtManagePOs_Click(object sender, EventArgs e)
+        {
+            PurchaseOrders po = new PurchaseOrders();
+            po.ShowDialog();
         }
     }
 
