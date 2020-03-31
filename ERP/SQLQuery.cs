@@ -29,6 +29,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<PurchaseOrder> LoadPurchaseOrder(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<PurchaseOrder> c = cnn.Query<PurchaseOrder>(String.Format("select * from PurchaseOrder where PO_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
         public static List<Employee> LoadEmployee(int id)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -69,6 +77,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<PurchaseOrder> LoadVendorPOs(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<PurchaseOrder> c = cnn.Query<PurchaseOrder>(String.Format("select * from PurchaseOrder where Vendor_ID = \"{0}\"", id)).ToList();
+                return c;
+            }
+        }
         public static void SaveCustomer(Customer c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -104,11 +120,25 @@ namespace ERP
                 cnn.Execute("UPDATE Vendor SET Vendor_Name = @Vendor_Name, Vendor_Street = @Vendor_Street, Vendor_City = @Vendor_City, Vendor_State = @Vendor_State, Vendor_Zip = @Vendor_Zip, Vendor_Phone = @Vendor_Phone, Vendor_Email = @Vendor_Email, Vendor_CreditLimit = @Vendor_CreditLimit, Vendor_Terms = @Vendor_Terms WHERE Vendor_Id = @Vendor_ID", c);
             }
         }
+        public static void EditItem(Item c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE Item SET Item_Number = @Item_Number, Vendor_ID = @Vendor_ID, Item_Description = @Item_Description, Item_PurchasePrice = @Item_PurchasePrice, Item_SellPrice = @Item_SellPrice, Item_UPC = @Item_UPC WHERE Item_Number = @Item_Number", c);
+            }
+        }
         public static void DeleteCustomer(string Cust_ID)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM Customer WHERE Cust_ID = {0}", Cust_ID));
+            }
+        }
+        public static void DeletePurchaseOrder(int po_id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM PurchaseOrder WHERE PO_ID = {0}", po_id));
             }
         }
         public static void DeleteEmployee(int Employee_Id)
@@ -123,6 +153,13 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM Vendor WHERE Vendor_ID = {0}", Vendor_Id));
+            }
+        }
+        public static void DeleteItem(string Item_Number)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM Item WHERE Item_Number = '{0}'", Item_Number));
             }
         }
         public static void DeleteOrder_Item(int Order_ID)
@@ -237,6 +274,13 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute("insert into Vendor (Vendor_Name, Vendor_Street, Vendor_City, Vendor_State, Vendor_Zip, Vendor_Phone, Vendor_Email, Vendor_CreditLimit, Vendor_Terms) values (@Vendor_Name, @Vendor_Street, @Vendor_City, @Vendor_State, @Vendor_Zip, @Vendor_Phone, @Vendor_Email, @Vendor_CreditLimit, @Vendor_Terms)", c);
+            }
+        }
+        public static void AddItem(Item c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Item (Item_Number, Vendor_ID, Item_Description, Item_PurchasePrice, Item_SellPrice, Item_UPC) values (@Item_Number, @Vendor_Id, @Item_Description, @Item_PurchasePrice, @Item_SellPrice, @Item_UPC)", c);
             }
         }
         public static void AddOrder_Item(Order_Item c)

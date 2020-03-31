@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace ERP
@@ -8,7 +9,8 @@ namespace ERP
     {
         List<Vendor> vendors = SqliteDataAccess.LoadAllVendor();
         List<PurchaseOrder_Item> selected = new List<PurchaseOrder_Item>();
-        public PurchaseOrders()
+        double cost = 0;
+        public PurchaseOrders(PurchaseOrder po)
         {
             InitializeComponent();
 
@@ -17,7 +19,18 @@ namespace ERP
             {
                 comboVendor.Items.Add(String.Format("{0} - {1}", v.Vendor_ID, v.Vendor_Name));
             }
+
+            if(po.PO_ShipDate != null)
+            {
+                comboVendor.SelectedIndex = comboVendor.FindString(po.Vendor_ID.ToString());
+                tbShippingStreet.Text = po.PO_ShipStreet;
+                tbShippingCity.Text = po.PO_ShipCity;
+                tbShippingState.Text = po.PO_ShipState;
+                tbShippingZip.Text = po.PO_ShipZip;
+                vendorDatePicker.Value = DateTime.Parse(po.PO_ShipDate);
+            }
         }
+        double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
         private void comboVendor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboVendor.SelectedItem.ToString() != "")
@@ -47,6 +60,14 @@ namespace ERP
             selected.RemoveAt(dataIndex);
             selected.Insert(dataIndex, si);
 
+            double costed = 0;
+            foreach(PurchaseOrder_Item poi in selected)
+            {
+                costed += poi.Item_Cost * poi.Item_Quantity;
+            }
+            tbSubTotal.Text = String.Format("$ " + Math.Round(costed, 2));
+            tbTotalCost.Text = String.Format("$ " + Math.Round(costed * (1 + taxRate), 2));
+            cost = costed;
         }
 
         private void btClose_Click(object sender, EventArgs e)
@@ -54,6 +75,8 @@ namespace ERP
             PurchaseOrder po = new PurchaseOrder();
             po.Vendor_ID = Convert.ToInt32(comboVendor.Text.Substring(0, comboVendor.Text.ToString().IndexOf(" - ")));
             po.PO_Date = DateTime.Today.ToShortDateString();
+            po.PO_Subtotal = cost;
+            po.PO_Total = cost * (1 + taxRate);
             po.PO_ShipDate = vendorDatePicker.Value.ToShortDateString();
             po.PO_ShipStreet = tbShippingStreet.Text;
             po.PO_ShipCity = tbShippingCity.Text;
@@ -91,7 +114,8 @@ namespace ERP
             dataSelected.CurrentCell = dataSelected.Rows[dataSelected.Rows.Count - 1].Cells["sQuantity"];
             dataSelected.CurrentCell.Value = 0;
             dataSelected.BeginEdit(true);
-
+            //tbSubTotal.Text = String.Format("$ " + Math.Round(cost, 2));
+            //tbTotalCost.Text = String.Format("$ " + Math.Round((cost * (1 + taxRate)), 2));
         }
 
         private void BtRemove_Click(object sender, EventArgs e)

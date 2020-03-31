@@ -97,8 +97,8 @@ namespace ERP
                 dataItem.Rows[i].Cells["itemNumber"].Value = c[i].Item_Number;
                 dataItem.Rows[i].Cells["itemVendorID"].Value = String.Format(c[i].Vendor_ID.ToString() + " - " + ven.Vendor_Name);
                 dataItem.Rows[i].Cells["itemDesc"].Value = c[i].Item_Description;
-                dataItem.Rows[i].Cells["itemPurchasePrice"].Value = c[i].Item_PurchasePrice;
-                dataItem.Rows[i].Cells["itemSellPrice"].Value = c[i].Item_SellPrice;
+                dataItem.Rows[i].Cells["itemPurchasePrice"].Value = String.Format("$ " + Math.Round(c[i].Item_PurchasePrice, 2));
+                dataItem.Rows[i].Cells["itemSellPrice"].Value = String.Format("$ " + Math.Round(c[i].Item_SellPrice, 2));
                 dataItem.Rows[i].Cells["itemUPC"].Value = c[i].Item_UPC;
             }
         }
@@ -316,6 +316,24 @@ namespace ERP
             }
 
         }
+        private void RefreshVendorPOs()
+        {
+            dataPurchaseOrders.Rows.Clear();
+            dataPurchaseOrders.DataSource = null;
+
+            int id = Convert.ToInt32(dataVendor.Rows[dataVendor.CurrentCell.RowIndex].Cells["vendorID"].Value);
+
+            List<PurchaseOrder> pos = SqliteDataAccess.LoadVendorPOs(id);
+
+            for(int i = 0; i< pos.Count; i++)
+            {
+                PurchaseOrder po = pos[i];
+                dataPurchaseOrders.Rows.Add();
+                dataPurchaseOrders.Rows[i].Cells["poID"].Value = po.PO_ID;
+                dataPurchaseOrders.Rows[i].Cells["poTotal"].Value = String.Format("$ " + Math.Round(po.PO_Total));
+                dataPurchaseOrders.Rows[i].Cells["poShipDate"].Value = po.PO_ShipDate;
+            }
+        }
         private void BtCustClear_Click_1(object sender, EventArgs e)
         {
             btCustSave.Visible = false;
@@ -410,6 +428,11 @@ namespace ERP
 
         private void CbCustSalesRep_Click(object sender, EventArgs e)
         {
+            string temp = "";
+            if(cbCustSalesRep.Text != "")
+            {
+                temp = cbCustSalesRep.Text;
+            }
             cbCustSalesRep.Items.Clear();
             List<Employee> emps = SqliteDataAccess.LoadAllEmployee();
             List<String> ID_Name = new List<String>();
@@ -419,9 +442,15 @@ namespace ERP
             }
             String[] arrays = ID_Name.ToArray();
             cbCustSalesRep.Items.AddRange(arrays);
+            cbCustSalesRep.SelectedItem = temp;
         }
         private void CbOrderCustomer_Click(object sender, EventArgs e)
         {
+            string temp = "";
+            if (cbOrderCustomer.Text != "")
+            {
+                temp = cbOrderCustomer.Text;
+            }
             cbOrderCustomer.Items.Clear();
             List<Customer> custs = SqliteDataAccess.LoadAllCustomer();
             List<String> ID_Name = new List<String>();
@@ -431,9 +460,15 @@ namespace ERP
             }
             String[] arrays = ID_Name.ToArray();
             cbOrderCustomer.Items.AddRange(arrays);
+            cbOrderCustomer.SelectedItem = temp;
         }
         private void cbEmpSupervisor_Click(object sender, EventArgs e)
         {
+            string temp = "";
+            if (cbEmpSupervisor.Text != "")
+            {
+                temp = cbEmpSupervisor.Text;
+            }
             cbEmpSupervisor.Items.Clear();
             List<Employee> emps = SqliteDataAccess.LoadAllEmployee();
             List<String> ID_Name = new List<String>();
@@ -443,6 +478,8 @@ namespace ERP
             }
             String[] arrays = ID_Name.ToArray();
             cbEmpSupervisor.Items.AddRange(arrays);
+            cbEmpSupervisor.SelectedItem = temp;
+
         }
 
         private void CheckShippingBilling_CheckedChanged(object sender, EventArgs e)
@@ -492,6 +529,11 @@ namespace ERP
 
         private void CbOrderSalesRep_Click(object sender, EventArgs e)
         {
+            string temp = "";
+            if (cbOrderSalesRep.Text != "")
+            {
+                temp = cbOrderSalesRep.Text;
+            }
             cbOrderSalesRep.Items.Clear();
             List<Employee> emps = SqliteDataAccess.LoadAllEmployee();
             List<String> ID_Name = new List<String>();
@@ -501,8 +543,26 @@ namespace ERP
             }
             String[] arrays = ID_Name.ToArray();
             cbOrderSalesRep.Items.AddRange(arrays);
+            cbOrderSalesRep.SelectedItem = temp;
         }
-
+        private void cbItemVendor_Click(object sender, EventArgs e)
+        {
+            string temp = "";
+            if (cbItemVendor.Text != "")
+            {
+                temp = cbItemVendor.Text;
+            }
+            cbItemVendor.Items.Clear();
+            List<Vendor> vens = SqliteDataAccess.LoadAllVendor();
+            List<String> ID_Name = new List<String>();
+            foreach (Vendor ven in vens)
+            {
+                ID_Name.Add(String.Format(ven.Vendor_ID.ToString() + " - " + ven.Vendor_Name));
+            }
+            String[] arrays = ID_Name.ToArray();
+            cbItemVendor.Items.AddRange(arrays);
+            cbItemVendor.SelectedItem = temp;
+        }
         public void BtOrderManageItems_Click(object sender, EventArgs e)
         {
             dataOrderItems.Rows.Clear();
@@ -663,7 +723,10 @@ namespace ERP
         {
             RefreshCustOrders();
         }
-
+        private void dataVendor_SelectionedChanged(object sender, EventArgs e)
+        {
+            RefreshVendorPOs();
+        }
         private void BtOrderEdit_Click(object sender, EventArgs e)
         {
             orderButtonsEnable();
@@ -1117,8 +1180,94 @@ namespace ERP
 
         private void BtManagePOs_Click(object sender, EventArgs e)
         {
-            PurchaseOrders po = new PurchaseOrders();
+            PurchaseOrders po = new PurchaseOrders(new PurchaseOrder());
             po.ShowDialog();
+        }
+
+        private void BtItemEdit_Click(object sender, EventArgs e)
+        {
+            Item item = SqliteDataAccess.LoadItem((string)dataItem.Rows[dataItem.CurrentCell.RowIndex].Cells["itemNumber"].Value)[0];
+            tbItemNumber.Text = item.Item_Number;
+            tbItemDesc.Text = item.Item_Description;
+            tbItemPurchase.Text = item.Item_PurchasePrice.ToString();
+            tbItemSell.Text = item.Item_SellPrice.ToString();
+            tbItemUPC.Text = item.Item_UPC;
+            cbItemVendor_Click(null, null);
+            cbItemVendor.SelectedIndex = cbItemVendor.FindString(item.Vendor_ID.ToString());
+            btItemSave.BringToFront();
+            btItemSave.Visible = true;
+
+        }
+
+        private void BtItemRemove_Click(object sender, EventArgs e)
+        {
+            string id = "";
+            try
+            {
+                id = (string)dataItem.Rows[dataItem.CurrentCell.RowIndex].Cells["itemNumber"].Value;
+            }
+            catch (NullReferenceException)
+            { }
+            SqliteDataAccess.DeleteItem(id);
+            RefreshItems();
+        }
+
+        private void BtItemClear_Click(object sender, EventArgs e)
+        {
+            tbItemNumber.Clear();
+            tbItemDesc.Clear();
+            tbItemPurchase.Clear();
+            tbItemSell.Clear();
+            tbItemUPC.Clear();
+            btItemSave.Visible = false;
+            cbItemVendor.SelectedIndex = -1;
+        }
+
+        private void BtItemAdd_Click(object sender, EventArgs e)
+        {
+            Item item = new Item();
+            item.Item_Number = tbItemNumber.Text;
+            item.Item_Description = tbItemDesc.Text;
+            item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
+            item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
+            item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
+            item.Item_UPC = tbItemUPC.Text;
+
+            SqliteDataAccess.AddItem(item);
+            RefreshItems();
+            BtItemClear_Click(null, null);
+
+        }
+
+        private void BtItemSave_Click(object sender, EventArgs e)
+        {
+            Item item = new Item();
+            item.Item_Number = tbItemNumber.Text;
+            item.Item_Description = tbItemDesc.Text;
+            item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
+            item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
+            item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
+            item.Item_UPC = tbItemUPC.Text;
+
+            SqliteDataAccess.EditItem(item);
+            RefreshItems();
+            BtItemClear_Click(null, null);
+            btItemSave.Visible = false;
+        }
+
+        private void BtPORemove_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
+            SqliteDataAccess.DeletePurchaseOrder(id);
+            RefreshVendorPOs();
+        }
+
+        private void BtPOEdit_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
+            PurchaseOrder po = SqliteDataAccess.LoadPurchaseOrder(id)[0];
+            PurchaseOrders poForm = new PurchaseOrders(po);
+            poForm.ShowDialog();
         }
     }
 

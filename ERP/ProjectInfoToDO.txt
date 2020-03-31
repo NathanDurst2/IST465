@@ -3,9 +3,8 @@
 	Upload background
 	Default shipping address for POs
 Item
-	All features
 	Purchase orders from this screen? (Maybe add purchase order tab for invoices and purchase orders?)
 Vendors
-	Edit / remove POs
+	Edit / remove POs items
 	
 

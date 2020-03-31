@@ -33,6 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btSave = new System.Windows.Forms.Button();
             this.dataAll = new System.Windows.Forms.DataGridView();
+            this.allItems = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.allDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbTotalCost = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btAdd = new System.Windows.Forms.Button();
@@ -42,9 +44,7 @@
             this.comboVendor = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.allItems = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.allDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbSubTotal = new System.Windows.Forms.TextBox();
             this.dataSelected = new System.Windows.Forms.DataGridView();
             this.sItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,6 +99,19 @@
             this.dataAll.ReadOnly = true;
             this.dataAll.Size = new System.Drawing.Size(315, 290);
             this.dataAll.TabIndex = 3;
+            // 
+            // allItems
+            // 
+            this.allItems.HeaderText = "Item";
+            this.allItems.Name = "allItems";
+            this.allItems.ReadOnly = true;
+            // 
+            // allDesc
+            // 
+            this.allDesc.HeaderText = "Description";
+            this.allDesc.Name = "allDesc";
+            this.allDesc.ReadOnly = true;
+            this.allDesc.Width = 170;
             // 
             // tbTotalCost
             // 
@@ -186,26 +199,13 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Subtotal";
             // 
-            // textBox1
+            // tbSubTotal
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(499, 478);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 13;
-            // 
-            // allItems
-            // 
-            this.allItems.HeaderText = "Item";
-            this.allItems.Name = "allItems";
-            this.allItems.ReadOnly = true;
-            // 
-            // allDesc
-            // 
-            this.allDesc.HeaderText = "Description";
-            this.allDesc.Name = "allDesc";
-            this.allDesc.ReadOnly = true;
-            this.allDesc.Width = 170;
+            this.tbSubTotal.Enabled = false;
+            this.tbSubTotal.Location = new System.Drawing.Point(499, 478);
+            this.tbSubTotal.Name = "tbSubTotal";
+            this.tbSubTotal.Size = new System.Drawing.Size(100, 20);
+            this.tbSubTotal.TabIndex = 13;
             // 
             // dataSelected
             // 
@@ -348,7 +348,7 @@
             this.Controls.Add(this.labelOrderShipDate);
             this.Controls.Add(this.dataSelected);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbSubTotal);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboVendor);
             this.Controls.Add(this.label4);
@@ -385,7 +385,7 @@
         private System.Windows.Forms.ComboBox comboVendor;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn allItems;
         private System.Windows.Forms.DataGridViewTextBoxColumn allDesc;
         private System.Windows.Forms.DataGridView dataSelected;

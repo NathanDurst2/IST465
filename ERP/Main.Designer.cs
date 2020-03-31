@@ -130,10 +130,15 @@
             this.tbEmpFirstName = new System.Windows.Forms.TextBox();
             this.tabVendor = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btPORemove = new System.Windows.Forms.Button();
+            this.btPOEdit = new System.Windows.Forms.Button();
             this.btAddPOs = new System.Windows.Forms.Button();
             this.label62 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.dataPurchaseOrders = new System.Windows.Forms.DataGridView();
+            this.poID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poShipDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btVendorAdd = new System.Windows.Forms.Button();
             this.cbVendorTerms = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
@@ -289,8 +294,6 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1162,8 +1165,8 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.button2);
-            this.groupBox6.Controls.Add(this.button1);
+            this.groupBox6.Controls.Add(this.btPORemove);
+            this.groupBox6.Controls.Add(this.btPOEdit);
             this.groupBox6.Controls.Add(this.btAddPOs);
             this.groupBox6.Location = new System.Drawing.Point(435, 54);
             this.groupBox6.Name = "groupBox6";
@@ -1171,6 +1174,28 @@
             this.groupBox6.TabIndex = 141;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "POs";
+            // 
+            // btPORemove
+            // 
+            this.btPORemove.Location = new System.Drawing.Point(6, 101);
+            this.btPORemove.Name = "btPORemove";
+            this.btPORemove.Size = new System.Drawing.Size(75, 23);
+            this.btPORemove.TabIndex = 129;
+            this.btPORemove.TabStop = false;
+            this.btPORemove.Text = "Remove";
+            this.btPORemove.UseVisualStyleBackColor = true;
+            this.btPORemove.Click += new System.EventHandler(this.BtPORemove_Click);
+            // 
+            // btPOEdit
+            // 
+            this.btPOEdit.Location = new System.Drawing.Point(6, 60);
+            this.btPOEdit.Name = "btPOEdit";
+            this.btPOEdit.Size = new System.Drawing.Size(75, 23);
+            this.btPOEdit.TabIndex = 128;
+            this.btPOEdit.TabStop = false;
+            this.btPOEdit.Text = "Edit";
+            this.btPOEdit.UseVisualStyleBackColor = true;
+            this.btPOEdit.Click += new System.EventHandler(this.BtPOEdit_Click);
             // 
             // btAddPOs
             // 
@@ -1209,6 +1234,10 @@
             this.dataPurchaseOrders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataPurchaseOrders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
             this.dataPurchaseOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPurchaseOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.poID,
+            this.poTotal,
+            this.poShipDate});
             this.dataPurchaseOrders.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataPurchaseOrders.Location = new System.Drawing.Point(535, 21);
             this.dataPurchaseOrders.Name = "dataPurchaseOrders";
@@ -1220,6 +1249,21 @@
             this.dataPurchaseOrders.Size = new System.Drawing.Size(510, 215);
             this.dataPurchaseOrders.TabIndex = 136;
             this.dataPurchaseOrders.TabStop = false;
+            // 
+            // poID
+            // 
+            this.poID.HeaderText = "ID";
+            this.poID.Name = "poID";
+            // 
+            // poTotal
+            // 
+            this.poTotal.HeaderText = "Total";
+            this.poTotal.Name = "poTotal";
+            // 
+            // poShipDate
+            // 
+            this.poShipDate.HeaderText = "Ship Date";
+            this.poShipDate.Name = "poShipDate";
             // 
             // btVendorAdd
             // 
@@ -1413,6 +1457,7 @@
             this.dataVendor.Size = new System.Drawing.Size(1025, 313);
             this.dataVendor.TabIndex = 117;
             this.dataVendor.TabStop = false;
+            this.dataVendor.SelectionChanged += new System.EventHandler(this.dataVendor_SelectionedChanged);
             // 
             // vendorID
             // 
@@ -1578,6 +1623,7 @@
             this.btItemAdd.TabStop = false;
             this.btItemAdd.Text = "Add";
             this.btItemAdd.UseVisualStyleBackColor = true;
+            this.btItemAdd.Click += new System.EventHandler(this.BtItemAdd_Click);
             // 
             // label36
             // 
@@ -1652,6 +1698,7 @@
             this.cbItemVendor.Name = "cbItemVendor";
             this.cbItemVendor.Size = new System.Drawing.Size(100, 21);
             this.cbItemVendor.TabIndex = 127;
+            this.cbItemVendor.Click += new System.EventHandler(this.cbItemVendor_Click);
             // 
             // btItemSave
             // 
@@ -1662,6 +1709,7 @@
             this.btItemSave.Text = "Save";
             this.btItemSave.UseVisualStyleBackColor = true;
             this.btItemSave.Visible = false;
+            this.btItemSave.Click += new System.EventHandler(this.BtItemSave_Click);
             // 
             // btItemEdit
             // 
@@ -1672,6 +1720,7 @@
             this.btItemEdit.TabStop = false;
             this.btItemEdit.Text = "Edit";
             this.btItemEdit.UseVisualStyleBackColor = true;
+            this.btItemEdit.Click += new System.EventHandler(this.BtItemEdit_Click);
             // 
             // btItemRemove
             // 
@@ -1682,6 +1731,7 @@
             this.btItemRemove.TabStop = false;
             this.btItemRemove.Text = "Remove";
             this.btItemRemove.UseVisualStyleBackColor = true;
+            this.btItemRemove.Click += new System.EventHandler(this.BtItemRemove_Click);
             // 
             // label18
             // 
@@ -1740,6 +1790,7 @@
             this.btItemClear.TabStop = false;
             this.btItemClear.Text = "Clear";
             this.btItemClear.UseVisualStyleBackColor = true;
+            this.btItemClear.Click += new System.EventHandler(this.BtItemClear_Click);
             // 
             // label34
             // 
@@ -2684,26 +2735,6 @@
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 60);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 128;
-            this.button1.TabStop = false;
-            this.button1.Text = "Edit";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 101);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 129;
-            this.button2.TabStop = false;
-            this.button2.Text = "Remove";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3013,8 +3044,11 @@
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.DataGridView dataPurchaseOrders;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btPORemove;
+        private System.Windows.Forms.Button btPOEdit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn poID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn poTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn poShipDate;
     }
 }
 
