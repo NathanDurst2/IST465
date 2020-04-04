@@ -283,7 +283,7 @@
             this.btSettingsSave = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
-            this.btSettingBrowse = new System.Windows.Forms.Button();
+            this.btDatabaseBrowse = new System.Windows.Forms.Button();
             this.tbDatabaseLoc = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tbLoginUser = new System.Windows.Forms.TextBox();
@@ -294,6 +294,9 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
+            this.label64 = new System.Windows.Forms.Label();
+            this.tbBackgroundImage = new System.Windows.Forms.TextBox();
+            this.btBackgroundBrowse = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -2467,6 +2470,9 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.btBackgroundBrowse);
+            this.tabSettings.Controls.Add(this.label64);
+            this.tabSettings.Controls.Add(this.tbBackgroundImage);
             this.tabSettings.Controls.Add(this.settingsIsAdmin);
             this.tabSettings.Controls.Add(this.label60);
             this.tabSettings.Controls.Add(this.tbSettingsUsername);
@@ -2480,7 +2486,7 @@
             this.tabSettings.Controls.Add(this.btSettingsSave);
             this.tabSettings.Controls.Add(this.label57);
             this.tabSettings.Controls.Add(this.label56);
-            this.tabSettings.Controls.Add(this.btSettingBrowse);
+            this.tabSettings.Controls.Add(this.btDatabaseBrowse);
             this.tabSettings.Controls.Add(this.tbDatabaseLoc);
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Margin = new System.Windows.Forms.Padding(0);
@@ -2633,15 +2639,15 @@
             this.label56.TabIndex = 2;
             this.label56.Text = "Database Location";
             // 
-            // btSettingBrowse
+            // btDatabaseBrowse
             // 
-            this.btSettingBrowse.Location = new System.Drawing.Point(225, 93);
-            this.btSettingBrowse.Name = "btSettingBrowse";
-            this.btSettingBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btSettingBrowse.TabIndex = 1;
-            this.btSettingBrowse.Text = "Browse";
-            this.btSettingBrowse.UseVisualStyleBackColor = true;
-            this.btSettingBrowse.Click += new System.EventHandler(this.BtSettingBrowse_Click);
+            this.btDatabaseBrowse.Location = new System.Drawing.Point(225, 93);
+            this.btDatabaseBrowse.Name = "btDatabaseBrowse";
+            this.btDatabaseBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btDatabaseBrowse.TabIndex = 1;
+            this.btDatabaseBrowse.Text = "Browse";
+            this.btDatabaseBrowse.UseVisualStyleBackColor = true;
+            this.btDatabaseBrowse.Click += new System.EventHandler(this.BtDatabaseBrowse_Click);
             // 
             // tbDatabaseLoc
             // 
@@ -2734,6 +2740,32 @@
             this.linkChangePassword.Text = "Change Password";
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(15, 249);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(97, 13);
+            this.label64.TabIndex = 16;
+            this.label64.Text = "Background Image";
+            // 
+            // tbBackgroundImage
+            // 
+            this.tbBackgroundImage.Location = new System.Drawing.Point(118, 246);
+            this.tbBackgroundImage.Name = "tbBackgroundImage";
+            this.tbBackgroundImage.Size = new System.Drawing.Size(100, 20);
+            this.tbBackgroundImage.TabIndex = 15;
+            // 
+            // btBackgroundBrowse
+            // 
+            this.btBackgroundBrowse.Location = new System.Drawing.Point(225, 243);
+            this.btBackgroundBrowse.Name = "btBackgroundBrowse";
+            this.btBackgroundBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btBackgroundBrowse.TabIndex = 17;
+            this.btBackgroundBrowse.Text = "Browse";
+            this.btBackgroundBrowse.UseVisualStyleBackColor = true;
+            this.btBackgroundBrowse.Click += new System.EventHandler(this.btBackgroundBrowse_Click);
             // 
             // Main
             // 
@@ -3013,7 +3045,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn custOrdersTotal;
         private System.Windows.Forms.TextBox tbDatabaseLoc;
         private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Button btSettingBrowse;
+        private System.Windows.Forms.Button btDatabaseBrowse;
         private System.Windows.Forms.Button btSettingsSave;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -3049,6 +3081,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn poID;
         private System.Windows.Forms.DataGridViewTextBoxColumn poTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn poShipDate;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox tbBackgroundImage;
+        private System.Windows.Forms.Button btBackgroundBrowse;
     }
 }
 

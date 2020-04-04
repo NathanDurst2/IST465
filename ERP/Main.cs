@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing;
 
 namespace ERP
 {
@@ -16,11 +18,16 @@ namespace ERP
             RefreshVendors();
             RefreshEmployeee();
             RefreshOrders();
+            string path = ConfigurationManager.AppSettings.Get("backgroundPath").ToString();
+            if (path != "")
+            {
+                this.BackgroundImage = Image.FromFile(path);
+            }
             lbCompany.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
         }
         List<SelectedItems> selectedItems = new List<SelectedItems>();
         double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
-        
+
         private void tabControl_Selected(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab.Text == "Order")
@@ -49,6 +56,7 @@ namespace ERP
                 var settings = (AppSettingsSection)ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).GetSection("appSettings");
                 tbSettingCompanyName.Text = settings.Settings["companyName"].Value;
                 tbSettingDefaultTaxRate.Text = settings.Settings["taxRate"].Value;
+                tbBackgroundImage.Text = settings.Settings["backgroundPath"].Value;
                 RefreshUsers();
 
             }
@@ -325,7 +333,7 @@ namespace ERP
 
             List<PurchaseOrder> pos = SqliteDataAccess.LoadVendorPOs(id);
 
-            for(int i = 0; i< pos.Count; i++)
+            for (int i = 0; i < pos.Count; i++)
             {
                 PurchaseOrder po = pos[i];
                 dataPurchaseOrders.Rows.Add();
@@ -357,7 +365,7 @@ namespace ERP
 
         private void BtCustAdd_Click(object sender, EventArgs e)
         {
-            if (tbFirstName.Text != "")
+            if (tbFirstName.Text != "" && tbLastName.Text != "" && tbCustStreet.Text != "" && tbCustCity.Text != "" && tbCustState.Text != "" && tbCustZip.Text != "" && tbPhone.Text != "" && tbEmail.Text != "" && cbCustSalesRep.Text != "")
             {
                 Customer c = new Customer();
 
@@ -376,6 +384,10 @@ namespace ERP
 
                 dataCustomer.DataSource = null;
                 RefreshCustomers();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
             }
         }
 
@@ -404,7 +416,7 @@ namespace ERP
 
         private void BtCustSave_Click(object sender, EventArgs e)
         {
-            if (tbFirstName.Text != "")
+            if (tbFirstName.Text != "" && tbLastName.Text != "" && tbCustStreet.Text != "" && tbCustCity.Text != "" && tbCustState.Text != "" && tbCustZip.Text != "" && tbPhone.Text != "" && tbEmail.Text != "" && cbCustSalesRep.Text != "")
             {
                 Customer c = new Customer();
                 c.Cust_Id = Convert.ToInt32(tbCustID.Text); tbCustID.Clear();
@@ -424,12 +436,16 @@ namespace ERP
                 dataCustomer.DataSource = null;
                 RefreshCustomers();
             }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
 
         private void CbCustSalesRep_Click(object sender, EventArgs e)
         {
             string temp = "";
-            if(cbCustSalesRep.Text != "")
+            if (cbCustSalesRep.Text != "")
             {
                 temp = cbCustSalesRep.Text;
             }
@@ -601,9 +617,7 @@ namespace ERP
                 }
             }
 
-
         }
-
         private void BtOrderAdd_Click(object sender, EventArgs e)
         {
             orderButtonsDisable();
@@ -898,23 +912,31 @@ namespace ERP
 
         private void BtEmpAdd_Click(object sender, EventArgs e)
         {
-            Employee emp = new Employee();
-            emp.Employee_FirstName = tbEmpFirstName.Text;
-            emp.Employee_LastName = tbEmpLastName.Text;
-            emp.Employee_Street = tbEmpStreet.Text;
-            emp.Employee_State = tbEmpState.Text;
-            emp.Employee_City = tbEmpCity.Text;
-            emp.Employee_Zip = tbEmpZip.Text;
-            emp.Employee_Phone = tbEmpPhone.Text;
-            emp.Employee_Email = tbEmpEmail.Text;
-            string supervisor = cbEmpSupervisor.Text;
-            if (supervisor.Length > 0 & supervisor.Contains(" -"))
+            if (tbEmpFirstName.Text != "" && tbEmpLastName.Text != "" && tbEmpStreet.Text != "" && tbEmpCity.Text != "" && tbEmpState.Text != "" && tbEmpZip.Text != "" && tbEmpPhone.Text != "" && tbEmpEmail.Text != "" && cbEmpSupervisor.Text != "")
             {
-                emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+                Employee emp = new Employee();
+                emp.Employee_FirstName = tbEmpFirstName.Text;
+                emp.Employee_LastName = tbEmpLastName.Text;
+                emp.Employee_Street = tbEmpStreet.Text;
+                emp.Employee_State = tbEmpState.Text;
+                emp.Employee_City = tbEmpCity.Text;
+                emp.Employee_Zip = tbEmpZip.Text;
+                emp.Employee_Phone = tbEmpPhone.Text;
+                emp.Employee_Email = tbEmpEmail.Text;
+                string supervisor = cbEmpSupervisor.Text;
+                if (supervisor.Length > 0 & supervisor.Contains(" -"))
+                {
+                    emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+                }
+                SqliteDataAccess.AddEmployee(emp);
+                BtEmpClear_Click(null, null);
+                RefreshEmployeee();
             }
-            SqliteDataAccess.AddEmployee(emp);
-            BtEmpClear_Click(null, null);
-            RefreshEmployeee();
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
+
         }
 
         private void BtEmpEdit_Click(object sender, EventArgs e)
@@ -939,23 +961,30 @@ namespace ERP
 
         private void BtEmpSave_Click(object sender, EventArgs e)
         {
-            Employee emp = new Employee();
-            emp.Employee_Id = Convert.ToInt32(tbEmpID.Text);
-            emp.Employee_FirstName = tbEmpFirstName.Text;
-            emp.Employee_LastName = tbEmpLastName.Text;
-            emp.Employee_Street = tbEmpStreet.Text;
-            emp.Employee_State = tbEmpState.Text;
-            emp.Employee_City = tbEmpCity.Text;
-            emp.Employee_Zip = tbEmpZip.Text;
-            emp.Employee_Phone = tbEmpPhone.Text;
-            emp.Employee_Email = tbEmpEmail.Text;
-            string supervisor = cbEmpSupervisor.Text;
-            if (supervisor.Length > 0 & supervisor.Contains(" -"))
-                emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
-            SqliteDataAccess.EditEmployee(emp);
-            btEmpSave.Visible = false;
-            BtEmpClear_Click(null, null);
-            RefreshEmployeee();
+            if (tbEmpFirstName.Text != "" && tbEmpLastName.Text != "" && tbEmpStreet.Text != "" && tbEmpCity.Text != "" && tbEmpState.Text != "" && tbEmpZip.Text != "" && tbEmpPhone.Text != "" && tbEmpEmail.Text != "" && cbEmpSupervisor.Text != "")
+            {
+                Employee emp = new Employee();
+                emp.Employee_Id = Convert.ToInt32(tbEmpID.Text);
+                emp.Employee_FirstName = tbEmpFirstName.Text;
+                emp.Employee_LastName = tbEmpLastName.Text;
+                emp.Employee_Street = tbEmpStreet.Text;
+                emp.Employee_State = tbEmpState.Text;
+                emp.Employee_City = tbEmpCity.Text;
+                emp.Employee_Zip = tbEmpZip.Text;
+                emp.Employee_Phone = tbEmpPhone.Text;
+                emp.Employee_Email = tbEmpEmail.Text;
+                string supervisor = cbEmpSupervisor.Text;
+                if (supervisor.Length > 0 & supervisor.Contains(" -"))
+                    emp.Employee_Supervisor_ID = Convert.ToInt32(supervisor.Substring(0, supervisor.IndexOf(" -")));
+                SqliteDataAccess.EditEmployee(emp);
+                btEmpSave.Visible = false;
+                BtEmpClear_Click(null, null);
+                RefreshEmployeee();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
 
         private void BtEmpRemove_Click(object sender, EventArgs e)
@@ -971,20 +1000,27 @@ namespace ERP
 
         private void BtVendorAdd_Click(object sender, EventArgs e)
         {
-            Vendor ven = new Vendor();
-            ven.Vendor_Name = tbVendorName.Text;
-            ven.Vendor_Street = tbVendorStreet.Text;
-            ven.Vendor_State = tbVendorState.Text;
-            ven.Vendor_City = tbVendorCity.Text;
-            ven.Vendor_State = tbVendorState.Text;
-            ven.Vendor_Zip = tbVendorZip.Text;
-            ven.Vendor_Phone = tbVendorPhone.Text;
-            ven.Vendor_Email = tbVendorEmail.Text;
-            ven.Vendor_CreditLimit = tbVendorCreditLimit.Text;
-            ven.Vendor_Terms = cbVendorTerms.SelectedItem.ToString();
-            SqliteDataAccess.AddVendor(ven);
-            RefreshVendors();
-            BtVendorClear_Click(null, null);
+            if (tbVendorName.Text != "" && tbVendorStreet.Text != "" && tbVendorStreet.Text != "" && tbVendorState.Text != "" && tbVendorCity.Text != "" && tbVendorZip.Text != "" && tbVendorPhone.Text != "" && tbVendorCreditLimit.Text != "" && tbVendorEmail.Text != "" && cbVendorTerms.Text != "")
+            {
+                Vendor ven = new Vendor();
+                ven.Vendor_Name = tbVendorName.Text;
+                ven.Vendor_Street = tbVendorStreet.Text;
+                ven.Vendor_State = tbVendorState.Text;
+                ven.Vendor_City = tbVendorCity.Text;
+                ven.Vendor_State = tbVendorState.Text;
+                ven.Vendor_Zip = tbVendorZip.Text;
+                ven.Vendor_Phone = tbVendorPhone.Text;
+                ven.Vendor_Email = tbVendorEmail.Text;
+                ven.Vendor_CreditLimit = tbVendorCreditLimit.Text;
+                ven.Vendor_Terms = cbVendorTerms.SelectedItem.ToString();
+                SqliteDataAccess.AddVendor(ven);
+                RefreshVendors();
+                BtVendorClear_Click(null, null);
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
 
         private void BtVendorClear_Click(object sender, EventArgs e)
@@ -1023,7 +1059,9 @@ namespace ERP
 
         private void BtVendorSave_Click(object sender, EventArgs e)
         {
-            Vendor ven = new Vendor();
+            if (tbVendorName.Text != "" && tbVendorStreet.Text != "" && tbVendorStreet.Text != "" && tbVendorState.Text != "" && tbVendorCity.Text != "" && tbVendorZip.Text != "" && tbVendorPhone.Text != "" && tbVendorCreditLimit.Text != "" && tbVendorEmail.Text != "" && cbVendorTerms.Text != "")
+            {
+                Vendor ven = new Vendor();
             ven.Vendor_ID = Convert.ToInt32(tbVendorID.Text);
             ven.Vendor_Name = tbVendorName.Text;
             ven.Vendor_Street = tbVendorStreet.Text;
@@ -1039,6 +1077,11 @@ namespace ERP
             BtVendorClear_Click(null, null);
             RefreshVendors();
             btVendorSave.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
 
         private void BtVendorRemove_Click(object sender, EventArgs e)
@@ -1052,12 +1095,20 @@ namespace ERP
             }
         }
 
-        private void BtSettingBrowse_Click(object sender, EventArgs e)
+        private void BtDatabaseBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
                 tbDatabaseLoc.Text = openFileDialog1.FileName;
+            }
+        }
+        private void btBackgroundBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                tbBackgroundImage.Text = openFileDialog1.FileName;
             }
         }
 
@@ -1071,6 +1122,18 @@ namespace ERP
                 appSetting.Settings["companyName"].Value = tbSettingCompanyName.Text;
                 ConfigurationManager.RefreshSection("appSettings");
                 config.Save();
+            }
+            if (appSetting != null && tbBackgroundImage.Text != "")
+            {
+                appSetting.Settings["backgroundPath"].Value = tbBackgroundImage.Text;
+                ConfigurationManager.RefreshSection("appSettings");
+                config.Save();
+            }
+            else
+            {
+                appSetting.Settings["backgroundPath"].Value = "";
+                config.Save();
+                ConfigurationManager.RefreshSection("appSettings");
             }
             if (connectionStringsSection != null && tbDatabaseLoc.Text != "")
             {
@@ -1180,8 +1243,9 @@ namespace ERP
 
         private void BtManagePOs_Click(object sender, EventArgs e)
         {
-            PurchaseOrders po = new PurchaseOrders(new PurchaseOrder());
+            PurchaseOrders po = new PurchaseOrders(new PurchaseOrder(), "new");
             po.ShowDialog();
+            RefreshVendorPOs();
         }
 
         private void BtItemEdit_Click(object sender, EventArgs e)
@@ -1266,8 +1330,9 @@ namespace ERP
         {
             int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
             PurchaseOrder po = SqliteDataAccess.LoadPurchaseOrder(id)[0];
-            PurchaseOrders poForm = new PurchaseOrders(po);
+            PurchaseOrders poForm = new PurchaseOrders(po, "edit");
             poForm.ShowDialog();
+            RefreshVendorPOs();
         }
     }
 

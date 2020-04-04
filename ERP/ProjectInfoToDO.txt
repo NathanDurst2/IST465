@@ -2,9 +2,7 @@
 	Upload Logo (auto size)
 	Upload background
 	Default shipping address for POs
-Item
-	Purchase orders from this screen? (Maybe add purchase order tab for invoices and purchase orders?)
-Vendors
-	Edit / remove POs items
+
+
 	
 

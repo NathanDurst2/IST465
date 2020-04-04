@@ -37,6 +37,14 @@ namespace ERP
                 return c;
             }
         }
+        public static List<PurchaseOrder_Item> LoadPurchaseOrder_Item(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                List<PurchaseOrder_Item> c = cnn.Query<PurchaseOrder_Item>(String.Format("select * from PurchaseOrder_Item where PO_ID = {0}", id)).ToList();
+                return c;
+            }
+        }
         public static List<Employee> LoadEmployee(int id)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -106,6 +114,13 @@ namespace ERP
                 cnn.Execute("UPDATE [Order] SET Cust_ID = @Cust_ID, Employee_ID = @Employee_ID, Order_Date = @Order_Date, Order_ShipDate = @Order_ShipDate, Order_Subtotal = @Order_Subtotal, Order_Tax = @Order_Tax, Order_Total = @Order_Total, Order_BillStreet = @Order_BillStreet, Order_BillCity = @Order_BillCity, Order_BillState = @Order_BillState, Order_BillZip = @Order_BillZip, Order_ShipStreet = @Order_ShipStreet, Order_ShipCity = @Order_ShipCity, Order_ShipState = @Order_ShipState, Order_ShipZip = @Order_ShipZip, Order_Status = @Order_Status, Order_Type = @Order_Type WHERE Order_ID = @Order_ID", c);
             }
         }
+        public static void EditPurchaseOrder(PurchaseOrder c)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE PurchaseOrder SET Vendor_ID = @Vendor_ID, PO_Date = @PO_Date, PO_ShipDate = @PO_ShipDate, PO_SubTotal = @PO_SubTotal, PO_Tax = @PO_Tax, PO_Total = @PO_Total, PO_ShipStreet = @PO_ShipStreet, PO_ShipCity = @PO_ShipCity, PO_ShipState = @PO_ShipState, PO_ShipZip = @PO_ShipZip WHERE PO_ID = @PO_ID", c);
+            }
+        }
         public static void EditEmployee(Employee c)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -139,6 +154,13 @@ namespace ERP
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 cnn.Execute(String.Format("DELETE FROM PurchaseOrder WHERE PO_ID = {0}", po_id));
+            }
+        }
+        public static void DeletePurchaseOrder_Item(int po_id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute(String.Format("DELETE FROM PurchaseOrder_Item WHERE PO_ID = {0}", po_id));
             }
         }
         public static void DeleteEmployee(int Employee_Id)

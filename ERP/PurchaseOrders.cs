@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace ERP
 {
@@ -10,7 +11,9 @@ namespace ERP
         List<Vendor> vendors = SqliteDataAccess.LoadAllVendor();
         List<PurchaseOrder_Item> selected = new List<PurchaseOrder_Item>();
         double cost = 0;
-        public PurchaseOrders(PurchaseOrder po)
+        string originType = "new";
+        int originID = 0;
+        public PurchaseOrders(PurchaseOrder po, string originType)
         {
             InitializeComponent();
 
@@ -20,14 +23,31 @@ namespace ERP
                 comboVendor.Items.Add(String.Format("{0} - {1}", v.Vendor_ID, v.Vendor_Name));
             }
 
-            if(po.PO_ShipDate != null)
+            if (originType == "edit")
             {
+                originID = po.PO_ID;
+                selected = SqliteDataAccess.LoadPurchaseOrder_Item(originID);
+                this.originType = originType;
+
                 comboVendor.SelectedIndex = comboVendor.FindString(po.Vendor_ID.ToString());
                 tbShippingStreet.Text = po.PO_ShipStreet;
                 tbShippingCity.Text = po.PO_ShipCity;
                 tbShippingState.Text = po.PO_ShipState;
                 tbShippingZip.Text = po.PO_ShipZip;
                 vendorDatePicker.Value = DateTime.Parse(po.PO_ShipDate);
+
+                double costed = 0;
+                foreach (PurchaseOrder_Item poi in selected)
+                {
+                    dataSelected.Rows.Add();
+                    dataSelected.Rows[dataSelected.RowCount - 1].Cells["sItem"].Value = poi.Item_Number;
+                    dataSelected.Rows[dataSelected.RowCount - 1].Cells["sCost"].Value = poi.Item_Cost;
+                    dataSelected.Rows[dataSelected.RowCount - 1].Cells["sQuantity"].Value = poi.Item_Quantity;
+                    costed += poi.Item_Cost * poi.Item_Quantity;
+                }
+                tbSubTotal.Text = String.Format("$ " + Math.Round(costed, 2));
+                tbTotalCost.Text = String.Format("$ " + Math.Round(costed * (1 + taxRate), 2));
+                cost = costed;
             }
         }
         double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
@@ -38,9 +58,18 @@ namespace ERP
                 List<Item> items = SqliteDataAccess.LoadVendorItem(comboVendor.SelectedItem.ToString().Substring(0, comboVendor.SelectedItem.ToString().IndexOf(" - ")));
                 for (int i = 0; i < items.Count; i++)
                 {
-                    dataAll.Rows.Add();
-                    dataAll.Rows[i].Cells["allItems"].Value = items[i].Item_Number;
-                    dataAll.Rows[i].Cells["allDesc"].Value = items[i].Item_Description;
+                    bool inSelected = false;
+                    foreach(PurchaseOrder_Item poi in selected)
+                    {
+                        if (poi.Item_Number == items[i].Item_Number)
+                            inSelected = true;
+                    }
+                    if (inSelected == false)
+                    {
+                        dataAll.Rows.Add();
+                        dataAll.Rows[dataAll.RowCount - 1].Cells["allItems"].Value = items[i].Item_Number;
+                        dataAll.Rows[dataAll.RowCount - 1].Cells["allDesc"].Value = items[i].Item_Description;
+                    }
                 }
             }
         }
@@ -61,7 +90,7 @@ namespace ERP
             selected.Insert(dataIndex, si);
 
             double costed = 0;
-            foreach(PurchaseOrder_Item poi in selected)
+            foreach (PurchaseOrder_Item poi in selected)
             {
                 costed += poi.Item_Cost * poi.Item_Quantity;
             }
@@ -83,9 +112,18 @@ namespace ERP
             po.PO_ShipState = tbShippingState.Text;
             po.PO_ShipZip = tbShippingZip.Text;
 
-            string id = SqliteDataAccess.AddPurchaseOrder(po);
+            string id = "";
+            if (originType == "new")
+                id = SqliteDataAccess.AddPurchaseOrder(po);
+            else if (originType == "edit")
+            {
+                SqliteDataAccess.EditPurchaseOrder(po);
+                SqliteDataAccess.DeletePurchaseOrder_Item(originID);
+                id = originID.ToString();
+            }
 
-            foreach(PurchaseOrder_Item siv in selected)
+
+            foreach (PurchaseOrder_Item siv in selected)
             {
                 siv.PO_ID = Convert.ToInt32(id);
                 SqliteDataAccess.AddPurchaseOrder_Item(siv);
