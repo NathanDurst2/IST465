@@ -267,21 +267,14 @@
             this.btOrderAdd = new System.Windows.Forms.Button();
             this.labelOrderShipDate = new System.Windows.Forms.Label();
             this.tabSettings = new System.Windows.Forms.TabPage();
-            this.settingsIsAdmin = new System.Windows.Forms.CheckBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.tbSettingsUsername = new System.Windows.Forms.TextBox();
-            this.btSettingsUserRemove = new System.Windows.Forms.Button();
-            this.btSettingsUserAdd = new System.Windows.Forms.Button();
-            this.dataUsers = new System.Windows.Forms.DataGridView();
-            this.usersUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usersLastLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usersIsAdmin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btBackgroundBrowse = new System.Windows.Forms.Button();
+            this.label64 = new System.Windows.Forms.Label();
+            this.tbBackgroundImage = new System.Windows.Forms.TextBox();
             this.label59 = new System.Windows.Forms.Label();
             this.tbSettingDefaultTaxRate = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
             this.tbSettingCompanyName = new System.Windows.Forms.TextBox();
             this.btSettingsSave = new System.Windows.Forms.Button();
-            this.label57 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.btDatabaseBrowse = new System.Windows.Forms.Button();
             this.tbDatabaseLoc = new System.Windows.Forms.TextBox();
@@ -294,9 +287,29 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
-            this.label64 = new System.Windows.Forms.Label();
-            this.tbBackgroundImage = new System.Windows.Forms.TextBox();
-            this.btBackgroundBrowse = new System.Windows.Forms.Button();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.tbSettingsPOZip = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.tbSettingsPOState = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.tbSettingsPOCity = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.tbSettingsPOStreet = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.settingsIsAdmin = new System.Windows.Forms.CheckBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.tbSettingsUsername = new System.Windows.Forms.TextBox();
+            this.btSettingsUserRemove = new System.Windows.Forms.Button();
+            this.btSettingsUserAdd = new System.Windows.Forms.Button();
+            this.dataUsers = new System.Windows.Forms.DataGridView();
+            this.usersUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usersLastLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usersIsAdmin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -319,6 +332,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataOrder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataOrderItems)).BeginInit();
             this.tabSettings.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -2470,21 +2484,28 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.groupBox7);
+            this.tabSettings.Controls.Add(this.label72);
+            this.tabSettings.Controls.Add(this.label57);
+            this.tabSettings.Controls.Add(this.label71);
+            this.tabSettings.Controls.Add(this.label70);
+            this.tabSettings.Controls.Add(this.label65);
+            this.tabSettings.Controls.Add(this.tbSettingsPOZip);
+            this.tabSettings.Controls.Add(this.label66);
+            this.tabSettings.Controls.Add(this.tbSettingsPOState);
+            this.tabSettings.Controls.Add(this.label67);
+            this.tabSettings.Controls.Add(this.tbSettingsPOCity);
+            this.tabSettings.Controls.Add(this.label68);
+            this.tabSettings.Controls.Add(this.tbSettingsPOStreet);
+            this.tabSettings.Controls.Add(this.label69);
             this.tabSettings.Controls.Add(this.btBackgroundBrowse);
             this.tabSettings.Controls.Add(this.label64);
             this.tabSettings.Controls.Add(this.tbBackgroundImage);
-            this.tabSettings.Controls.Add(this.settingsIsAdmin);
-            this.tabSettings.Controls.Add(this.label60);
-            this.tabSettings.Controls.Add(this.tbSettingsUsername);
-            this.tabSettings.Controls.Add(this.btSettingsUserRemove);
-            this.tabSettings.Controls.Add(this.btSettingsUserAdd);
-            this.tabSettings.Controls.Add(this.dataUsers);
             this.tabSettings.Controls.Add(this.label59);
             this.tabSettings.Controls.Add(this.tbSettingDefaultTaxRate);
             this.tabSettings.Controls.Add(this.label58);
             this.tabSettings.Controls.Add(this.tbSettingCompanyName);
             this.tabSettings.Controls.Add(this.btSettingsSave);
-            this.tabSettings.Controls.Add(this.label57);
             this.tabSettings.Controls.Add(this.label56);
             this.tabSettings.Controls.Add(this.btDatabaseBrowse);
             this.tabSettings.Controls.Add(this.tbDatabaseLoc);
@@ -2496,93 +2517,36 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
-            // settingsIsAdmin
+            // btBackgroundBrowse
             // 
-            this.settingsIsAdmin.AutoSize = true;
-            this.settingsIsAdmin.Location = new System.Drawing.Point(905, 60);
-            this.settingsIsAdmin.Name = "settingsIsAdmin";
-            this.settingsIsAdmin.Size = new System.Drawing.Size(68, 17);
-            this.settingsIsAdmin.TabIndex = 14;
-            this.settingsIsAdmin.Text = "isAdmin?";
-            this.settingsIsAdmin.UseVisualStyleBackColor = true;
+            this.btBackgroundBrowse.Location = new System.Drawing.Point(225, 516);
+            this.btBackgroundBrowse.Name = "btBackgroundBrowse";
+            this.btBackgroundBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btBackgroundBrowse.TabIndex = 17;
+            this.btBackgroundBrowse.Text = "Browse";
+            this.btBackgroundBrowse.UseVisualStyleBackColor = true;
+            this.btBackgroundBrowse.Click += new System.EventHandler(this.btBackgroundBrowse_Click);
             // 
-            // label60
+            // label64
             // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(755, 61);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(55, 13);
-            this.label60.TabIndex = 13;
-            this.label60.Text = "Username";
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(15, 522);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(97, 13);
+            this.label64.TabIndex = 16;
+            this.label64.Text = "Background Image";
             // 
-            // tbSettingsUsername
+            // tbBackgroundImage
             // 
-            this.tbSettingsUsername.Location = new System.Drawing.Point(816, 57);
-            this.tbSettingsUsername.Name = "tbSettingsUsername";
-            this.tbSettingsUsername.Size = new System.Drawing.Size(74, 20);
-            this.tbSettingsUsername.TabIndex = 12;
-            // 
-            // btSettingsUserRemove
-            // 
-            this.btSettingsUserRemove.Location = new System.Drawing.Point(888, 14);
-            this.btSettingsUserRemove.Name = "btSettingsUserRemove";
-            this.btSettingsUserRemove.Size = new System.Drawing.Size(75, 23);
-            this.btSettingsUserRemove.TabIndex = 11;
-            this.btSettingsUserRemove.Text = "Remove User";
-            this.btSettingsUserRemove.UseVisualStyleBackColor = true;
-            this.btSettingsUserRemove.Click += new System.EventHandler(this.BtSettingsUserRemove_Click);
-            // 
-            // btSettingsUserAdd
-            // 
-            this.btSettingsUserAdd.Location = new System.Drawing.Point(793, 14);
-            this.btSettingsUserAdd.Name = "btSettingsUserAdd";
-            this.btSettingsUserAdd.Size = new System.Drawing.Size(75, 23);
-            this.btSettingsUserAdd.TabIndex = 10;
-            this.btSettingsUserAdd.Text = "Add User";
-            this.btSettingsUserAdd.UseVisualStyleBackColor = true;
-            this.btSettingsUserAdd.Click += new System.EventHandler(this.BtSettingsUserAdd_Click);
-            // 
-            // dataUsers
-            // 
-            this.dataUsers.AllowUserToAddRows = false;
-            this.dataUsers.AllowUserToDeleteRows = false;
-            this.dataUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.usersUsername,
-            this.usersLastLogin,
-            this.usersIsAdmin});
-            this.dataUsers.Location = new System.Drawing.Point(718, 97);
-            this.dataUsers.Name = "dataUsers";
-            this.dataUsers.ReadOnly = true;
-            this.dataUsers.Size = new System.Drawing.Size(344, 182);
-            this.dataUsers.TabIndex = 9;
-            // 
-            // usersUsername
-            // 
-            this.usersUsername.HeaderText = "Username";
-            this.usersUsername.Name = "usersUsername";
-            this.usersUsername.ReadOnly = true;
-            this.usersUsername.Width = 60;
-            // 
-            // usersLastLogin
-            // 
-            this.usersLastLogin.HeaderText = "LastLogin";
-            this.usersLastLogin.Name = "usersLastLogin";
-            this.usersLastLogin.ReadOnly = true;
-            this.usersLastLogin.Width = 140;
-            // 
-            // usersIsAdmin
-            // 
-            this.usersIsAdmin.HeaderText = "IsAdmin";
-            this.usersIsAdmin.Name = "usersIsAdmin";
-            this.usersIsAdmin.ReadOnly = true;
-            this.usersIsAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.usersIsAdmin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.tbBackgroundImage.Location = new System.Drawing.Point(118, 519);
+            this.tbBackgroundImage.Name = "tbBackgroundImage";
+            this.tbBackgroundImage.Size = new System.Drawing.Size(100, 20);
+            this.tbBackgroundImage.TabIndex = 15;
             // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(15, 189);
+            this.label59.Location = new System.Drawing.Point(15, 429);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(88, 13);
             this.label59.TabIndex = 8;
@@ -2590,7 +2554,7 @@
             // 
             // tbSettingDefaultTaxRate
             // 
-            this.tbSettingDefaultTaxRate.Location = new System.Drawing.Point(118, 186);
+            this.tbSettingDefaultTaxRate.Location = new System.Drawing.Point(118, 426);
             this.tbSettingDefaultTaxRate.Name = "tbSettingDefaultTaxRate";
             this.tbSettingDefaultTaxRate.Size = new System.Drawing.Size(100, 20);
             this.tbSettingDefaultTaxRate.TabIndex = 7;
@@ -2598,7 +2562,7 @@
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(30, 71);
+            this.label58.Location = new System.Drawing.Point(30, 30);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(82, 13);
             this.label58.TabIndex = 6;
@@ -2606,14 +2570,14 @@
             // 
             // tbSettingCompanyName
             // 
-            this.tbSettingCompanyName.Location = new System.Drawing.Point(118, 68);
+            this.tbSettingCompanyName.Location = new System.Drawing.Point(118, 27);
             this.tbSettingCompanyName.Name = "tbSettingCompanyName";
             this.tbSettingCompanyName.Size = new System.Drawing.Size(100, 20);
             this.tbSettingCompanyName.TabIndex = 5;
             // 
             // btSettingsSave
             // 
-            this.btSettingsSave.Location = new System.Drawing.Point(481, 539);
+            this.btSettingsSave.Location = new System.Drawing.Point(479, 589);
             this.btSettingsSave.Name = "btSettingsSave";
             this.btSettingsSave.Size = new System.Drawing.Size(75, 23);
             this.btSettingsSave.TabIndex = 4;
@@ -2621,19 +2585,10 @@
             this.btSettingsSave.UseVisualStyleBackColor = true;
             this.btSettingsSave.Click += new System.EventHandler(this.BtSettingsSave_Click);
             // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(129, 119);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(156, 13);
-            this.label57.TabIndex = 3;
-            this.label57.Text = "Leave blank for default location";
-            // 
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(15, 97);
+            this.label56.Location = new System.Drawing.Point(15, 465);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(97, 13);
             this.label56.TabIndex = 2;
@@ -2641,7 +2596,7 @@
             // 
             // btDatabaseBrowse
             // 
-            this.btDatabaseBrowse.Location = new System.Drawing.Point(225, 93);
+            this.btDatabaseBrowse.Location = new System.Drawing.Point(225, 461);
             this.btDatabaseBrowse.Name = "btDatabaseBrowse";
             this.btDatabaseBrowse.Size = new System.Drawing.Size(75, 23);
             this.btDatabaseBrowse.TabIndex = 1;
@@ -2651,7 +2606,7 @@
             // 
             // tbDatabaseLoc
             // 
-            this.tbDatabaseLoc.Location = new System.Drawing.Point(118, 94);
+            this.tbDatabaseLoc.Location = new System.Drawing.Point(118, 462);
             this.tbDatabaseLoc.Name = "tbDatabaseLoc";
             this.tbDatabaseLoc.Size = new System.Drawing.Size(100, 20);
             this.tbDatabaseLoc.TabIndex = 0;
@@ -2741,31 +2696,217 @@
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
             // 
-            // label64
+            // label69
             // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(15, 249);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(97, 13);
-            this.label64.TabIndex = 16;
-            this.label64.Text = "Background Image";
+            this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label69.Location = new System.Drawing.Point(223, 128);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(173, 43);
+            this.label69.TabIndex = 106;
+            this.label69.Text = "The default address used for purchase orders, leave blank for no default address." +
+    "";
             // 
-            // tbBackgroundImage
+            // label65
             // 
-            this.tbBackgroundImage.Location = new System.Drawing.Point(118, 246);
-            this.tbBackgroundImage.Name = "tbBackgroundImage";
-            this.tbBackgroundImage.Size = new System.Drawing.Size(100, 20);
-            this.tbBackgroundImage.TabIndex = 15;
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(62, 184);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(50, 13);
+            this.label65.TabIndex = 111;
+            this.label65.Text = "Zip Code";
             // 
-            // btBackgroundBrowse
+            // tbSettingsPOZip
             // 
-            this.btBackgroundBrowse.Location = new System.Drawing.Point(225, 243);
-            this.btBackgroundBrowse.Name = "btBackgroundBrowse";
-            this.btBackgroundBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btBackgroundBrowse.TabIndex = 17;
-            this.btBackgroundBrowse.Text = "Browse";
-            this.btBackgroundBrowse.UseVisualStyleBackColor = true;
-            this.btBackgroundBrowse.Click += new System.EventHandler(this.btBackgroundBrowse_Click);
+            this.tbSettingsPOZip.Location = new System.Drawing.Point(118, 181);
+            this.tbSettingsPOZip.Name = "tbSettingsPOZip";
+            this.tbSettingsPOZip.Size = new System.Drawing.Size(100, 20);
+            this.tbSettingsPOZip.TabIndex = 114;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(80, 158);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(32, 13);
+            this.label66.TabIndex = 110;
+            this.label66.Text = "State";
+            // 
+            // tbSettingsPOState
+            // 
+            this.tbSettingsPOState.Location = new System.Drawing.Point(118, 155);
+            this.tbSettingsPOState.Name = "tbSettingsPOState";
+            this.tbSettingsPOState.Size = new System.Drawing.Size(100, 20);
+            this.tbSettingsPOState.TabIndex = 113;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(88, 132);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(24, 13);
+            this.label67.TabIndex = 109;
+            this.label67.Text = "City";
+            // 
+            // tbSettingsPOCity
+            // 
+            this.tbSettingsPOCity.Location = new System.Drawing.Point(118, 129);
+            this.tbSettingsPOCity.Name = "tbSettingsPOCity";
+            this.tbSettingsPOCity.Size = new System.Drawing.Size(100, 20);
+            this.tbSettingsPOCity.TabIndex = 112;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(77, 106);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(35, 13);
+            this.label68.TabIndex = 107;
+            this.label68.Text = "Street";
+            // 
+            // tbSettingsPOStreet
+            // 
+            this.tbSettingsPOStreet.Location = new System.Drawing.Point(118, 103);
+            this.tbSettingsPOStreet.Name = "tbSettingsPOStreet";
+            this.tbSettingsPOStreet.Size = new System.Drawing.Size(100, 20);
+            this.tbSettingsPOStreet.TabIndex = 108;
+            // 
+            // label70
+            // 
+            this.label70.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label70.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label70.Location = new System.Drawing.Point(224, 19);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(173, 43);
+            this.label70.TabIndex = 115;
+            this.label70.Text = "The name of the company, used on the login screen and the top of the application." +
+    "";
+            // 
+            // label71
+            // 
+            this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label71.Location = new System.Drawing.Point(224, 431);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(173, 15);
+            this.label71.TabIndex = 116;
+            this.label71.Text = "Default tax rate applied to all orders";
+            // 
+            // label57
+            // 
+            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label57.Location = new System.Drawing.Point(306, 461);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(173, 32);
+            this.label57.TabIndex = 117;
+            this.label57.Text = "The location of the database file, leave blank for default location.";
+            // 
+            // label72
+            // 
+            this.label72.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label72.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label72.Location = new System.Drawing.Point(306, 516);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(173, 32);
+            this.label72.TabIndex = 118;
+            this.label72.Text = "Upload background images for the login screen";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.settingsIsAdmin);
+            this.groupBox7.Controls.Add(this.label60);
+            this.groupBox7.Controls.Add(this.tbSettingsUsername);
+            this.groupBox7.Controls.Add(this.btSettingsUserRemove);
+            this.groupBox7.Controls.Add(this.btSettingsUserAdd);
+            this.groupBox7.Controls.Add(this.dataUsers);
+            this.groupBox7.Location = new System.Drawing.Point(684, 19);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(378, 302);
+            this.groupBox7.TabIndex = 119;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "User Management";
+            // 
+            // settingsIsAdmin
+            // 
+            this.settingsIsAdmin.AutoSize = true;
+            this.settingsIsAdmin.Location = new System.Drawing.Point(217, 65);
+            this.settingsIsAdmin.Name = "settingsIsAdmin";
+            this.settingsIsAdmin.Size = new System.Drawing.Size(68, 17);
+            this.settingsIsAdmin.TabIndex = 20;
+            this.settingsIsAdmin.Text = "isAdmin?";
+            this.settingsIsAdmin.UseVisualStyleBackColor = true;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(67, 66);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(55, 13);
+            this.label60.TabIndex = 19;
+            this.label60.Text = "Username";
+            // 
+            // tbSettingsUsername
+            // 
+            this.tbSettingsUsername.Location = new System.Drawing.Point(128, 62);
+            this.tbSettingsUsername.Name = "tbSettingsUsername";
+            this.tbSettingsUsername.Size = new System.Drawing.Size(74, 20);
+            this.tbSettingsUsername.TabIndex = 18;
+            // 
+            // btSettingsUserRemove
+            // 
+            this.btSettingsUserRemove.Location = new System.Drawing.Point(200, 19);
+            this.btSettingsUserRemove.Name = "btSettingsUserRemove";
+            this.btSettingsUserRemove.Size = new System.Drawing.Size(75, 23);
+            this.btSettingsUserRemove.TabIndex = 17;
+            this.btSettingsUserRemove.Text = "Remove User";
+            this.btSettingsUserRemove.UseVisualStyleBackColor = true;
+            // 
+            // btSettingsUserAdd
+            // 
+            this.btSettingsUserAdd.Location = new System.Drawing.Point(105, 19);
+            this.btSettingsUserAdd.Name = "btSettingsUserAdd";
+            this.btSettingsUserAdd.Size = new System.Drawing.Size(75, 23);
+            this.btSettingsUserAdd.TabIndex = 16;
+            this.btSettingsUserAdd.Text = "Add User";
+            this.btSettingsUserAdd.UseVisualStyleBackColor = true;
+            // 
+            // dataUsers
+            // 
+            this.dataUsers.AllowUserToAddRows = false;
+            this.dataUsers.AllowUserToDeleteRows = false;
+            this.dataUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.usersUsername,
+            this.usersLastLogin,
+            this.usersIsAdmin});
+            this.dataUsers.Location = new System.Drawing.Point(19, 102);
+            this.dataUsers.Name = "dataUsers";
+            this.dataUsers.ReadOnly = true;
+            this.dataUsers.Size = new System.Drawing.Size(344, 182);
+            this.dataUsers.TabIndex = 15;
+            // 
+            // usersUsername
+            // 
+            this.usersUsername.HeaderText = "Username";
+            this.usersUsername.Name = "usersUsername";
+            this.usersUsername.ReadOnly = true;
+            this.usersUsername.Width = 60;
+            // 
+            // usersLastLogin
+            // 
+            this.usersLastLogin.HeaderText = "LastLogin";
+            this.usersLastLogin.Name = "usersLastLogin";
+            this.usersLastLogin.ReadOnly = true;
+            this.usersLastLogin.Width = 140;
+            // 
+            // usersIsAdmin
+            // 
+            this.usersIsAdmin.HeaderText = "IsAdmin";
+            this.usersIsAdmin.Name = "usersIsAdmin";
+            this.usersIsAdmin.ReadOnly = true;
+            this.usersIsAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.usersIsAdmin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Main
             // 
@@ -2820,6 +2961,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataOrderItems)).EndInit();
             this.tabSettings.ResumeLayout(false);
             this.tabSettings.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3047,7 +3190,6 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Button btDatabaseBrowse;
         private System.Windows.Forms.Button btSettingsSave;
-        private System.Windows.Forms.Label label57;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox tbLoginUser;
         private System.Windows.Forms.TextBox tbLoginPass;
@@ -3059,15 +3201,6 @@
         private System.Windows.Forms.TextBox tbSettingCompanyName;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.TextBox tbSettingDefaultTaxRate;
-        private System.Windows.Forms.Button btSettingsUserRemove;
-        private System.Windows.Forms.Button btSettingsUserAdd;
-        private System.Windows.Forms.DataGridView dataUsers;
-        private System.Windows.Forms.CheckBox settingsIsAdmin;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.TextBox tbSettingsUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usersUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usersLastLogin;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn usersIsAdmin;
         private System.Windows.Forms.Label lbSessionUsername;
         private System.Windows.Forms.LinkLabel linkChangePassword;
         private System.Windows.Forms.Label label63;
@@ -3084,6 +3217,29 @@
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.TextBox tbBackgroundImage;
         private System.Windows.Forms.Button btBackgroundBrowse;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox settingsIsAdmin;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox tbSettingsUsername;
+        private System.Windows.Forms.Button btSettingsUserRemove;
+        private System.Windows.Forms.Button btSettingsUserAdd;
+        private System.Windows.Forms.DataGridView dataUsers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn usersUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn usersLastLogin;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn usersIsAdmin;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TextBox tbSettingsPOZip;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox tbSettingsPOState;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.TextBox tbSettingsPOCity;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox tbSettingsPOStreet;
+        private System.Windows.Forms.Label label69;
     }
 }
 

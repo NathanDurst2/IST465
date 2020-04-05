@@ -71,6 +71,14 @@ namespace ERP
                         dataAll.Rows[dataAll.RowCount - 1].Cells["allDesc"].Value = items[i].Item_Description;
                     }
                 }
+
+                if(originType == "new")
+                {
+                    tbShippingStreet.Text = ConfigurationManager.AppSettings.Get("purchaseOrderDefaultStreet").ToString();
+                    tbShippingCity.Text = ConfigurationManager.AppSettings.Get("purchaseOrderDefaultCity").ToString();
+                    tbShippingState.Text = ConfigurationManager.AppSettings.Get("purchaseOrderDefaultState").ToString();
+                    tbShippingZip.Text = ConfigurationManager.AppSettings.Get("purchaseOrderDefaultZip").ToString();
+                }
             }
         }
         private void dataSelected_CellEndEdit(object sender, EventArgs e)

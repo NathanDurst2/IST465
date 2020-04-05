@@ -4,6 +4,10 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using X16 = DocumentFormat.OpenXml.Office2016.Excel;
 
 namespace ERP
 {
@@ -18,12 +22,14 @@ namespace ERP
             RefreshVendors();
             RefreshEmployeee();
             RefreshOrders();
+            
             string path = ConfigurationManager.AppSettings.Get("backgroundPath").ToString();
             if (path != "")
             {
                 this.BackgroundImage = Image.FromFile(path);
             }
             lbCompany.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
+            this.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
         }
         List<SelectedItems> selectedItems = new List<SelectedItems>();
         double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
@@ -57,6 +63,10 @@ namespace ERP
                 tbSettingCompanyName.Text = settings.Settings["companyName"].Value;
                 tbSettingDefaultTaxRate.Text = settings.Settings["taxRate"].Value;
                 tbBackgroundImage.Text = settings.Settings["backgroundPath"].Value;
+                tbSettingsPOStreet.Text = settings.Settings["purchaseOrderDefaultStreet"].Value;
+                tbSettingsPOCity.Text = settings.Settings["purchaseOrderDefaultCity"].Value;
+                tbSettingsPOState.Text = settings.Settings["purchaseOrderDefaultState"].Value;
+                tbSettingsPOZip.Text = settings.Settings["purchaseOrderDefaultZip"].Value;
                 RefreshUsers();
 
             }
@@ -396,6 +406,7 @@ namespace ERP
             int Cust_ID = (int)dataCustomer.Rows[dataCustomer.CurrentCell.RowIndex].Cells["Cust_ID"].Value;
 
             Customer cust = SqliteDataAccess.LoadCustomer(Cust_ID)[0];
+            //CreateExcelFile(SqliteDataAccess.LoadCustomer(Cust_ID), "");
 
             tbCustID.Text = cust.Cust_Id.ToString();
             tbFirstName.Text = cust.Customer_FirstName;
@@ -1062,21 +1073,21 @@ namespace ERP
             if (tbVendorName.Text != "" && tbVendorStreet.Text != "" && tbVendorStreet.Text != "" && tbVendorState.Text != "" && tbVendorCity.Text != "" && tbVendorZip.Text != "" && tbVendorPhone.Text != "" && tbVendorCreditLimit.Text != "" && tbVendorEmail.Text != "" && cbVendorTerms.Text != "")
             {
                 Vendor ven = new Vendor();
-            ven.Vendor_ID = Convert.ToInt32(tbVendorID.Text);
-            ven.Vendor_Name = tbVendorName.Text;
-            ven.Vendor_Street = tbVendorStreet.Text;
-            ven.Vendor_State = tbVendorState.Text;
-            ven.Vendor_City = tbVendorCity.Text;
-            ven.Vendor_Zip = tbVendorZip.Text;
-            ven.Vendor_Phone = tbVendorPhone.Text;
-            ven.Vendor_Email = tbVendorEmail.Text;
-            ven.Vendor_CreditLimit = tbVendorCreditLimit.Text;
-            ven.Vendor_Terms = cbVendorTerms.Text;
-            SqliteDataAccess.EditVendor(ven);
-            btVendorSave.Visible = false;
-            BtVendorClear_Click(null, null);
-            RefreshVendors();
-            btVendorSave.Visible = false;
+                ven.Vendor_ID = Convert.ToInt32(tbVendorID.Text);
+                ven.Vendor_Name = tbVendorName.Text;
+                ven.Vendor_Street = tbVendorStreet.Text;
+                ven.Vendor_State = tbVendorState.Text;
+                ven.Vendor_City = tbVendorCity.Text;
+                ven.Vendor_Zip = tbVendorZip.Text;
+                ven.Vendor_Phone = tbVendorPhone.Text;
+                ven.Vendor_Email = tbVendorEmail.Text;
+                ven.Vendor_CreditLimit = tbVendorCreditLimit.Text;
+                ven.Vendor_Terms = cbVendorTerms.Text;
+                SqliteDataAccess.EditVendor(ven);
+                btVendorSave.Visible = false;
+                BtVendorClear_Click(null, null);
+                RefreshVendors();
+                btVendorSave.Visible = false;
             }
             else
             {
@@ -1108,7 +1119,8 @@ namespace ERP
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                tbBackgroundImage.Text = openFileDialog1.FileName;
+                Image.FromFile(openFileDialog1.FileName).Save(Path.GetFileName(openFileDialog1.FileName));
+                tbBackgroundImage.Text = Path.GetFileName(openFileDialog1.FileName);
             }
         }
 
@@ -1117,15 +1129,30 @@ namespace ERP
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
             var appSetting = (AppSettingsSection)config.GetSection("appSettings");
+            // Company name
             if (appSetting != null && tbSettingCompanyName.Text != "")
             {
                 appSetting.Settings["companyName"].Value = tbSettingCompanyName.Text;
                 ConfigurationManager.RefreshSection("appSettings");
                 config.Save();
             }
+            // Default address for purchase orders
+            if (appSetting != null)
+            {
+                appSetting.Settings["purchaseOrderDefaultStreet"].Value = tbSettingsPOStreet.Text;
+                appSetting.Settings["purchaseOrderDefaultCity"].Value = tbSettingsPOCity.Text;
+                appSetting.Settings["purchaseOrderDefaultState"].Value = tbSettingsPOState.Text;
+                appSetting.Settings["purchaseOrderDefaultZip"].Value = tbSettingsPOZip.Text;
+                ConfigurationManager.RefreshSection("appSettings");
+                config.Save();
+            }
+            // Background image
             if (appSetting != null && tbBackgroundImage.Text != "")
             {
-                appSetting.Settings["backgroundPath"].Value = tbBackgroundImage.Text;
+                if (appSetting.Settings["backgroundPath"].Value != tbBackgroundImage.Text)
+                {
+                    appSetting.Settings["backgroundPath"].Value = Path.GetFileName(tbBackgroundImage.Text);
+                }
                 ConfigurationManager.RefreshSection("appSettings");
                 config.Save();
             }
@@ -1135,6 +1162,7 @@ namespace ERP
                 config.Save();
                 ConfigurationManager.RefreshSection("appSettings");
             }
+            // Custom database location
             if (connectionStringsSection != null && tbDatabaseLoc.Text != "")
             {
                 connectionStringsSection.ConnectionStrings["Custom"].ConnectionString = String.Format("Data Source=" + tbDatabaseLoc.Text + "; Version=3;");
@@ -1334,6 +1362,46 @@ namespace ERP
             poForm.ShowDialog();
             RefreshVendorPOs();
         }
+
+        //// Excel Test Export 
+        //// Figure out how to export class name
+        //private void CreateExcelFile(object data, string directory)
+        //{
+        //    directory = @"C:\Users\Nathan\Desktop\testexel.xlsx";
+        //    using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(directory, SpreadsheetDocumentType.Workbook))
+        //    {
+        //        // Add a WorkbookPart to the document.
+        //        WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+        //        workbookpart.Workbook = new Workbook();
+
+        //        // Add a WorksheetPart to the WorkbookPart.
+        //        WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+        //        worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+        //        // Add Sheets to the Workbook.
+        //        Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
+        //            AppendChild<Sheets>(new Sheets());
+
+
+        //        MessageBox.Show(data.GetType().FullName);
+        //        // Append a new worksheet and associate it with the workbook.
+        //        Sheet sheet = new Sheet()
+        //        {
+        //            Id = spreadsheetDocument.WorkbookPart.
+        //            GetIdOfPart(worksheetPart),
+        //            SheetId = 1,
+        //            Name = data.GetType().ToString()
+        //        };
+        //        sheets.Append(sheet);
+        //        MessageBox.Show(data.GetType().ToString());
+
+        //        workbookpart.Workbook.Save();
+
+        //        // Close the document.
+        //        spreadsheetDocument.Close();
+
+        //    }
+        //}
     }
 
 }
