@@ -39,7 +39,6 @@ C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\bin\Debug\Dapper.xml
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\bin\Debug\System.Data.SQLite.xml
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.csprojAssemblyReference.cache
-C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.Form1.resources
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.Properties.Resources.resources
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.csproj.GenerateResource.cache
 C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.csproj.CoreCompileInputs.cache
@@ -62,3 +61,13 @@ C:\Users\sbruc\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.csproj.CoreCom
 C:\Users\sbruc\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.csproj.CopyComplete
 C:\Users\sbruc\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.exe
 C:\Users\sbruc\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.pdb
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\erp.db
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.ManageItems.resources
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.Main.resources
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.PasswordReset.resources
+C:\Users\Nathan\Source\Repos\NathanDurst2\IST465\ERP\obj\Debug\ERP.PurchaseOrders.resources
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\System.IO.Packaging.dll
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\Nathan\source\repos\NathanDurst2\IST465\ERP\bin\Debug\System.IO.Packaging.xml

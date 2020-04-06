@@ -39,11 +39,20 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.10.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.10.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,19 +63,56 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="PasswordReset.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PasswordReset.Designer.cs">
+      <DependentUpon>PasswordReset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_PurchaseOrder_Item.cs" />
+    <Compile Include="_PurchaseOrder.cs" />
+    <Compile Include="PurchaseOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PurchaseOrders.Designer.cs">
+      <DependentUpon>PurchaseOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecurePasswordHasher.cs" />
+    <Compile Include="_SelectedItemVendor.cs" />
+    <Compile Include="_User.cs" />
+    <Compile Include="_Order.cs" />
+    <Compile Include="_SelectedItems.cs" />
+    <Compile Include="ManageItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageItems.Designer.cs">
+      <DependentUpon>ManageItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_Order_Item.cs" />
+    <Compile Include="_Customer.cs" />
+    <Compile Include="_Employee.cs" />
+    <Compile Include="_Item.cs" />
+    <Compile Include="SQLQuery.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="_Vendor.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageItems.resx">
+      <DependentUpon>ManageItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordReset.resx">
+      <DependentUpon>PasswordReset.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,7 +123,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="erp.db" />
+    <EmbeddedResource Include="PurchaseOrders.resx">
+      <DependentUpon>PurchaseOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="erp.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Customer.datasource" />
     <None Include="Properties\DataSources\Employee.datasource" />

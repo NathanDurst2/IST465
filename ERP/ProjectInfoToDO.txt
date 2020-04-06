@@ -1,1 +1,8 @@
-﻿
+﻿Settings Tab
+	Upload Logo (auto size)
+	Upload background
+	Default shipping address for POs
+
+
+	
+
