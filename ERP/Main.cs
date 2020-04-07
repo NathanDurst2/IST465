@@ -1363,6 +1363,16 @@ namespace ERP
             RefreshVendorPOs();
         }
 
+        private void BtSettingsUserAdd_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtSettingsUserRemove_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         //// Excel Test Export 
         //// Figure out how to export class name
         //private void CreateExcelFile(object data, string directory)
