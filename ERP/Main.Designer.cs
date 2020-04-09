@@ -350,6 +350,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1073, 641);
             this.tabControl.TabIndex = 0;
+            this.tabControl.TabStop = false;
             this.tabControl.Visible = false;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_Selected);
             // 
@@ -422,7 +423,7 @@
             this.groupBox5.Location = new System.Drawing.Point(30, 98);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(170, 135);
-            this.groupBox5.TabIndex = 104;
+            this.groupBox5.TabIndex = 215;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Address";
             // 
@@ -440,7 +441,7 @@
             this.tbCustZip.Location = new System.Drawing.Point(64, 96);
             this.tbCustZip.Name = "tbCustZip";
             this.tbCustZip.Size = new System.Drawing.Size(100, 20);
-            this.tbCustZip.TabIndex = 74;
+            this.tbCustZip.TabIndex = 250;
             // 
             // label16
             // 
@@ -456,7 +457,7 @@
             this.tbCustState.Location = new System.Drawing.Point(64, 70);
             this.tbCustState.Name = "tbCustState";
             this.tbCustState.Size = new System.Drawing.Size(100, 20);
-            this.tbCustState.TabIndex = 73;
+            this.tbCustState.TabIndex = 240;
             // 
             // label15
             // 
@@ -472,7 +473,7 @@
             this.tbCustCity.Location = new System.Drawing.Point(64, 44);
             this.tbCustCity.Name = "tbCustCity";
             this.tbCustCity.Size = new System.Drawing.Size(100, 20);
-            this.tbCustCity.TabIndex = 72;
+            this.tbCustCity.TabIndex = 230;
             // 
             // label3
             // 
@@ -488,16 +489,18 @@
             this.tbCustStreet.Location = new System.Drawing.Point(64, 18);
             this.tbCustStreet.Name = "tbCustStreet";
             this.tbCustStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbCustStreet.TabIndex = 68;
+            this.tbCustStreet.TabIndex = 220;
             // 
             // cbCustSalesRep
             // 
+            this.cbCustSalesRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbCustSalesRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustSalesRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbCustSalesRep.FormattingEnabled = true;
             this.cbCustSalesRep.Location = new System.Drawing.Point(261, 78);
             this.cbCustSalesRep.Name = "cbCustSalesRep";
             this.cbCustSalesRep.Size = new System.Drawing.Size(100, 21);
-            this.cbCustSalesRep.TabIndex = 103;
+            this.cbCustSalesRep.TabIndex = 280;
             this.cbCustSalesRep.Click += new System.EventHandler(this.CbCustSalesRep_Click);
             // 
             // btCustSave
@@ -505,7 +508,7 @@
             this.btCustSave.Location = new System.Drawing.Point(43, 237);
             this.btCustSave.Name = "btCustSave";
             this.btCustSave.Size = new System.Drawing.Size(75, 23);
-            this.btCustSave.TabIndex = 102;
+            this.btCustSave.TabIndex = 310;
             this.btCustSave.Text = "Save";
             this.btCustSave.UseVisualStyleBackColor = true;
             this.btCustSave.Visible = false;
@@ -516,7 +519,7 @@
             this.btCustEdit.Location = new System.Drawing.Point(354, 247);
             this.btCustEdit.Name = "btCustEdit";
             this.btCustEdit.Size = new System.Drawing.Size(75, 23);
-            this.btCustEdit.TabIndex = 101;
+            this.btCustEdit.TabIndex = 350;
             this.btCustEdit.TabStop = false;
             this.btCustEdit.Text = "Edit";
             this.btCustEdit.UseVisualStyleBackColor = true;
@@ -527,7 +530,7 @@
             this.btCustRemove.Location = new System.Drawing.Point(435, 247);
             this.btCustRemove.Name = "btCustRemove";
             this.btCustRemove.Size = new System.Drawing.Size(75, 23);
-            this.btCustRemove.TabIndex = 44;
+            this.btCustRemove.TabIndex = 0;
             this.btCustRemove.TabStop = false;
             this.btCustRemove.Text = "Remove";
             this.btCustRemove.UseVisualStyleBackColor = true;
@@ -720,7 +723,7 @@
             this.btCustAdd.Location = new System.Drawing.Point(43, 237);
             this.btCustAdd.Name = "btCustAdd";
             this.btCustAdd.Size = new System.Drawing.Size(75, 23);
-            this.btCustAdd.TabIndex = 100;
+            this.btCustAdd.TabIndex = 290;
             this.btCustAdd.Text = "Add";
             this.btCustAdd.UseVisualStyleBackColor = true;
             this.btCustAdd.Click += new System.EventHandler(this.BtCustAdd_Click);
@@ -775,28 +778,28 @@
             this.tbEmail.Location = new System.Drawing.Point(261, 52);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(100, 20);
-            this.tbEmail.TabIndex = 88;
+            this.tbEmail.TabIndex = 270;
             // 
             // tbPhone
             // 
             this.tbPhone.Location = new System.Drawing.Point(261, 26);
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(100, 20);
-            this.tbPhone.TabIndex = 77;
+            this.tbPhone.TabIndex = 260;
             // 
             // tbLastName
             // 
             this.tbLastName.Location = new System.Drawing.Point(90, 75);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(100, 20);
-            this.tbLastName.TabIndex = 22;
+            this.tbLastName.TabIndex = 210;
             // 
             // tbFirstName
             // 
             this.tbFirstName.Location = new System.Drawing.Point(90, 49);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(100, 20);
-            this.tbFirstName.TabIndex = 11;
+            this.tbFirstName.TabIndex = 200;
             // 
             // tabEmployee
             // 
@@ -842,7 +845,7 @@
             this.btEmpSave.Location = new System.Drawing.Point(49, 220);
             this.btEmpSave.Name = "btEmpSave";
             this.btEmpSave.Size = new System.Drawing.Size(75, 23);
-            this.btEmpSave.TabIndex = 130;
+            this.btEmpSave.TabIndex = 300;
             this.btEmpSave.Text = "Save";
             this.btEmpSave.UseVisualStyleBackColor = true;
             this.btEmpSave.Visible = false;
@@ -853,7 +856,7 @@
             this.btEmpEdit.Location = new System.Drawing.Point(351, 237);
             this.btEmpEdit.Name = "btEmpEdit";
             this.btEmpEdit.Size = new System.Drawing.Size(75, 23);
-            this.btEmpEdit.TabIndex = 129;
+            this.btEmpEdit.TabIndex = 320;
             this.btEmpEdit.TabStop = false;
             this.btEmpEdit.Text = "Edit";
             this.btEmpEdit.UseVisualStyleBackColor = true;
@@ -872,12 +875,14 @@
             // 
             // cbEmpSupervisor
             // 
+            this.cbEmpSupervisor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbEmpSupervisor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmpSupervisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbEmpSupervisor.FormattingEnabled = true;
             this.cbEmpSupervisor.Location = new System.Drawing.Point(278, 78);
             this.cbEmpSupervisor.Name = "cbEmpSupervisor";
             this.cbEmpSupervisor.Size = new System.Drawing.Size(121, 21);
-            this.cbEmpSupervisor.TabIndex = 75;
+            this.cbEmpSupervisor.TabIndex = 280;
             this.cbEmpSupervisor.Click += new System.EventHandler(this.cbEmpSupervisor_Click);
             // 
             // groupEmpAddress
@@ -893,7 +898,7 @@
             this.groupEmpAddress.Location = new System.Drawing.Point(34, 92);
             this.groupEmpAddress.Name = "groupEmpAddress";
             this.groupEmpAddress.Size = new System.Drawing.Size(178, 122);
-            this.groupEmpAddress.TabIndex = 105;
+            this.groupEmpAddress.TabIndex = 215;
             this.groupEmpAddress.TabStop = false;
             this.groupEmpAddress.Text = "Address";
             // 
@@ -911,7 +916,7 @@
             this.tbEmpZip.Location = new System.Drawing.Point(70, 96);
             this.tbEmpZip.Name = "tbEmpZip";
             this.tbEmpZip.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpZip.TabIndex = 74;
+            this.tbEmpZip.TabIndex = 250;
             // 
             // label49
             // 
@@ -927,7 +932,7 @@
             this.tbEmpState.Location = new System.Drawing.Point(70, 70);
             this.tbEmpState.Name = "tbEmpState";
             this.tbEmpState.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpState.TabIndex = 73;
+            this.tbEmpState.TabIndex = 240;
             // 
             // label50
             // 
@@ -943,7 +948,7 @@
             this.tbEmpCity.Location = new System.Drawing.Point(70, 44);
             this.tbEmpCity.Name = "tbEmpCity";
             this.tbEmpCity.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpCity.TabIndex = 72;
+            this.tbEmpCity.TabIndex = 230;
             // 
             // label51
             // 
@@ -959,7 +964,7 @@
             this.tbEmpStreet.Location = new System.Drawing.Point(70, 18);
             this.tbEmpStreet.Name = "tbEmpStreet";
             this.tbEmpStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpStreet.TabIndex = 68;
+            this.tbEmpStreet.TabIndex = 220;
             // 
             // dataEmployee
             // 
@@ -1043,6 +1048,7 @@
             this.btEmpClear.Name = "btEmpClear";
             this.btEmpClear.Size = new System.Drawing.Size(75, 23);
             this.btEmpClear.TabIndex = 47;
+            this.btEmpClear.TabStop = false;
             this.btEmpClear.Text = "Clear";
             this.btEmpClear.UseVisualStyleBackColor = true;
             this.btEmpClear.Click += new System.EventHandler(this.BtEmpClear_Click);
@@ -1052,7 +1058,7 @@
             this.btEmpAdd.Location = new System.Drawing.Point(49, 220);
             this.btEmpAdd.Name = "btEmpAdd";
             this.btEmpAdd.Size = new System.Drawing.Size(75, 23);
-            this.btEmpAdd.TabIndex = 46;
+            this.btEmpAdd.TabIndex = 290;
             this.btEmpAdd.Text = "Add";
             this.btEmpAdd.UseVisualStyleBackColor = true;
             this.btEmpAdd.Click += new System.EventHandler(this.BtEmpAdd_Click);
@@ -1073,6 +1079,7 @@
             this.tbEmpID.ReadOnly = true;
             this.tbEmpID.Size = new System.Drawing.Size(32, 20);
             this.tbEmpID.TabIndex = 44;
+            this.tbEmpID.TabStop = false;
             // 
             // label7
             // 
@@ -1124,28 +1131,28 @@
             this.tbEmpEmail.Location = new System.Drawing.Point(278, 53);
             this.tbEmpEmail.Name = "tbEmpEmail";
             this.tbEmpEmail.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpEmail.TabIndex = 36;
+            this.tbEmpEmail.TabIndex = 270;
             // 
             // tbEmpPhone
             // 
             this.tbEmpPhone.Location = new System.Drawing.Point(278, 27);
             this.tbEmpPhone.Name = "tbEmpPhone";
             this.tbEmpPhone.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpPhone.TabIndex = 35;
+            this.tbEmpPhone.TabIndex = 260;
             // 
             // tbEmpLastName
             // 
             this.tbEmpLastName.Location = new System.Drawing.Point(103, 66);
             this.tbEmpLastName.Name = "tbEmpLastName";
             this.tbEmpLastName.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpLastName.TabIndex = 33;
+            this.tbEmpLastName.TabIndex = 210;
             // 
             // tbEmpFirstName
             // 
             this.tbEmpFirstName.Location = new System.Drawing.Point(103, 40);
             this.tbEmpFirstName.Name = "tbEmpFirstName";
             this.tbEmpFirstName.Size = new System.Drawing.Size(100, 20);
-            this.tbEmpFirstName.TabIndex = 32;
+            this.tbEmpFirstName.TabIndex = 200;
             // 
             // tabVendor
             // 
@@ -1188,7 +1195,7 @@
             this.groupBox6.Location = new System.Drawing.Point(435, 54);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(88, 132);
-            this.groupBox6.TabIndex = 141;
+            this.groupBox6.TabIndex = 175;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "POs";
             // 
@@ -1208,7 +1215,7 @@
             this.btPOEdit.Location = new System.Drawing.Point(6, 60);
             this.btPOEdit.Name = "btPOEdit";
             this.btPOEdit.Size = new System.Drawing.Size(75, 23);
-            this.btPOEdit.TabIndex = 128;
+            this.btPOEdit.TabIndex = 200;
             this.btPOEdit.TabStop = false;
             this.btPOEdit.Text = "Edit";
             this.btPOEdit.UseVisualStyleBackColor = true;
@@ -1219,7 +1226,7 @@
             this.btAddPOs.Location = new System.Drawing.Point(6, 19);
             this.btAddPOs.Name = "btAddPOs";
             this.btAddPOs.Size = new System.Drawing.Size(75, 23);
-            this.btAddPOs.TabIndex = 0;
+            this.btAddPOs.TabIndex = 190;
             this.btAddPOs.Text = "Add";
             this.btAddPOs.UseVisualStyleBackColor = true;
             this.btAddPOs.Click += new System.EventHandler(this.BtManagePOs_Click);
@@ -1287,15 +1294,16 @@
             this.btVendorAdd.Location = new System.Drawing.Point(43, 206);
             this.btVendorAdd.Name = "btVendorAdd";
             this.btVendorAdd.Size = new System.Drawing.Size(75, 23);
-            this.btVendorAdd.TabIndex = 135;
-            this.btVendorAdd.TabStop = false;
+            this.btVendorAdd.TabIndex = 180;
             this.btVendorAdd.Text = "Add";
             this.btVendorAdd.UseVisualStyleBackColor = true;
             this.btVendorAdd.Click += new System.EventHandler(this.BtVendorAdd_Click);
             // 
             // cbVendorTerms
             // 
+            this.cbVendorTerms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbVendorTerms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVendorTerms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbVendorTerms.FormattingEnabled = true;
             this.cbVendorTerms.Items.AddRange(new object[] {
             "PIA",
@@ -1308,7 +1316,7 @@
             this.cbVendorTerms.Location = new System.Drawing.Point(261, 86);
             this.cbVendorTerms.Name = "cbVendorTerms";
             this.cbVendorTerms.Size = new System.Drawing.Size(100, 21);
-            this.cbVendorTerms.TabIndex = 134;
+            this.cbVendorTerms.TabIndex = 160;
             // 
             // label42
             // 
@@ -1333,7 +1341,7 @@
             this.tbVendorCreditLimit.Location = new System.Drawing.Point(261, 113);
             this.tbVendorCreditLimit.Name = "tbVendorCreditLimit";
             this.tbVendorCreditLimit.Size = new System.Drawing.Size(100, 20);
-            this.tbVendorCreditLimit.TabIndex = 133;
+            this.tbVendorCreditLimit.TabIndex = 170;
             // 
             // groupBox4
             // 
@@ -1348,7 +1356,7 @@
             this.groupBox4.Location = new System.Drawing.Point(20, 74);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(174, 126);
-            this.groupBox4.TabIndex = 129;
+            this.groupBox4.TabIndex = 105;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Address";
             // 
@@ -1414,7 +1422,7 @@
             this.tbVendorStreet.Location = new System.Drawing.Point(70, 18);
             this.tbVendorStreet.Name = "tbVendorStreet";
             this.tbVendorStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbVendorStreet.TabIndex = 126;
+            this.tbVendorStreet.TabIndex = 115;
             // 
             // btVendorSave
             // 
@@ -1587,21 +1595,21 @@
             this.tbVendorEmail.Location = new System.Drawing.Point(261, 38);
             this.tbVendorEmail.Name = "tbVendorEmail";
             this.tbVendorEmail.Size = new System.Drawing.Size(100, 20);
-            this.tbVendorEmail.TabIndex = 126;
+            this.tbVendorEmail.TabIndex = 150;
             // 
             // tbVendorPhone
             // 
             this.tbVendorPhone.Location = new System.Drawing.Point(261, 12);
             this.tbVendorPhone.Name = "tbVendorPhone";
             this.tbVendorPhone.Size = new System.Drawing.Size(100, 20);
-            this.tbVendorPhone.TabIndex = 125;
+            this.tbVendorPhone.TabIndex = 140;
             // 
             // tbVendorName
             // 
             this.tbVendorName.Location = new System.Drawing.Point(90, 35);
             this.tbVendorName.Name = "tbVendorName";
             this.tbVendorName.Size = new System.Drawing.Size(100, 20);
-            this.tbVendorName.TabIndex = 104;
+            this.tbVendorName.TabIndex = 100;
             // 
             // tabItems
             // 
@@ -1636,8 +1644,7 @@
             this.btItemAdd.Location = new System.Drawing.Point(30, 219);
             this.btItemAdd.Name = "btItemAdd";
             this.btItemAdd.Size = new System.Drawing.Size(75, 23);
-            this.btItemAdd.TabIndex = 138;
-            this.btItemAdd.TabStop = false;
+            this.btItemAdd.TabIndex = 170;
             this.btItemAdd.Text = "Add";
             this.btItemAdd.UseVisualStyleBackColor = true;
             this.btItemAdd.Click += new System.EventHandler(this.BtItemAdd_Click);
@@ -1709,7 +1716,9 @@
             // 
             // cbItemVendor
             // 
+            this.cbItemVendor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbItemVendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbItemVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbItemVendor.FormattingEnabled = true;
             this.cbItemVendor.Location = new System.Drawing.Point(77, 48);
             this.cbItemVendor.Name = "cbItemVendor";
@@ -1764,7 +1773,7 @@
             this.tbItemUPC.Location = new System.Drawing.Point(86, 191);
             this.tbItemUPC.Name = "tbItemUPC";
             this.tbItemUPC.Size = new System.Drawing.Size(100, 20);
-            this.tbItemUPC.TabIndex = 122;
+            this.tbItemUPC.TabIndex = 160;
             // 
             // label24
             // 
@@ -1780,7 +1789,7 @@
             this.tbItemSell.Location = new System.Drawing.Point(86, 165);
             this.tbItemSell.Name = "tbItemSell";
             this.tbItemSell.Size = new System.Drawing.Size(100, 20);
-            this.tbItemSell.TabIndex = 121;
+            this.tbItemSell.TabIndex = 150;
             // 
             // label25
             // 
@@ -1796,7 +1805,7 @@
             this.tbItemPurchase.Location = new System.Drawing.Point(86, 135);
             this.tbItemPurchase.Name = "tbItemPurchase";
             this.tbItemPurchase.Size = new System.Drawing.Size(100, 20);
-            this.tbItemPurchase.TabIndex = 119;
+            this.tbItemPurchase.TabIndex = 140;
             // 
             // btItemClear
             // 
@@ -1848,7 +1857,7 @@
             this.tbItemDesc.Location = new System.Drawing.Point(77, 74);
             this.tbItemDesc.Name = "tbItemDesc";
             this.tbItemDesc.Size = new System.Drawing.Size(100, 20);
-            this.tbItemDesc.TabIndex = 105;
+            this.tbItemDesc.TabIndex = 130;
             // 
             // tabOrder
             // 
@@ -1895,7 +1904,7 @@
             this.orderDatePicker.Margin = new System.Windows.Forms.Padding(0);
             this.orderDatePicker.Name = "orderDatePicker";
             this.orderDatePicker.Size = new System.Drawing.Size(98, 20);
-            this.orderDatePicker.TabIndex = 152;
+            this.orderDatePicker.TabIndex = 50;
             this.orderDatePicker.Visible = false;
             // 
             // labelOrderStatus
@@ -1910,7 +1919,9 @@
             // 
             // cbOrderStatus
             // 
+            this.cbOrderStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbOrderStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrderStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOrderStatus.FormattingEnabled = true;
             this.cbOrderStatus.Items.AddRange(new object[] {
             "Open",
@@ -1921,7 +1932,7 @@
             this.cbOrderStatus.Location = new System.Drawing.Point(427, 18);
             this.cbOrderStatus.Name = "cbOrderStatus";
             this.cbOrderStatus.Size = new System.Drawing.Size(98, 21);
-            this.cbOrderStatus.TabIndex = 149;
+            this.cbOrderStatus.TabIndex = 40;
             this.cbOrderStatus.Visible = false;
             // 
             // btOrderNew
@@ -1929,7 +1940,7 @@
             this.btOrderNew.Location = new System.Drawing.Point(84, 18);
             this.btOrderNew.Name = "btOrderNew";
             this.btOrderNew.Size = new System.Drawing.Size(44, 23);
-            this.btOrderNew.TabIndex = 148;
+            this.btOrderNew.TabIndex = 1;
             this.btOrderNew.Text = "New";
             this.btOrderNew.UseVisualStyleBackColor = true;
             this.btOrderNew.Click += new System.EventHandler(this.BtOrderNew_Click);
@@ -1959,6 +1970,7 @@
             this.tbOrderTotal.Name = "tbOrderTotal";
             this.tbOrderTotal.Size = new System.Drawing.Size(100, 20);
             this.tbOrderTotal.TabIndex = 145;
+            this.tbOrderTotal.TabStop = false;
             // 
             // tbOrderSubTotal
             // 
@@ -1967,6 +1979,7 @@
             this.tbOrderSubTotal.Name = "tbOrderSubTotal";
             this.tbOrderSubTotal.Size = new System.Drawing.Size(100, 20);
             this.tbOrderSubTotal.TabIndex = 144;
+            this.tbOrderSubTotal.TabStop = false;
             // 
             // label10
             // 
@@ -1979,13 +1992,15 @@
             // 
             // cbOrderSalesRep
             // 
+            this.cbOrderSalesRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbOrderSalesRep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrderSalesRep.Enabled = false;
+            this.cbOrderSalesRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOrderSalesRep.FormattingEnabled = true;
             this.cbOrderSalesRep.Location = new System.Drawing.Point(269, 46);
             this.cbOrderSalesRep.Name = "cbOrderSalesRep";
             this.cbOrderSalesRep.Size = new System.Drawing.Size(104, 21);
-            this.cbOrderSalesRep.TabIndex = 142;
+            this.cbOrderSalesRep.TabIndex = 30;
             this.cbOrderSalesRep.Click += new System.EventHandler(this.CbOrderSalesRep_Click);
             // 
             // groupBox3
@@ -1994,7 +2009,7 @@
             this.groupBox3.Location = new System.Drawing.Point(421, 93);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(88, 120);
-            this.groupBox3.TabIndex = 140;
+            this.groupBox3.TabIndex = 80;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items";
             // 
@@ -2004,15 +2019,17 @@
             this.btOrderManageItems.Location = new System.Drawing.Point(6, 35);
             this.btOrderManageItems.Name = "btOrderManageItems";
             this.btOrderManageItems.Size = new System.Drawing.Size(75, 54);
-            this.btOrderManageItems.TabIndex = 0;
+            this.btOrderManageItems.TabIndex = 1;
             this.btOrderManageItems.Text = "Manage Items";
             this.btOrderManageItems.UseVisualStyleBackColor = true;
             this.btOrderManageItems.Click += new System.EventHandler(this.BtOrderManageItems_Click);
             // 
             // cbOrderType
             // 
+            this.cbOrderType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrderType.Enabled = false;
+            this.cbOrderType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOrderType.FormattingEnabled = true;
             this.cbOrderType.Items.AddRange(new object[] {
             "Estimate",
@@ -2020,7 +2037,7 @@
             this.cbOrderType.Location = new System.Drawing.Point(269, 19);
             this.cbOrderType.Name = "cbOrderType";
             this.cbOrderType.Size = new System.Drawing.Size(104, 21);
-            this.cbOrderType.TabIndex = 138;
+            this.cbOrderType.TabIndex = 20;
             this.cbOrderType.SelectedValueChanged += new System.EventHandler(this.cbOrderType_SelectionChanged);
             // 
             // label23
@@ -2064,7 +2081,7 @@
             this.groupBox2.Location = new System.Drawing.Point(222, 81);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(173, 142);
-            this.groupBox2.TabIndex = 133;
+            this.groupBox2.TabIndex = 70;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Shipping Address";
             // 
@@ -2142,7 +2159,7 @@
             this.checkShippingBilling.Location = new System.Drawing.Point(23, 13);
             this.checkShippingBilling.Name = "checkShippingBilling";
             this.checkShippingBilling.Size = new System.Drawing.Size(144, 25);
-            this.checkShippingBilling.TabIndex = 0;
+            this.checkShippingBilling.TabIndex = 1;
             this.checkShippingBilling.Text = "Same as Billing Address";
             this.checkShippingBilling.UseVisualStyleBackColor = true;
             this.checkShippingBilling.CheckedChanged += new System.EventHandler(this.CheckShippingBilling_CheckedChanged);
@@ -2160,7 +2177,7 @@
             this.groupBox1.Location = new System.Drawing.Point(30, 81);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(174, 142);
-            this.groupBox1.TabIndex = 130;
+            this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Billing Address";
             // 
@@ -2234,13 +2251,15 @@
             // 
             // cbOrderCustomer
             // 
+            this.cbOrderCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
             this.cbOrderCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrderCustomer.Enabled = false;
+            this.cbOrderCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOrderCustomer.FormattingEnabled = true;
             this.cbOrderCustomer.Location = new System.Drawing.Point(89, 46);
             this.cbOrderCustomer.Name = "cbOrderCustomer";
             this.cbOrderCustomer.Size = new System.Drawing.Size(104, 21);
-            this.cbOrderCustomer.TabIndex = 129;
+            this.cbOrderCustomer.TabIndex = 10;
             this.cbOrderCustomer.SelectedIndexChanged += new System.EventHandler(this.CbOrderCustomer_SelectedIndexChanged);
             this.cbOrderCustomer.Click += new System.EventHandler(this.CbOrderCustomer_Click);
             // 
@@ -2249,7 +2268,7 @@
             this.btOrderSave.Location = new System.Drawing.Point(53, 229);
             this.btOrderSave.Name = "btOrderSave";
             this.btOrderSave.Size = new System.Drawing.Size(75, 23);
-            this.btOrderSave.TabIndex = 128;
+            this.btOrderSave.TabIndex = 90;
             this.btOrderSave.Text = "Save";
             this.btOrderSave.UseVisualStyleBackColor = true;
             this.btOrderSave.Visible = false;
@@ -2467,7 +2486,7 @@
             this.btOrderAdd.Location = new System.Drawing.Point(53, 229);
             this.btOrderAdd.Name = "btOrderAdd";
             this.btOrderAdd.Size = new System.Drawing.Size(75, 23);
-            this.btOrderAdd.TabIndex = 139;
+            this.btOrderAdd.TabIndex = 90;
             this.btOrderAdd.Text = "Add";
             this.btOrderAdd.UseVisualStyleBackColor = true;
             this.btOrderAdd.Click += new System.EventHandler(this.BtOrderAdd_Click);
@@ -2528,7 +2547,7 @@
             this.groupBox7.Location = new System.Drawing.Point(684, 19);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(378, 302);
-            this.groupBox7.TabIndex = 119;
+            this.groupBox7.TabIndex = 110;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "User Management";
             // 
@@ -2538,7 +2557,7 @@
             this.settingsIsAdmin.Location = new System.Drawing.Point(217, 65);
             this.settingsIsAdmin.Name = "settingsIsAdmin";
             this.settingsIsAdmin.Size = new System.Drawing.Size(68, 17);
-            this.settingsIsAdmin.TabIndex = 20;
+            this.settingsIsAdmin.TabIndex = 10;
             this.settingsIsAdmin.Text = "isAdmin?";
             this.settingsIsAdmin.UseVisualStyleBackColor = true;
             // 
@@ -2556,7 +2575,7 @@
             this.tbSettingsUsername.Location = new System.Drawing.Point(128, 62);
             this.tbSettingsUsername.Name = "tbSettingsUsername";
             this.tbSettingsUsername.Size = new System.Drawing.Size(74, 20);
-            this.tbSettingsUsername.TabIndex = 18;
+            this.tbSettingsUsername.TabIndex = 5;
             // 
             // btSettingsUserRemove
             // 
@@ -2573,7 +2592,7 @@
             this.btSettingsUserAdd.Location = new System.Drawing.Point(105, 19);
             this.btSettingsUserAdd.Name = "btSettingsUserAdd";
             this.btSettingsUserAdd.Size = new System.Drawing.Size(75, 23);
-            this.btSettingsUserAdd.TabIndex = 16;
+            this.btSettingsUserAdd.TabIndex = 1;
             this.btSettingsUserAdd.Text = "Add User";
             this.btSettingsUserAdd.UseVisualStyleBackColor = true;
             this.btSettingsUserAdd.Click += new System.EventHandler(this.BtSettingsUserAdd_Click);
@@ -2670,7 +2689,7 @@
             this.tbSettingsPOZip.Location = new System.Drawing.Point(118, 181);
             this.tbSettingsPOZip.Name = "tbSettingsPOZip";
             this.tbSettingsPOZip.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingsPOZip.TabIndex = 114;
+            this.tbSettingsPOZip.TabIndex = 50;
             // 
             // label66
             // 
@@ -2686,7 +2705,7 @@
             this.tbSettingsPOState.Location = new System.Drawing.Point(118, 155);
             this.tbSettingsPOState.Name = "tbSettingsPOState";
             this.tbSettingsPOState.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingsPOState.TabIndex = 113;
+            this.tbSettingsPOState.TabIndex = 40;
             // 
             // label67
             // 
@@ -2702,7 +2721,7 @@
             this.tbSettingsPOCity.Location = new System.Drawing.Point(118, 129);
             this.tbSettingsPOCity.Name = "tbSettingsPOCity";
             this.tbSettingsPOCity.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingsPOCity.TabIndex = 112;
+            this.tbSettingsPOCity.TabIndex = 30;
             // 
             // label68
             // 
@@ -2718,7 +2737,7 @@
             this.tbSettingsPOStreet.Location = new System.Drawing.Point(118, 103);
             this.tbSettingsPOStreet.Name = "tbSettingsPOStreet";
             this.tbSettingsPOStreet.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingsPOStreet.TabIndex = 108;
+            this.tbSettingsPOStreet.TabIndex = 20;
             // 
             // label69
             // 
@@ -2736,7 +2755,7 @@
             this.btBackgroundBrowse.Location = new System.Drawing.Point(225, 516);
             this.btBackgroundBrowse.Name = "btBackgroundBrowse";
             this.btBackgroundBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btBackgroundBrowse.TabIndex = 17;
+            this.btBackgroundBrowse.TabIndex = 100;
             this.btBackgroundBrowse.Text = "Browse";
             this.btBackgroundBrowse.UseVisualStyleBackColor = true;
             this.btBackgroundBrowse.Click += new System.EventHandler(this.btBackgroundBrowse_Click);
@@ -2755,7 +2774,7 @@
             this.tbBackgroundImage.Location = new System.Drawing.Point(118, 519);
             this.tbBackgroundImage.Name = "tbBackgroundImage";
             this.tbBackgroundImage.Size = new System.Drawing.Size(100, 20);
-            this.tbBackgroundImage.TabIndex = 15;
+            this.tbBackgroundImage.TabIndex = 90;
             // 
             // label59
             // 
@@ -2771,7 +2790,7 @@
             this.tbSettingDefaultTaxRate.Location = new System.Drawing.Point(118, 426);
             this.tbSettingDefaultTaxRate.Name = "tbSettingDefaultTaxRate";
             this.tbSettingDefaultTaxRate.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingDefaultTaxRate.TabIndex = 7;
+            this.tbSettingDefaultTaxRate.TabIndex = 60;
             // 
             // label58
             // 
@@ -2787,14 +2806,14 @@
             this.tbSettingCompanyName.Location = new System.Drawing.Point(118, 27);
             this.tbSettingCompanyName.Name = "tbSettingCompanyName";
             this.tbSettingCompanyName.Size = new System.Drawing.Size(100, 20);
-            this.tbSettingCompanyName.TabIndex = 5;
+            this.tbSettingCompanyName.TabIndex = 10;
             // 
             // btSettingsSave
             // 
             this.btSettingsSave.Location = new System.Drawing.Point(479, 589);
             this.btSettingsSave.Name = "btSettingsSave";
             this.btSettingsSave.Size = new System.Drawing.Size(75, 23);
-            this.btSettingsSave.TabIndex = 4;
+            this.btSettingsSave.TabIndex = 130;
             this.btSettingsSave.Text = "Save";
             this.btSettingsSave.UseVisualStyleBackColor = true;
             this.btSettingsSave.Click += new System.EventHandler(this.BtSettingsSave_Click);
@@ -2813,7 +2832,7 @@
             this.btDatabaseBrowse.Location = new System.Drawing.Point(225, 461);
             this.btDatabaseBrowse.Name = "btDatabaseBrowse";
             this.btDatabaseBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btDatabaseBrowse.TabIndex = 1;
+            this.btDatabaseBrowse.TabIndex = 80;
             this.btDatabaseBrowse.Text = "Browse";
             this.btDatabaseBrowse.UseVisualStyleBackColor = true;
             this.btDatabaseBrowse.Click += new System.EventHandler(this.BtDatabaseBrowse_Click);
@@ -2823,7 +2842,7 @@
             this.tbDatabaseLoc.Location = new System.Drawing.Point(118, 462);
             this.tbDatabaseLoc.Name = "tbDatabaseLoc";
             this.tbDatabaseLoc.Size = new System.Drawing.Size(100, 20);
-            this.tbDatabaseLoc.TabIndex = 0;
+            this.tbDatabaseLoc.TabIndex = 70;
             // 
             // openFileDialog1
             // 
@@ -2835,6 +2854,7 @@
             this.tbLoginUser.Name = "tbLoginUser";
             this.tbLoginUser.Size = new System.Drawing.Size(106, 20);
             this.tbLoginUser.TabIndex = 1;
+            this.tbLoginUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
             // 
             // tbLoginPass
             // 
@@ -2843,6 +2863,7 @@
             this.tbLoginPass.PasswordChar = '*';
             this.tbLoginPass.Size = new System.Drawing.Size(106, 20);
             this.tbLoginPass.TabIndex = 2;
+            this.tbLoginPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
             // 
             // lbLogin1
             // 
@@ -2904,8 +2925,7 @@
             this.linkChangePassword.Location = new System.Drawing.Point(979, 639);
             this.linkChangePassword.Name = "linkChangePassword";
             this.linkChangePassword.Size = new System.Drawing.Size(93, 13);
-            this.linkChangePassword.TabIndex = 18;
-            this.linkChangePassword.TabStop = true;
+            this.linkChangePassword.TabIndex = 10000;
             this.linkChangePassword.Text = "Change Password";
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);

@@ -22,7 +22,7 @@ namespace ERP
             RefreshVendors();
             RefreshEmployeee();
             RefreshOrders();
-            
+
             string path = ConfigurationManager.AppSettings.Get("backgroundPath").ToString();
             if (path != "")
             {
@@ -30,6 +30,8 @@ namespace ERP
             }
             lbCompany.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
             this.Text = ConfigurationManager.AppSettings.Get("companyName").ToString();
+
+            linkChangePassword.TabStop = false;
         }
         List<SelectedItems> selectedItems = new List<SelectedItems>();
         double taxRate = Convert.ToDouble(ConfigurationManager.AppSettings.Get("taxRate").ToString());
@@ -71,7 +73,13 @@ namespace ERP
 
             }
         }
-
+        private void tbLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                BtLogin_Click(sender, e);
+            }
+        }
         private void RefreshCustomers()
         {
             dataCustomer.Rows.Clear();
@@ -923,7 +931,7 @@ namespace ERP
 
         private void BtEmpAdd_Click(object sender, EventArgs e)
         {
-            if (tbEmpFirstName.Text != "" && tbEmpLastName.Text != "" && tbEmpStreet.Text != "" && tbEmpCity.Text != "" && tbEmpState.Text != "" && tbEmpZip.Text != "" && tbEmpPhone.Text != "" && tbEmpEmail.Text != "" && cbEmpSupervisor.Text != "")
+            if (tbEmpFirstName.Text != "" && tbEmpLastName.Text != "" && tbEmpStreet.Text != "" && tbEmpCity.Text != "" && tbEmpState.Text != "" && tbEmpZip.Text != "" && tbEmpPhone.Text != "")
             {
                 Employee emp = new Employee();
                 emp.Employee_FirstName = tbEmpFirstName.Text;
@@ -1317,23 +1325,33 @@ namespace ERP
 
         private void BtItemAdd_Click(object sender, EventArgs e)
         {
-            Item item = new Item();
-            item.Item_Number = tbItemNumber.Text;
-            item.Item_Description = tbItemDesc.Text;
-            item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
-            item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
-            item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
-            item.Item_UPC = tbItemUPC.Text;
+            if(tbItemNumber.Text != "" && tbItemDesc.Text != "" && tbItemPurchase.Text != "" && tbItemSell.Text != "" && cbItemVendor.Text != "")
+            {
+                Item item = new Item();
+                item.Item_Number = tbItemNumber.Text;
+                item.Item_Description = tbItemDesc.Text;
+                item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
+                item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
+                item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
+                item.Item_UPC = tbItemUPC.Text;
 
-            SqliteDataAccess.AddItem(item);
-            RefreshItems();
-            BtItemClear_Click(null, null);
+                SqliteDataAccess.AddItem(item);
+                RefreshItems();
+                BtItemClear_Click(null, null);
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
+            
 
         }
 
         private void BtItemSave_Click(object sender, EventArgs e)
         {
-            Item item = new Item();
+            if (tbItemNumber.Text != "" && tbItemDesc.Text != "" && tbItemPurchase.Text != "" && tbItemSell.Text != "" && cbItemVendor.Text != "")
+            {
+                Item item = new Item();
             item.Item_Number = tbItemNumber.Text;
             item.Item_Description = tbItemDesc.Text;
             item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
@@ -1345,6 +1363,11 @@ namespace ERP
             RefreshItems();
             BtItemClear_Click(null, null);
             btItemSave.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
 
         private void BtPORemove_Click(object sender, EventArgs e)
@@ -1361,16 +1384,6 @@ namespace ERP
             PurchaseOrders poForm = new PurchaseOrders(po, "edit");
             poForm.ShowDialog();
             RefreshVendorPOs();
-        }
-
-        private void BtSettingsUserAdd_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtSettingsUserRemove_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         //// Excel Test Export 
