@@ -310,6 +310,10 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.testColumnOne = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -334,6 +338,8 @@
             this.tabSettings.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -344,6 +350,7 @@
             this.tabControl.Controls.Add(this.tabItems);
             this.tabControl.Controls.Add(this.tabOrder);
             this.tabControl.Controls.Add(this.tabSettings);
+            this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Location = new System.Drawing.Point(-1, -2);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
@@ -356,6 +363,7 @@
             // 
             // tabCustomers
             // 
+            this.tabCustomers.Controls.Add(this.button1);
             this.tabCustomers.Controls.Add(this.label55);
             this.tabCustomers.Controls.Add(this.label54);
             this.tabCustomers.Controls.Add(this.groupBox5);
@@ -2930,6 +2938,44 @@
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(970, 589);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 351;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1065, 615);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.testColumnOne});
+            this.dataGridView1.Location = new System.Drawing.Point(276, 150);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // testColumnOne
+            // 
+            this.testColumnOne.HeaderText = "One";
+            this.testColumnOne.Name = "testColumnOne";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2986,6 +3032,8 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3262,6 +3310,10 @@
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.TextBox tbSettingsPOStreet;
         private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn testColumnOne;
     }
 }
 

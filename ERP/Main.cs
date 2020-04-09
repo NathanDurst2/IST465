@@ -38,7 +38,17 @@ namespace ERP
 
         private void tabControl_Selected(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab.Text == "Order")
+            if (tabControl.SelectedTab.Text == "tabPage1")
+            {
+                dataGridView1.Rows.Add();
+                dataGridView1.Rows[0].Cells[0].Value = "filter";
+                for (int i = 0; i < 10; i++)
+                {
+                    dataGridView1.Rows.Add();
+                    dataGridView1.Rows[i+1].Cells[0].Value = i.ToString();
+                }
+            }
+                if (tabControl.SelectedTab.Text == "Order")
             {
                 dataOrder.ClearSelection();
                 dataOrderItems.ClearSelection();
@@ -71,6 +81,16 @@ namespace ERP
                 tbSettingsPOZip.Text = settings.Settings["purchaseOrderDefaultZip"].Value;
                 RefreshUsers();
 
+            }
+        }
+        private void dataGridView1_CellEndEdit(object sender, EventArgs e)
+        {
+            for(int i =1; i< dataGridView1.Rows.Count; i++)
+            {
+                if(dataGridView1.Rows[i].Cells[0].Value != dataGridView1.Rows[0].Cells[0].Value)
+                {
+                    dataGridView1.Rows[i].Visible = false;
+                }
             }
         }
         private void tbLogin_KeyDown(object sender, KeyEventArgs e)
