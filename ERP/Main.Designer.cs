@@ -43,6 +43,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabCustomers = new System.Windows.Forms.TabPage();
+            this.custExport = new System.Windows.Forms.Button();
             this.label55 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -90,6 +91,7 @@
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.tabEmployee = new System.Windows.Forms.TabPage();
+            this.empExport = new System.Windows.Forms.Button();
             this.label63 = new System.Windows.Forms.Label();
             this.btEmpSave = new System.Windows.Forms.Button();
             this.btEmpEdit = new System.Windows.Forms.Button();
@@ -129,6 +131,7 @@
             this.tbEmpLastName = new System.Windows.Forms.TextBox();
             this.tbEmpFirstName = new System.Windows.Forms.TextBox();
             this.tabVendor = new System.Windows.Forms.TabPage();
+            this.vendorExport = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btPORemove = new System.Windows.Forms.Button();
             this.btPOEdit = new System.Windows.Forms.Button();
@@ -177,6 +180,7 @@
             this.tbVendorPhone = new System.Windows.Forms.TextBox();
             this.tbVendorName = new System.Windows.Forms.TextBox();
             this.tabItems = new System.Windows.Forms.TabPage();
+            this.itemExport = new System.Windows.Forms.Button();
             this.btItemAdd = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.dataItem = new System.Windows.Forms.DataGridView();
@@ -203,6 +207,7 @@
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.tbItemDesc = new System.Windows.Forms.TextBox();
             this.tabOrder = new System.Windows.Forms.TabPage();
+            this.orderExport = new System.Windows.Forms.Button();
             this.orderDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelOrderStatus = new System.Windows.Forms.Label();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
@@ -268,6 +273,7 @@
             this.labelOrderShipDate = new System.Windows.Forms.Label();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.userExport = new System.Windows.Forms.Button();
             this.settingsIsAdmin = new System.Windows.Forms.CheckBox();
             this.label60 = new System.Windows.Forms.Label();
             this.tbSettingsUsername = new System.Windows.Forms.TextBox();
@@ -310,10 +316,6 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.testColumnOne = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -338,8 +340,6 @@
             this.tabSettings.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -350,7 +350,6 @@
             this.tabControl.Controls.Add(this.tabItems);
             this.tabControl.Controls.Add(this.tabOrder);
             this.tabControl.Controls.Add(this.tabSettings);
-            this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Location = new System.Drawing.Point(-1, -2);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
@@ -363,7 +362,7 @@
             // 
             // tabCustomers
             // 
-            this.tabCustomers.Controls.Add(this.button1);
+            this.tabCustomers.Controls.Add(this.custExport);
             this.tabCustomers.Controls.Add(this.label55);
             this.tabCustomers.Controls.Add(this.label54);
             this.tabCustomers.Controls.Add(this.groupBox5);
@@ -393,6 +392,16 @@
             this.tabCustomers.TabIndex = 0;
             this.tabCustomers.Text = "Customers";
             this.tabCustomers.UseVisualStyleBackColor = true;
+            // 
+            // custExport
+            // 
+            this.custExport.Location = new System.Drawing.Point(970, 589);
+            this.custExport.Name = "custExport";
+            this.custExport.Size = new System.Drawing.Size(75, 23);
+            this.custExport.TabIndex = 352;
+            this.custExport.Text = "Export";
+            this.custExport.UseVisualStyleBackColor = true;
+            this.custExport.Click += new System.EventHandler(this.custExport_Click);
             // 
             // label55
             // 
@@ -811,6 +820,7 @@
             // 
             // tabEmployee
             // 
+            this.tabEmployee.Controls.Add(this.empExport);
             this.tabEmployee.Controls.Add(this.label63);
             this.tabEmployee.Controls.Add(this.btEmpSave);
             this.tabEmployee.Controls.Add(this.btEmpEdit);
@@ -838,6 +848,16 @@
             this.tabEmployee.TabIndex = 1;
             this.tabEmployee.Text = "Employee";
             this.tabEmployee.UseVisualStyleBackColor = true;
+            // 
+            // empExport
+            // 
+            this.empExport.Location = new System.Drawing.Point(969, 589);
+            this.empExport.Name = "empExport";
+            this.empExport.Size = new System.Drawing.Size(75, 23);
+            this.empExport.TabIndex = 353;
+            this.empExport.Text = "Export";
+            this.empExport.UseVisualStyleBackColor = true;
+            this.empExport.Click += new System.EventHandler(this.EmpExport_Click);
             // 
             // label63
             // 
@@ -996,7 +1016,7 @@
             this.dataEmployee.Location = new System.Drawing.Point(19, 266);
             this.dataEmployee.Name = "dataEmployee";
             this.dataEmployee.RowHeadersWidth = 51;
-            this.dataEmployee.Size = new System.Drawing.Size(1025, 313);
+            this.dataEmployee.Size = new System.Drawing.Size(1025, 320);
             this.dataEmployee.TabIndex = 48;
             this.dataEmployee.TabStop = false;
             // 
@@ -1164,6 +1184,7 @@
             // 
             // tabVendor
             // 
+            this.tabVendor.Controls.Add(this.vendorExport);
             this.tabVendor.Controls.Add(this.groupBox6);
             this.tabVendor.Controls.Add(this.label62);
             this.tabVendor.Controls.Add(this.label61);
@@ -1194,6 +1215,16 @@
             this.tabVendor.TabIndex = 5;
             this.tabVendor.Text = "Vendor";
             this.tabVendor.UseVisualStyleBackColor = true;
+            // 
+            // vendorExport
+            // 
+            this.vendorExport.Location = new System.Drawing.Point(970, 589);
+            this.vendorExport.Name = "vendorExport";
+            this.vendorExport.Size = new System.Drawing.Size(75, 23);
+            this.vendorExport.TabIndex = 353;
+            this.vendorExport.Text = "Export";
+            this.vendorExport.UseVisualStyleBackColor = true;
+            this.vendorExport.Click += new System.EventHandler(this.VendorExport_Click);
             // 
             // groupBox6
             // 
@@ -1487,7 +1518,7 @@
             this.dataVendor.Location = new System.Drawing.Point(20, 262);
             this.dataVendor.Name = "dataVendor";
             this.dataVendor.RowHeadersWidth = 51;
-            this.dataVendor.Size = new System.Drawing.Size(1025, 313);
+            this.dataVendor.Size = new System.Drawing.Size(1025, 324);
             this.dataVendor.TabIndex = 117;
             this.dataVendor.TabStop = false;
             this.dataVendor.SelectionChanged += new System.EventHandler(this.dataVendor_SelectionedChanged);
@@ -1621,6 +1652,7 @@
             // 
             // tabItems
             // 
+            this.tabItems.Controls.Add(this.itemExport);
             this.tabItems.Controls.Add(this.btItemAdd);
             this.tabItems.Controls.Add(this.label36);
             this.tabItems.Controls.Add(this.dataItem);
@@ -1646,6 +1678,16 @@
             this.tabItems.TabIndex = 2;
             this.tabItems.Text = "Items";
             this.tabItems.UseVisualStyleBackColor = true;
+            // 
+            // itemExport
+            // 
+            this.itemExport.Location = new System.Drawing.Point(969, 589);
+            this.itemExport.Name = "itemExport";
+            this.itemExport.Size = new System.Drawing.Size(75, 23);
+            this.itemExport.TabIndex = 353;
+            this.itemExport.Text = "Export";
+            this.itemExport.UseVisualStyleBackColor = true;
+            this.itemExport.Click += new System.EventHandler(this.ItemExport_Click);
             // 
             // btItemAdd
             // 
@@ -1869,6 +1911,7 @@
             // 
             // tabOrder
             // 
+            this.tabOrder.Controls.Add(this.orderExport);
             this.tabOrder.Controls.Add(this.orderDatePicker);
             this.tabOrder.Controls.Add(this.labelOrderStatus);
             this.tabOrder.Controls.Add(this.cbOrderStatus);
@@ -1904,6 +1947,16 @@
             this.tabOrder.TabIndex = 3;
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
+            // 
+            // orderExport
+            // 
+            this.orderExport.Location = new System.Drawing.Point(969, 589);
+            this.orderExport.Name = "orderExport";
+            this.orderExport.Size = new System.Drawing.Size(75, 23);
+            this.orderExport.TabIndex = 353;
+            this.orderExport.Text = "Export";
+            this.orderExport.UseVisualStyleBackColor = true;
+            this.orderExport.Click += new System.EventHandler(this.OrderExport_Click);
             // 
             // orderDatePicker
             // 
@@ -2546,6 +2599,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.userExport);
             this.groupBox7.Controls.Add(this.settingsIsAdmin);
             this.groupBox7.Controls.Add(this.label60);
             this.groupBox7.Controls.Add(this.tbSettingsUsername);
@@ -2554,10 +2608,20 @@
             this.groupBox7.Controls.Add(this.dataUsers);
             this.groupBox7.Location = new System.Drawing.Point(684, 19);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(378, 302);
+            this.groupBox7.Size = new System.Drawing.Size(378, 320);
             this.groupBox7.TabIndex = 110;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "User Management";
+            // 
+            // userExport
+            // 
+            this.userExport.Location = new System.Drawing.Point(288, 289);
+            this.userExport.Name = "userExport";
+            this.userExport.Size = new System.Drawing.Size(75, 23);
+            this.userExport.TabIndex = 353;
+            this.userExport.Text = "Export";
+            this.userExport.UseVisualStyleBackColor = true;
+            this.userExport.Click += new System.EventHandler(this.UserExport_Click);
             // 
             // settingsIsAdmin
             // 
@@ -2934,47 +2998,10 @@
             this.linkChangePassword.Name = "linkChangePassword";
             this.linkChangePassword.Size = new System.Drawing.Size(93, 13);
             this.linkChangePassword.TabIndex = 10000;
+            this.linkChangePassword.TabStop = true;
             this.linkChangePassword.Text = "Change Password";
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(970, 589);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 351;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1065, 615);
-            this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.testColumnOne});
-            this.dataGridView1.Location = new System.Drawing.Point(276, 150);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // testColumnOne
-            // 
-            this.testColumnOne.HeaderText = "One";
-            this.testColumnOne.Name = "testColumnOne";
             // 
             // Main
             // 
@@ -3032,8 +3059,6 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsers)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3310,10 +3335,12 @@
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.TextBox tbSettingsPOStreet;
         private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn testColumnOne;
+        private System.Windows.Forms.Button custExport;
+        private System.Windows.Forms.Button empExport;
+        private System.Windows.Forms.Button vendorExport;
+        private System.Windows.Forms.Button itemExport;
+        private System.Windows.Forms.Button orderExport;
+        private System.Windows.Forms.Button userExport;
     }
 }
 
