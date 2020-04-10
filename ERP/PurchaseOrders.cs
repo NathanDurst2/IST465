@@ -83,58 +83,73 @@ namespace ERP
         }
         private void dataSelected_CellEndEdit(object sender, EventArgs e)
         {
-            string itemNumber = (string)dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sItem"].Value;
-            double itemCost = Convert.ToDouble(dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sCost"].Value);
-            int itemQuantity = Convert.ToInt32(dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sQuantity"].Value);
-            int dataIndex = dataSelected.CurrentCell.RowIndex;
-
-            PurchaseOrder_Item si = new PurchaseOrder_Item();
-            si.Item_Number = itemNumber;
-            si.Item_Quantity = itemQuantity;
-            si.Item_Cost = itemCost;
-
-
-            selected.RemoveAt(dataIndex);
-            selected.Insert(dataIndex, si);
-
-            double costed = 0;
-            foreach (PurchaseOrder_Item poi in selected)
+            try
             {
-                costed += poi.Item_Cost * poi.Item_Quantity;
+                string itemNumber = (string)dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sItem"].Value;
+                double itemCost = Convert.ToDouble(dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sCost"].Value);
+                int itemQuantity = Convert.ToInt32(dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sQuantity"].Value);
+                int dataIndex = dataSelected.CurrentCell.RowIndex;
+
+                PurchaseOrder_Item si = new PurchaseOrder_Item();
+                si.Item_Number = itemNumber;
+                si.Item_Quantity = itemQuantity;
+                si.Item_Cost = itemCost;
+
+
+                selected.RemoveAt(dataIndex);
+                selected.Insert(dataIndex, si);
+
+                double costed = 0;
+                foreach (PurchaseOrder_Item poi in selected)
+                {
+                    costed += poi.Item_Cost * poi.Item_Quantity;
+                }
+                tbSubTotal.Text = String.Format("$ " + Math.Round(costed, 2));
+                tbTotalCost.Text = String.Format("$ " + Math.Round(costed * (1 + taxRate), 2));
+                cost = costed;
             }
-            tbSubTotal.Text = String.Format("$ " + Math.Round(costed, 2));
-            tbTotalCost.Text = String.Format("$ " + Math.Round(costed * (1 + taxRate), 2));
-            cost = costed;
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid value entered - please try again");
+                dataSelected.CurrentCell.Value = 0;
+            }
         }
 
         private void btClose_Click(object sender, EventArgs e)
         {
-            PurchaseOrder po = new PurchaseOrder();
-            po.Vendor_ID = Convert.ToInt32(comboVendor.Text.Substring(0, comboVendor.Text.ToString().IndexOf(" - ")));
-            po.PO_Date = DateTime.Today.ToShortDateString();
-            po.PO_Subtotal = cost;
-            po.PO_Total = cost * (1 + taxRate);
-            po.PO_ShipDate = vendorDatePicker.Value.ToShortDateString();
-            po.PO_ShipStreet = tbShippingStreet.Text;
-            po.PO_ShipCity = tbShippingCity.Text;
-            po.PO_ShipState = tbShippingState.Text;
-            po.PO_ShipZip = tbShippingZip.Text;
-
-            string id = "";
-            if (originType == "new")
-                id = SqliteDataAccess.AddPurchaseOrder(po);
-            else if (originType == "edit")
+            try
             {
-                SqliteDataAccess.EditPurchaseOrder(po);
-                SqliteDataAccess.DeletePurchaseOrder_Item(originID);
-                id = originID.ToString();
+                PurchaseOrder po = new PurchaseOrder();
+                po.Vendor_ID = Convert.ToInt32(comboVendor.Text.Substring(0, comboVendor.Text.ToString().IndexOf(" - ")));
+                po.PO_Date = DateTime.Today.ToShortDateString();
+                po.PO_Subtotal = cost;
+                po.PO_Total = cost * (1 + taxRate);
+                po.PO_ShipDate = vendorDatePicker.Value.ToShortDateString();
+                po.PO_ShipStreet = tbShippingStreet.Text;
+                po.PO_ShipCity = tbShippingCity.Text;
+                po.PO_ShipState = tbShippingState.Text;
+                po.PO_ShipZip = tbShippingZip.Text;
+
+                string id = "";
+                if (originType == "new")
+                    id = SqliteDataAccess.AddPurchaseOrder(po);
+                else if (originType == "edit")
+                {
+                    SqliteDataAccess.EditPurchaseOrder(po);
+                    SqliteDataAccess.DeletePurchaseOrder_Item(originID);
+                    id = originID.ToString();
+                }
+
+
+                foreach (PurchaseOrder_Item siv in selected)
+                {
+                    siv.PO_ID = Convert.ToInt32(id);
+                    SqliteDataAccess.AddPurchaseOrder_Item(siv);
+                }
             }
-
-
-            foreach (PurchaseOrder_Item siv in selected)
+            catch(ArgumentOutOfRangeException)
             {
-                siv.PO_ID = Convert.ToInt32(id);
-                SqliteDataAccess.AddPurchaseOrder_Item(siv);
+                MessageBox.Show("Closing without saving");
             }
 
             this.Close();
@@ -142,42 +157,57 @@ namespace ERP
 
         private void BtAdd_Click(object sender, EventArgs e)
         {
-            string itemNumber = (string)dataAll.Rows[dataAll.CurrentCell.RowIndex].Cells["allItems"].Value;
+            if(dataAll.CurrentCell != null)
+            {
+                string itemNumber = (string)dataAll.Rows[dataAll.CurrentCell.RowIndex].Cells["allItems"].Value;
 
-            dataSelected.Rows.Add();
-            dataSelected.Rows[dataSelected.RowCount - 1].Cells["sItem"].Value = itemNumber;
-            dataSelected.Rows[dataSelected.RowCount - 1].Cells["sCost"].Value = SqliteDataAccess.LoadItem(itemNumber)[0].Item_PurchasePrice;
+                dataSelected.Rows.Add();
+                dataSelected.Rows[dataSelected.RowCount - 1].Cells["sItem"].Value = itemNumber;
+                dataSelected.Rows[dataSelected.RowCount - 1].Cells["sCost"].Value = SqliteDataAccess.LoadItem(itemNumber)[0].Item_PurchasePrice;
 
-            dataAll.Rows.RemoveAt(dataAll.CurrentCell.RowIndex);
-
-
-            PurchaseOrder_Item si = new PurchaseOrder_Item();
-            si.Item_Number = itemNumber;
-            si.Item_Cost = SqliteDataAccess.LoadItem(itemNumber)[0].Item_PurchasePrice;
-            selected.Add(si);
+                dataAll.Rows.RemoveAt(dataAll.CurrentCell.RowIndex);
 
 
-            dataSelected.CurrentCell = dataSelected.Rows[dataSelected.Rows.Count - 1].Cells["sQuantity"];
-            dataSelected.CurrentCell.Value = 0;
-            dataSelected.BeginEdit(true);
-            //tbSubTotal.Text = String.Format("$ " + Math.Round(cost, 2));
-            //tbTotalCost.Text = String.Format("$ " + Math.Round((cost * (1 + taxRate)), 2));
+                PurchaseOrder_Item si = new PurchaseOrder_Item();
+                si.Item_Number = itemNumber;
+                si.Item_Cost = SqliteDataAccess.LoadItem(itemNumber)[0].Item_PurchasePrice;
+                selected.Add(si);
+
+
+                dataSelected.CurrentCell = dataSelected.Rows[dataSelected.Rows.Count - 1].Cells["sQuantity"];
+                dataSelected.CurrentCell.Value = 0;
+                dataSelected.BeginEdit(true);
+                //tbSubTotal.Text = String.Format("$ " + Math.Round(cost, 2));
+                //tbTotalCost.Text = String.Format("$ " + Math.Round((cost * (1 + taxRate)), 2));
+            }
+            else
+            {
+                MessageBox.Show("Please select a row and try again");
+            }
         }
 
         private void BtRemove_Click(object sender, EventArgs e)
         {
-            string Item_Number = (string)dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sItem"].Value;
-            int index = dataSelected.CurrentCell.RowIndex;
+            if(dataSelected.CurrentCell != null)
+            {
+                string Item_Number = (string)dataSelected.Rows[dataSelected.CurrentCell.RowIndex].Cells["sItem"].Value;
+                int index = dataSelected.CurrentCell.RowIndex;
 
 
-            dataSelected.Rows.RemoveAt(dataSelected.CurrentCell.RowIndex);
+                dataSelected.Rows.RemoveAt(dataSelected.CurrentCell.RowIndex);
 
-            Item items = SqliteDataAccess.LoadItem(Item_Number)[0];
-            dataAll.Rows.Add();
-            dataAll.Rows[dataAll.RowCount - 1].Cells["allItems"].Value = items.Item_Number;
-            dataAll.Rows[dataAll.RowCount - 1].Cells["allDesc"].Value = items.Item_Description;
+                Item items = SqliteDataAccess.LoadItem(Item_Number)[0];
+                dataAll.Rows.Add();
+                dataAll.Rows[dataAll.RowCount - 1].Cells["allItems"].Value = items.Item_Number;
+                dataAll.Rows[dataAll.RowCount - 1].Cells["allDesc"].Value = items.Item_Description;
 
-            selected.RemoveAt(index);
+                selected.RemoveAt(index);
+            }
+            else
+            {
+                MessageBox.Show("Please select a row and try again");
+            }
+
         }
     }
 }

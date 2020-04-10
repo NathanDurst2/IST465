@@ -639,69 +639,77 @@ namespace ERP
         }
         private void BtOrderAdd_Click(object sender, EventArgs e)
         {
-            orderButtonsDisable();
-
-            Order est = new Order();
-
-            string emp = cbOrderSalesRep.Text;
-            int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
-
-            string cust = cbOrderCustomer.Text;
-            int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
-
-            est.Cust_ID = cust_id;
-            est.Employee_ID = emp_id;
-            est.Order_Date = DateTime.Today.ToShortDateString();
-
-            est.Order_Type = cbOrderType.Text;
-            if (est.Order_Type == "Sales Order")
+            if (cbOrderCustomer.Text != "" && tbOrderBillingStreet.Text != "" && tbOrderBillingCity.Text != "" && tbOrderBillingState.Text != "" && tbOrderBillingZip.Text != "" && tbOrderShippingStreet.Text != "" && tbOrderShippingCity.Text != "" && tbOrderShippingState.Text != "" && tbOrderShippingZip.Text != "" && cbOrderType.Text != "" && cbOrderSalesRep.Text != "")
             {
-                est.Order_ShipDate = orderDatePicker.Value.ToShortDateString();
-                est.Order_Status = cbOrderStatus.Text;
+                orderButtonsDisable();
+
+                Order est = new Order();
+
+                string emp = cbOrderSalesRep.Text;
+                int emp_id = Convert.ToInt32(emp.Substring(0, emp.IndexOf(" -")));
+
+                string cust = cbOrderCustomer.Text;
+                int cust_id = Convert.ToInt32(cust.Substring(0, cust.IndexOf(" -")));
+
+                est.Cust_ID = cust_id;
+                est.Employee_ID = emp_id;
+                est.Order_Date = DateTime.Today.ToShortDateString();
+
+                est.Order_Type = cbOrderType.Text;
+                if (est.Order_Type == "Sales Order")
+                {
+                    est.Order_ShipDate = orderDatePicker.Value.ToShortDateString();
+                    est.Order_Status = cbOrderStatus.Text;
+                }
+
+                double subTotal = 0;
+                foreach (SelectedItems si in selectedItems)
+                    subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
+
+                est.Order_Subtotal = subTotal;
+                est.Order_Tax = (subTotal * taxRate);
+                est.Order_Total = (est.Order_Subtotal + est.Order_Tax);
+                est.Order_BillStreet = tbOrderBillingStreet.Text;
+                est.Order_BillCity = tbOrderBillingCity.Text;
+                est.Order_BillState = tbOrderBillingState.Text;
+                est.Order_BillZip = tbOrderBillingZip.Text;
+                est.Order_ShipStreet = tbOrderShippingStreet.Text;
+                est.Order_ShipCity = tbOrderShippingCity.Text;
+                est.Order_ShipState = tbOrderShippingState.Text;
+                est.Order_ShipZip = tbOrderShippingZip.Text;
+
+                string est_id = SqliteDataAccess.AddOrder(est);
+
+                foreach (SelectedItems it in selectedItems)
+                {
+                    Order_Item ei = new Order_Item();
+                    ei.Order_ID = Convert.ToInt32(est_id);
+                    ei.Item_Number = it.Item_Number;
+                    ei.Order_Item_Quantity = it.Item_Quantity;
+
+                    SqliteDataAccess.AddOrder_Item(ei);
+                }
+                //Clears out the list of items so that the next order is empty
+                selectedItems = new List<SelectedItems>();
+
+                //Clears out the list of items so that the next order is empty
+                selectedItems = new List<SelectedItems>();
+                BtOrderClear_Click(null, null);
+                orderButtonsDisable();
+                RefreshOrders();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
             }
 
-            double subTotal = 0;
-            foreach (SelectedItems si in selectedItems)
-                subTotal += (si.Item_Quantity * SqliteDataAccess.LoadItem(si.Item_Number)[0].Item_SellPrice);
-
-            est.Order_Subtotal = subTotal;
-            est.Order_Tax = (subTotal * taxRate);
-            est.Order_Total = (est.Order_Subtotal + est.Order_Tax);
-            est.Order_BillStreet = tbOrderBillingStreet.Text;
-            est.Order_BillCity = tbOrderBillingCity.Text;
-            est.Order_BillState = tbOrderBillingState.Text;
-            est.Order_BillZip = tbOrderBillingZip.Text;
-            est.Order_ShipStreet = tbOrderShippingStreet.Text;
-            est.Order_ShipCity = tbOrderShippingCity.Text;
-            est.Order_ShipState = tbOrderShippingState.Text;
-            est.Order_ShipZip = tbOrderShippingZip.Text;
-
-            string est_id = SqliteDataAccess.AddOrder(est);
-
-            foreach (SelectedItems it in selectedItems)
-            {
-                Order_Item ei = new Order_Item();
-                ei.Order_ID = Convert.ToInt32(est_id);
-                ei.Item_Number = it.Item_Number;
-                ei.Order_Item_Quantity = it.Item_Quantity;
-
-                SqliteDataAccess.AddOrder_Item(ei);
-            }
-            //Clears out the list of items so that the next order is empty
-            selectedItems = new List<SelectedItems>();
-
-            //Clears out the list of items so that the next order is empty
-            selectedItems = new List<SelectedItems>();
-            BtOrderClear_Click(null, null);
-            orderButtonsDisable();
-            RefreshOrders();
         }
 
         private void BtOrderSave_Click(object sender, EventArgs e)
         {
-            orderButtonsDisable();
-            if (cbOrderCustomer != null)
+            if (cbOrderCustomer.Text != "" && tbOrderBillingStreet.Text != "" && tbOrderBillingCity.Text != "" && tbOrderBillingState.Text != "" && tbOrderBillingZip.Text != "" && tbOrderShippingStreet.Text != "" && tbOrderShippingCity.Text != "" && tbOrderShippingState.Text != "" && tbOrderShippingZip.Text != "" && cbOrderType.Text != "" && cbOrderSalesRep.Text != "")
             {
+                orderButtonsDisable();
                 Order es = new Order();
                 es.Order_ID = Convert.ToInt32(tbOrderID.Text); tbOrderID.Clear();
                 es.Cust_ID = Convert.ToInt32(cbOrderCustomer.Text.Substring(0, cbOrderCustomer.Text.IndexOf(" -"))); cbOrderCustomer.Items.Clear();
@@ -747,6 +755,10 @@ namespace ERP
                 btOrderSave.Visible = false;
                 btOrderSave.SendToBack();
             }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields");
+            }
         }
         private void dataOrder_SelectionChanged(object sender, EventArgs e)
         {
@@ -762,42 +774,50 @@ namespace ERP
         }
         private void BtOrderEdit_Click(object sender, EventArgs e)
         {
-            orderButtonsEnable();
-            btOrderNew.Visible = false;
-
-            int orderID = (int)dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value;
-
-            Order est = SqliteDataAccess.LoadOrder(orderID)[0];
-            List<Order_Item> itemList = SqliteDataAccess.LoadOrder_ItemFOR(est.Order_ID);
-            CbOrderCustomer_Click(null, null);
-            selectedItems = new List<SelectedItems>();
-
-            foreach (Order_Item estItem in itemList)
+            if (dataOrder.CurrentCell != null)
             {
-                SelectedItems si = new SelectedItems();
-                si.Item_Number = estItem.Item_Number;
-                si.Item_Quantity = Convert.ToInt32(estItem.Order_Item_Quantity);
-                si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
-                selectedItems.Add(si);
+                orderButtonsEnable();
+                btOrderNew.Visible = false;
+
+                int orderID = (int)dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value;
+
+                Order est = SqliteDataAccess.LoadOrder(orderID)[0];
+                List<Order_Item> itemList = SqliteDataAccess.LoadOrder_ItemFOR(est.Order_ID);
+                CbOrderCustomer_Click(null, null);
+                selectedItems = new List<SelectedItems>();
+
+                foreach (Order_Item estItem in itemList)
+                {
+                    SelectedItems si = new SelectedItems();
+                    si.Item_Number = estItem.Item_Number;
+                    si.Item_Quantity = Convert.ToInt32(estItem.Order_Item_Quantity);
+                    si.Vendor_ID = SqliteDataAccess.LoadItem(si.Item_Number.ToString())[0].Vendor_ID;
+                    selectedItems.Add(si);
+                }
+                if (est.Order_Type == "Sales Order")
+                {
+                    orderDatePicker.Value = DateTime.Parse(est.Order_ShipDate);
+                    cbOrderStatus.SelectedIndex = cbOrderStatus.FindString(est.Order_Status);
+                }
+                tbOrderID.Text = est.Order_ID.ToString();
+                cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
+                cbOrderType.SelectedIndex = cbOrderType.FindString(est.Order_Type);
+                tbOrderBillingStreet.Text = est.Order_BillStreet;
+                tbOrderBillingCity.Text = est.Order_BillCity;
+                tbOrderBillingState.Text = est.Order_BillState;
+                tbOrderShippingZip.Text = est.Order_ShipZip;
+                tbOrderShippingStreet.Text = est.Order_ShipStreet;
+                tbOrderShippingCity.Text = est.Order_ShipCity;
+                tbOrderShippingState.Text = est.Order_ShipState;
+                tbOrderShippingZip.Text = est.Order_ShipZip;
+                btOrderSave.Visible = true;
+                btOrderSave.BringToFront();
             }
-            if (est.Order_Type == "Sales Order")
+            else
             {
-                orderDatePicker.Value = DateTime.Parse(est.Order_ShipDate);
-                cbOrderStatus.SelectedIndex = cbOrderStatus.FindString(est.Order_Status);
+                MessageBox.Show("Please select a row and try again");
             }
-            tbOrderID.Text = est.Order_ID.ToString();
-            cbOrderCustomer.SelectedIndex = cbOrderCustomer.FindString(est.Cust_ID.ToString());
-            cbOrderType.SelectedIndex = cbOrderType.FindString(est.Order_Type);
-            tbOrderBillingStreet.Text = est.Order_BillStreet;
-            tbOrderBillingCity.Text = est.Order_BillCity;
-            tbOrderBillingState.Text = est.Order_BillState;
-            tbOrderShippingZip.Text = est.Order_ShipZip;
-            tbOrderShippingStreet.Text = est.Order_ShipStreet;
-            tbOrderShippingCity.Text = est.Order_ShipCity;
-            tbOrderShippingState.Text = est.Order_ShipState;
-            tbOrderShippingZip.Text = est.Order_ShipZip;
-            btOrderSave.Visible = true;
-            btOrderSave.BringToFront();
+
         }
 
         private void BtOrderClear_Click(object sender, EventArgs e)
@@ -893,25 +913,30 @@ namespace ERP
 
         private void BtOrderRemove_Click(object sender, EventArgs e)
         {
-            string orderType = "";
-            int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
-            try
+            if (dataOrder.CurrentCell != null)
             {
-                orderType = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
-            }
-            catch (NullReferenceException)
-            { }
+                string orderType = "";
+                int id = Convert.ToInt32(dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderID"].Value);
+                try
+                {
+                    orderType = dataOrder.Rows[dataOrder.CurrentCell.RowIndex].Cells["orderType"].Value.ToString();
+                }
+                catch (NullReferenceException)
+                { }
 
-            DialogResult result = MessageBox.Show("Are you sure you wish to delete this order?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
+                DialogResult result = MessageBox.Show("Are you sure you wish to delete this order?", "Caution", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    SqliteDataAccess.DeleteOrder(id);
+                    SqliteDataAccess.DeleteOrder_Item(id);
+                    RefreshOrders();
+                    RefreshOrderItems();
+                }
+            }
+            else
             {
-                SqliteDataAccess.DeleteOrder(id);
-                SqliteDataAccess.DeleteOrder_Item(id);
-                RefreshOrders();
-                RefreshOrderItems();
+                MessageBox.Show("Please select a row and try again");
             }
-
-
         }
         private void BtEmpClear_Click(object sender, EventArgs e)
         {
@@ -1221,6 +1246,16 @@ namespace ERP
                             if (user.isAdmin == "0")
                             {
                                 this.tabSettings.Parent = null;
+                                custImport.Visible = false;
+                                custExport.Visible = false;
+                                empImport.Visible = false;
+                                empExport.Visible = false;
+                                vendorImport.Visible = false;
+                                vendorExport.Visible = false;
+                                itemImport.Visible = false;
+                                itemExport.Visible = false;
+                                orderImport.Visible = false;
+                                orderExport.Visible = false;
                             }
                         }
                         else
@@ -1372,18 +1407,33 @@ namespace ERP
 
         private void BtPORemove_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
-            SqliteDataAccess.DeletePurchaseOrder(id);
-            RefreshVendorPOs();
+            if (dataPurchaseOrders.CurrentCell != null)
+            {
+                int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
+                SqliteDataAccess.DeletePurchaseOrder(id);
+                RefreshVendorPOs();
+            }
+            else
+            {
+                MessageBox.Show("Please select a row and try again");
+            }
         }
 
         private void BtPOEdit_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
-            PurchaseOrder po = SqliteDataAccess.LoadPurchaseOrder(id)[0];
-            PurchaseOrders poForm = new PurchaseOrders(po, "edit");
-            poForm.ShowDialog();
-            RefreshVendorPOs();
+            if (dataPurchaseOrders.CurrentCell != null)
+            {
+                int id = Convert.ToInt32(dataPurchaseOrders.Rows[dataPurchaseOrders.CurrentCell.RowIndex].Cells["poID"].Value);
+                PurchaseOrder po = SqliteDataAccess.LoadPurchaseOrder(id)[0];
+                PurchaseOrders poForm = new PurchaseOrders(po, "edit");
+                poForm.ShowDialog();
+                RefreshVendorPOs();
+            }
+            else
+            {
+                MessageBox.Show("Please select a row and try again");
+            }
+
         }
         private void exportExcel(string table)
         {
@@ -1579,7 +1629,7 @@ namespace ERP
                         emp.Cust_ID = Convert.ToInt32(rows[i][1]);
                         emp.Employee_ID = Convert.ToInt32(rows[i][2]);
                         emp.Order_Date = DateTime.FromOADate(Convert.ToDouble(rows[i][3])).ToShortDateString();
-                        if(rows[i][4] != "")
+                        if (rows[i][4] != "")
                         {
                             emp.Order_ShipDate = DateTime.FromOADate(Convert.ToDouble(rows[i][4])).ToShortDateString();
                         }
@@ -1637,7 +1687,7 @@ namespace ERP
         {
             openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
             DialogResult results = openFileDialog2.ShowDialog();
-            if(results == DialogResult.OK)
+            if (results == DialogResult.OK)
             {
                 try
                 {
