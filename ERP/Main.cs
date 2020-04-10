@@ -4,10 +4,8 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using X16 = DocumentFormat.OpenXml.Office2016.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Data.SQLite;
 
 namespace ERP
 {
@@ -75,7 +73,7 @@ namespace ERP
         }
         private void tbLogin_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 BtLogin_Click(sender, e);
             }
@@ -1325,7 +1323,7 @@ namespace ERP
 
         private void BtItemAdd_Click(object sender, EventArgs e)
         {
-            if(tbItemNumber.Text != "" && tbItemDesc.Text != "" && tbItemPurchase.Text != "" && tbItemSell.Text != "" && cbItemVendor.Text != "")
+            if (tbItemNumber.Text != "" && tbItemDesc.Text != "" && tbItemPurchase.Text != "" && tbItemSell.Text != "" && cbItemVendor.Text != "")
             {
                 Item item = new Item();
                 item.Item_Number = tbItemNumber.Text;
@@ -1343,7 +1341,7 @@ namespace ERP
             {
                 MessageBox.Show("Please fill in all required fields");
             }
-            
+
 
         }
 
@@ -1352,17 +1350,17 @@ namespace ERP
             if (tbItemNumber.Text != "" && tbItemDesc.Text != "" && tbItemPurchase.Text != "" && tbItemSell.Text != "" && cbItemVendor.Text != "")
             {
                 Item item = new Item();
-            item.Item_Number = tbItemNumber.Text;
-            item.Item_Description = tbItemDesc.Text;
-            item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
-            item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
-            item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
-            item.Item_UPC = tbItemUPC.Text;
+                item.Item_Number = tbItemNumber.Text;
+                item.Item_Description = tbItemDesc.Text;
+                item.Item_PurchasePrice = Convert.ToDouble(tbItemPurchase.Text);
+                item.Item_SellPrice = Convert.ToDouble(tbItemSell.Text);
+                item.Vendor_ID = Convert.ToInt32(cbItemVendor.Text.Substring(0, cbItemVendor.Text.IndexOf(" - ")));
+                item.Item_UPC = tbItemUPC.Text;
 
-            SqliteDataAccess.EditItem(item);
-            RefreshItems();
-            BtItemClear_Click(null, null);
-            btItemSave.Visible = false;
+                SqliteDataAccess.EditItem(item);
+                RefreshItems();
+                BtItemClear_Click(null, null);
+                btItemSave.Visible = false;
             }
             else
             {
@@ -1384,6 +1382,118 @@ namespace ERP
             PurchaseOrders poForm = new PurchaseOrders(po, "edit");
             poForm.ShowDialog();
             RefreshVendorPOs();
+        }
+        private void exportExcel(string table)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Custom"].ConnectionString;
+            if (connectionString == "")
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            }
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            //string cs = "URI=file:test.db";
+            string data = String.Empty;
+
+            int i = 1;
+            int j = 0;
+
+            using (SQLiteConnection con = new SQLiteConnection(connectionString))
+            {
+                con.Open();
+
+                string stm = String.Format("SELECT * FROM [{0}]", table);
+
+                using (SQLiteCommand cmd = new SQLiteCommand(stm, con))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read()) // Reading Rows
+                        {
+                            for(int g = 0; g< rdr.FieldCount; g++) //Label columns
+                            {
+                                xlWorkSheet.Cells[1, g + 1] = rdr.GetOriginalName(g);
+                            }
+                            for (j = 0; j <= rdr.FieldCount - 1; j++) // Looping throw colums
+                            {
+                                data = rdr.GetValue(j).ToString();
+                                xlWorkSheet.Cells[i + 1, j + 1] = data;
+                            }
+                            i++;
+                        }
+                        xlWorkSheet.Name = rdr.GetTableName(0);
+                    }
+                }
+                con.Close();
+            }
+
+            try
+            {
+                xlWorkBook.SaveAs(String.Format("{0}_ExcelDump-{1}-{2}.xls", table, DateTime.Now.ToShortDateString(), DateTime.Now.ToFileTime()).Replace("/", ""), Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            { }
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+
+        }
+        private static void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
+
+        private void custExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Order");
+        }
+
+        private void EmpExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Employee");
+        }
+
+        private void VendorExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Vendor");
+        }
+
+        private void ItemExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Item");
+        }
+
+        private void OrderExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Order");
+        }
+
+        private void UserExport_Click(object sender, EventArgs e)
+        {
+            exportExcel("Users");
         }
 
         //// Excel Test Export 
