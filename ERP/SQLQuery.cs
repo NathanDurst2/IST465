@@ -365,5 +365,18 @@ namespace ERP
                 return c;
             }
         }
+        public static bool UserIsAdmin(string username)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+
+                List<User> c = cnn.Query<User>("select * from [Users] where Username = '{0}'", username).ToList();
+                if (c[0].isAdmin == "1")
+                    return true;
+                else
+                    return false;
+
+            }
+        }
     }
 }

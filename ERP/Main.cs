@@ -6,6 +6,7 @@ using System.IO;
 using System.Drawing;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SQLite;
+using System.Diagnostics;
 
 namespace ERP
 {
@@ -243,6 +244,7 @@ namespace ERP
                 {
                     dataOrder.Rows[i].Cells["orderType"].Value = "Estimate";
                     dataOrder.Rows[i].Cells["orderShipDate"].Value = "-";
+                    dataOrder.Rows[i].Cells["orderStatus"].Value = "-";
                 }
                 else if (c[i].Order_Type == "Sales Order")
                 {
@@ -1417,7 +1419,7 @@ namespace ERP
                     {
                         while (rdr.Read()) // Reading Rows
                         {
-                            for(int g = 0; g< rdr.FieldCount; g++) //Label columns
+                            for (int g = 0; g < rdr.FieldCount; g++) //Label columns
                             {
                                 xlWorkSheet.Cells[1, g + 1] = rdr.GetOriginalName(g);
                             }
@@ -1466,9 +1468,144 @@ namespace ERP
             }
         }
 
+        private void importExcel(string path, string objectType)
+        {
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Excel.Range xlRange = xlWorksheet.UsedRange;
+
+            List<String> singleRow = new List<String>();
+            List<List<String>> rows = new List<List<string>>();
+
+            for (int i = 2; i <= xlRange.Rows.Count; i++)
+            {
+                for (int j = 1; j <= xlRange.Columns.Count; j++)
+                {
+
+                    //write the value to the console
+                    if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
+                    {
+                        //MessageBox.Show(String.Format(xlRange.Cells[i, j].Value2.ToString()));
+                        singleRow.Add(xlRange.Cells[i, j].Value2.ToString());
+                    }
+                    else
+                    {
+                        singleRow.Add("");
+                    }
+                }
+                rows.Add(singleRow);
+                singleRow = new List<string>();
+            }
+            releaseObject(xlWorksheet);
+            releaseObject(xlWorkbook);
+            releaseObject(xlApp);
+            releaseObject(xlRange);
+            createClassFromImport(rows, objectType);
+        }
+        private void createClassFromImport(List<List<String>> rows, string objectType)
+        {
+            switch (objectType)
+            {
+                case "Customer":
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        Customer cust = new Customer();
+                        cust.Customer_FirstName = rows[i][1];
+                        cust.Customer_LastName = rows[i][2];
+                        cust.Customer_Street = rows[i][3];
+                        cust.Customer_City = rows[i][4];
+                        cust.Customer_State = rows[i][5];
+                        cust.Customer_Zip = rows[i][6];
+                        cust.Customer_Phone = rows[i][7];
+                        cust.Customer_Email = rows[i][8];
+                        cust.Employee_ID = Convert.ToInt32(rows[i][9]);
+                        RefreshCustomers();
+                        SqliteDataAccess.SaveCustomer(cust);
+                    }
+                    break;
+                case "Employee":
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        Employee emp = new Employee();
+                        emp.Employee_FirstName = rows[i][1];
+                        emp.Employee_LastName = rows[i][2];
+                        emp.Employee_Street = rows[i][3];
+                        emp.Employee_City = rows[i][4];
+                        emp.Employee_State = rows[i][5];
+                        emp.Employee_Zip = rows[i][6];
+                        emp.Employee_Phone = rows[i][7];
+                        emp.Employee_Email = rows[i][8];
+                        emp.Employee_Supervisor_ID = Convert.ToInt32(rows[i][9]);
+                        RefreshEmployeee();
+                        SqliteDataAccess.AddEmployee(emp);
+                    }
+                    break;
+                case "Vendor":
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        Vendor emp = new Vendor();
+                        emp.Vendor_Name = rows[i][1];
+                        emp.Vendor_Street = rows[i][3];
+                        emp.Vendor_City = rows[i][4];
+                        emp.Vendor_State = rows[i][5];
+                        emp.Vendor_Zip = rows[i][6];
+                        emp.Vendor_Phone = rows[i][7];
+                        emp.Vendor_Email = rows[i][8];
+                        emp.Vendor_Terms = rows[i][9];
+                        emp.Vendor_CreditLimit = rows[i][10];
+                        RefreshVendors();
+                        SqliteDataAccess.AddVendor(emp);
+                    }
+                    break;
+                case "Item":
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        Item emp = new Item();
+                        emp.Item_Number = rows[i][0];
+                        emp.Vendor_ID = Convert.ToInt32(rows[i][1]);
+                        emp.Item_Description = rows[i][2];
+                        emp.Item_PurchasePrice = Convert.ToDouble(rows[i][3]);
+                        emp.Item_SellPrice = Convert.ToDouble(rows[i][4]);
+                        emp.Item_UPC = rows[i][5];
+                        RefreshItems();
+                        SqliteDataAccess.AddItem(emp);
+                    }
+                    break;
+                case "Order":
+                    for (int i = 0; i < rows.Count; i++)
+                    {
+                        Order emp = new Order();
+                        emp.Cust_ID = Convert.ToInt32(rows[i][1]);
+                        emp.Employee_ID = Convert.ToInt32(rows[i][2]);
+                        emp.Order_Date = DateTime.FromOADate(Convert.ToDouble(rows[i][3])).ToShortDateString();
+                        if(rows[i][4] != "")
+                        {
+                            emp.Order_ShipDate = DateTime.FromOADate(Convert.ToDouble(rows[i][4])).ToShortDateString();
+                        }
+                        emp.Order_Subtotal = Convert.ToDouble(rows[i][5]);
+                        emp.Order_Tax = Convert.ToDouble(rows[i][6]);
+                        emp.Order_Total = Convert.ToDouble(rows[i][7]);
+                        emp.Order_BillStreet = rows[i][8];
+                        emp.Order_BillCity = rows[i][9];
+                        emp.Order_BillState = rows[i][10];
+                        emp.Order_BillZip = rows[i][11];
+                        emp.Order_ShipStreet = rows[i][12];
+                        emp.Order_ShipCity = rows[i][13];
+                        emp.Order_ShipState = rows[i][14];
+                        emp.Order_ShipZip = rows[i][15];
+                        emp.Order_Type = rows[i][16];
+                        emp.Order_Status = rows[i][17];
+                        RefreshOrders();
+                        SqliteDataAccess.AddOrder(emp);
+                    }
+                    break;
+            }
+        }
+
         private void custExport_Click(object sender, EventArgs e)
         {
-            exportExcel("Order");
+            exportExcel("Customer");
         }
 
         private void EmpExport_Click(object sender, EventArgs e)
@@ -1495,6 +1632,92 @@ namespace ERP
         {
             exportExcel("Users");
         }
+
+        private void custImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
+            DialogResult results = openFileDialog2.ShowDialog();
+            if(results == DialogResult.OK)
+            {
+                try
+                {
+                    importExcel(openFileDialog2.FileName, "Customer");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Incorrect file format");
+                }
+            }
+        }
+
+        private void empImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
+            DialogResult results = openFileDialog2.ShowDialog();
+            if (results == DialogResult.OK)
+            {
+                try
+                {
+                    importExcel(openFileDialog2.FileName, "Employee");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Incorrect file format");
+                }
+            }
+        }
+
+        private void VendorImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
+            DialogResult results = openFileDialog2.ShowDialog();
+            if (results == DialogResult.OK)
+            {
+                try
+                {
+                    importExcel(openFileDialog2.FileName, "Vendor");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Incorrect file format");
+                }
+            }
+        }
+
+        private void ItemImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
+            DialogResult results = openFileDialog2.ShowDialog();
+            if (results == DialogResult.OK)
+            {
+                try
+                {
+                    importExcel(openFileDialog2.FileName, "Item");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Incorrect file format");
+                }
+            }
+        }
+
+        private void OrderImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Excel Files (*.xls)|*.xls";
+            DialogResult results = openFileDialog2.ShowDialog();
+            if (results == DialogResult.OK)
+            {
+                try
+                {
+                    importExcel(openFileDialog2.FileName, "Order");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Incorrect file format");
+                }
+            }
+        }
+
 
         //// Excel Test Export 
         //// Figure out how to export class name

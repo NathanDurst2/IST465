@@ -43,6 +43,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabCustomers = new System.Windows.Forms.TabPage();
+            this.custImport = new System.Windows.Forms.Button();
             this.custExport = new System.Windows.Forms.Button();
             this.label55 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
@@ -91,6 +92,7 @@
             this.tbLastName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.tabEmployee = new System.Windows.Forms.TabPage();
+            this.empImport = new System.Windows.Forms.Button();
             this.empExport = new System.Windows.Forms.Button();
             this.label63 = new System.Windows.Forms.Label();
             this.btEmpSave = new System.Windows.Forms.Button();
@@ -131,6 +133,7 @@
             this.tbEmpLastName = new System.Windows.Forms.TextBox();
             this.tbEmpFirstName = new System.Windows.Forms.TextBox();
             this.tabVendor = new System.Windows.Forms.TabPage();
+            this.vendorImport = new System.Windows.Forms.Button();
             this.vendorExport = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btPORemove = new System.Windows.Forms.Button();
@@ -180,6 +183,7 @@
             this.tbVendorPhone = new System.Windows.Forms.TextBox();
             this.tbVendorName = new System.Windows.Forms.TextBox();
             this.tabItems = new System.Windows.Forms.TabPage();
+            this.itemImport = new System.Windows.Forms.Button();
             this.itemExport = new System.Windows.Forms.Button();
             this.btItemAdd = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
@@ -207,6 +211,7 @@
             this.tbItemNumber = new System.Windows.Forms.TextBox();
             this.tbItemDesc = new System.Windows.Forms.TextBox();
             this.tabOrder = new System.Windows.Forms.TabPage();
+            this.orderImport = new System.Windows.Forms.Button();
             this.orderExport = new System.Windows.Forms.Button();
             this.orderDatePicker = new System.Windows.Forms.DateTimePicker();
             this.labelOrderStatus = new System.Windows.Forms.Label();
@@ -316,6 +321,7 @@
             this.lbCompany = new System.Windows.Forms.Label();
             this.lbSessionUsername = new System.Windows.Forms.Label();
             this.linkChangePassword = new System.Windows.Forms.LinkLabel();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl.SuspendLayout();
             this.tabCustomers.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -362,6 +368,7 @@
             // 
             // tabCustomers
             // 
+            this.tabCustomers.Controls.Add(this.custImport);
             this.tabCustomers.Controls.Add(this.custExport);
             this.tabCustomers.Controls.Add(this.label55);
             this.tabCustomers.Controls.Add(this.label54);
@@ -392,6 +399,16 @@
             this.tabCustomers.TabIndex = 0;
             this.tabCustomers.Text = "Customers";
             this.tabCustomers.UseVisualStyleBackColor = true;
+            // 
+            // custImport
+            // 
+            this.custImport.Location = new System.Drawing.Point(20, 592);
+            this.custImport.Name = "custImport";
+            this.custImport.Size = new System.Drawing.Size(75, 23);
+            this.custImport.TabIndex = 353;
+            this.custImport.Text = "Import";
+            this.custImport.UseVisualStyleBackColor = true;
+            this.custImport.Click += new System.EventHandler(this.custImport_Click);
             // 
             // custExport
             // 
@@ -820,6 +837,7 @@
             // 
             // tabEmployee
             // 
+            this.tabEmployee.Controls.Add(this.empImport);
             this.tabEmployee.Controls.Add(this.empExport);
             this.tabEmployee.Controls.Add(this.label63);
             this.tabEmployee.Controls.Add(this.btEmpSave);
@@ -848,6 +866,16 @@
             this.tabEmployee.TabIndex = 1;
             this.tabEmployee.Text = "Employee";
             this.tabEmployee.UseVisualStyleBackColor = true;
+            // 
+            // empImport
+            // 
+            this.empImport.Location = new System.Drawing.Point(19, 589);
+            this.empImport.Name = "empImport";
+            this.empImport.Size = new System.Drawing.Size(75, 23);
+            this.empImport.TabIndex = 354;
+            this.empImport.Text = "Import";
+            this.empImport.UseVisualStyleBackColor = true;
+            this.empImport.Click += new System.EventHandler(this.empImport_Click);
             // 
             // empExport
             // 
@@ -1184,6 +1212,7 @@
             // 
             // tabVendor
             // 
+            this.tabVendor.Controls.Add(this.vendorImport);
             this.tabVendor.Controls.Add(this.vendorExport);
             this.tabVendor.Controls.Add(this.groupBox6);
             this.tabVendor.Controls.Add(this.label62);
@@ -1215,6 +1244,16 @@
             this.tabVendor.TabIndex = 5;
             this.tabVendor.Text = "Vendor";
             this.tabVendor.UseVisualStyleBackColor = true;
+            // 
+            // vendorImport
+            // 
+            this.vendorImport.Location = new System.Drawing.Point(20, 589);
+            this.vendorImport.Name = "vendorImport";
+            this.vendorImport.Size = new System.Drawing.Size(75, 23);
+            this.vendorImport.TabIndex = 354;
+            this.vendorImport.Text = "Import";
+            this.vendorImport.UseVisualStyleBackColor = true;
+            this.vendorImport.Click += new System.EventHandler(this.VendorImport_Click);
             // 
             // vendorExport
             // 
@@ -1652,6 +1691,7 @@
             // 
             // tabItems
             // 
+            this.tabItems.Controls.Add(this.itemImport);
             this.tabItems.Controls.Add(this.itemExport);
             this.tabItems.Controls.Add(this.btItemAdd);
             this.tabItems.Controls.Add(this.label36);
@@ -1678,6 +1718,16 @@
             this.tabItems.TabIndex = 2;
             this.tabItems.Text = "Items";
             this.tabItems.UseVisualStyleBackColor = true;
+            // 
+            // itemImport
+            // 
+            this.itemImport.Location = new System.Drawing.Point(19, 589);
+            this.itemImport.Name = "itemImport";
+            this.itemImport.Size = new System.Drawing.Size(75, 23);
+            this.itemImport.TabIndex = 354;
+            this.itemImport.Text = "Import";
+            this.itemImport.UseVisualStyleBackColor = true;
+            this.itemImport.Click += new System.EventHandler(this.ItemImport_Click);
             // 
             // itemExport
             // 
@@ -1911,6 +1961,7 @@
             // 
             // tabOrder
             // 
+            this.tabOrder.Controls.Add(this.orderImport);
             this.tabOrder.Controls.Add(this.orderExport);
             this.tabOrder.Controls.Add(this.orderDatePicker);
             this.tabOrder.Controls.Add(this.labelOrderStatus);
@@ -1947,6 +1998,16 @@
             this.tabOrder.TabIndex = 3;
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
+            // 
+            // orderImport
+            // 
+            this.orderImport.Location = new System.Drawing.Point(19, 589);
+            this.orderImport.Name = "orderImport";
+            this.orderImport.Size = new System.Drawing.Size(75, 23);
+            this.orderImport.TabIndex = 354;
+            this.orderImport.Text = "Import";
+            this.orderImport.UseVisualStyleBackColor = true;
+            this.orderImport.Click += new System.EventHandler(this.OrderImport_Click);
             // 
             // orderExport
             // 
@@ -3003,6 +3064,10 @@
             this.linkChangePassword.Visible = false;
             this.linkChangePassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkChangePassword_LinkClicked);
             // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3341,6 +3406,12 @@
         private System.Windows.Forms.Button itemExport;
         private System.Windows.Forms.Button orderExport;
         private System.Windows.Forms.Button userExport;
+        private System.Windows.Forms.Button custImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.Button empImport;
+        private System.Windows.Forms.Button vendorImport;
+        private System.Windows.Forms.Button itemImport;
+        private System.Windows.Forms.Button orderImport;
     }
 }
 
