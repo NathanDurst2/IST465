@@ -7,6 +7,8 @@ using System.Drawing;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.Data;
+using System.Reflection;
 
 namespace ERP
 {
@@ -1767,47 +1769,6 @@ namespace ERP
                 }
             }
         }
-
-
-        //// Excel Test Export 
-        //// Figure out how to export class name
-        //private void CreateExcelFile(object data, string directory)
-        //{
-        //    directory = @"C:\Users\Nathan\Desktop\testexel.xlsx";
-        //    using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(directory, SpreadsheetDocumentType.Workbook))
-        //    {
-        //        // Add a WorkbookPart to the document.
-        //        WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
-        //        workbookpart.Workbook = new Workbook();
-
-        //        // Add a WorksheetPart to the WorkbookPart.
-        //        WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-        //        worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-        //        // Add Sheets to the Workbook.
-        //        Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
-        //            AppendChild<Sheets>(new Sheets());
-
-
-        //        MessageBox.Show(data.GetType().FullName);
-        //        // Append a new worksheet and associate it with the workbook.
-        //        Sheet sheet = new Sheet()
-        //        {
-        //            Id = spreadsheetDocument.WorkbookPart.
-        //            GetIdOfPart(worksheetPart),
-        //            SheetId = 1,
-        //            Name = data.GetType().ToString()
-        //        };
-        //        sheets.Append(sheet);
-        //        MessageBox.Show(data.GetType().ToString());
-
-        //        workbookpart.Workbook.Save();
-
-        //        // Close the document.
-        //        spreadsheetDocument.Close();
-
-        //    }
-        //}
     }
 
 }

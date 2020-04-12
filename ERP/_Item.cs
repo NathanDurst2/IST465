@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERP
 {
-    public class Item
+    public class Item : Entity
     {
         public string Item_Number { get; set; }
         public int Vendor_ID { get; set; }
