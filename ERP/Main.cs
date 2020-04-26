@@ -1598,14 +1598,14 @@ namespace ERP
                     {
                         Vendor emp = new Vendor();
                         emp.Vendor_Name = rows[i][1];
-                        emp.Vendor_Street = rows[i][3];
-                        emp.Vendor_City = rows[i][4];
-                        emp.Vendor_State = rows[i][5];
-                        emp.Vendor_Zip = rows[i][6];
-                        emp.Vendor_Phone = rows[i][7];
-                        emp.Vendor_Email = rows[i][8];
-                        emp.Vendor_Terms = rows[i][9];
-                        emp.Vendor_CreditLimit = rows[i][10];
+                        emp.Vendor_Street = rows[i][2];
+                        emp.Vendor_City = rows[i][3];
+                        emp.Vendor_State = rows[i][4];
+                        emp.Vendor_Zip = rows[i][5];
+                        emp.Vendor_Phone = rows[i][6];
+                        emp.Vendor_Email = rows[i][7];
+                        emp.Vendor_Terms = rows[i][8];
+                        emp.Vendor_CreditLimit = rows[i][9];
                         RefreshVendors();
                         SqliteDataAccess.AddVendor(emp);
                     }

@@ -1,5 +1,4 @@
 ﻿Search function
-Import/Export only for admins
 
 
 	
